@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-05T07:41:33.658Z</updated>
+  <updated>2017-05-05T14:40:08.193Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vim-使用教程</title>
+    <link href="http://yoursite.com/2017/05/05/vim-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
+    <id>http://yoursite.com/2017/05/05/vim-使用教程/</id>
+    <published>2017-05-05T08:14:06.000Z</published>
+    <updated>2017-05-05T14:40:08.193Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="vim-插件配置"><a href="#vim-插件配置" class="headerlink" title="vim 插件配置"></a>vim 插件配置</h1><h2 id="安装vim"><a href="#安装vim" class="headerlink" title="安装vim"></a>安装vim</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> git@github.com:vim/vim.git</div><div class="line">$ <span class="built_in">cd</span> vim/</div><div class="line">$ sudo apt install python-dev python3-dev ruby-dev libtolua-dev libx11-dev libghc-gtk-dev libghc-gtk3-dev python-gtk2-dev libghc-ncurses-dev</div><div class="line">$ ./configure --with-features=huge --enable-pythoninterp --enable-rubyinterp --enable-luainterp --enable-perlinterp --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/ --enable-gui=gtk2 --enable-cscope --prefix=/usr</div><div class="line">$ make</div><div class="line">$ make install</div></pre></td></tr></table></figure>
+<blockquote>
+<p><em>more info</em><br><a href="http://packages.ubuntu.com/" target="_blank" rel="external">Ubuntu Packages Search</a></p>
+</blockquote>
+<h2 id="安装-vundle"><a href="#安装-vundle" class="headerlink" title="安装 vundle"></a>安装 vundle</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</div></pre></td></tr></table></figure>
+<h2 id="vimrc-文件配置"><a href="#vimrc-文件配置" class="headerlink" title=".vimrc 文件配置"></a>.vimrc 文件配置</h2><p>参考 <a href="https://github.com/bkseastone/.back-files/blob/master/.vimrc" target="_blank" rel="external">.vimrc</a></p>
+<h2 id="安装插件进入vim执行："><a href="#安装插件进入vim执行：" class="headerlink" title="安装插件进入vim执行："></a>安装插件<h3>进入vim执行：</h3></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">:PluginInstall</div><div class="line">:PluginClean <span class="comment">#卸载前先删掉.vimrc文件中的配置语句</span></div><div class="line">:PluginUpdate</div></pre></td></tr></table></figure>
+<h2 id="安装YCM插件"><a href="#安装YCM插件" class="headerlink" title="安装YCM插件"></a>安装YCM插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install llvm-dev clang</div><div class="line">$ sudo apt install cmake</div><div class="line">$ <span class="built_in">cd</span> ~/.vim/bundle/YouCompleteMe</div><div class="line">$ ./install.py --clang-completer --system-libclang</div></pre></td></tr></table></figure>
+<blockquote>
+<p><em>more info</em><br><a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">use vim as IDE</a></p>
+</blockquote>
+<h1 id="gvim-的使用"><a href="#gvim-的使用" class="headerlink" title="gvim 的使用"></a>gvim 的使用</h1><h2 id="工程环境配置修改-indexer-files"><a href="#工程环境配置修改-indexer-files" class="headerlink" title="工程环境配置修改~/.indexer_files"></a>工程环境配置<h3>修改~/.indexer_files</h3></h2><blockquote>
+<p>用于产生标签</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">--------------- ~/.indexer_files ---------------  </div><div class="line">[project] </div><div class="line">/home/redmud/practice/project/src/</div></pre></td></tr></table></figure>
+<h3 id="根据你工程情况只需调整-ycm-extra-conf-py-的-flags-部分"><a href="#根据你工程情况只需调整-ycm-extra-conf-py-的-flags-部分" class="headerlink" title="根据你工程情况只需调整 .ycm_extra_conf.py 的 flags 部分"></a>根据你工程情况只需调整 .ycm_extra_conf.py 的 flags 部分</h3><blockquote>
+<p>参考<a href="https://raw.githubusercontent.com/yangyangwithgnu/use_vim_as_ide/master/.ycm_extra_conf.py" target="_blank" rel="external">.ycm_extra_conf.py</a></p>
+</blockquote>
+<h2 id="快捷键的使用"><a href="#快捷键的使用" class="headerlink" title="快捷键的使用"></a>快捷键的使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">;ilt    <span class="comment">#打开标签页</span></div><div class="line">;hw     <span class="comment">#跳转左侧窗口</span></div><div class="line">p       <span class="comment">#右侧窗口显示标签对应函数</span></div><div class="line"></div><div class="line">/word   <span class="comment">#在文件内查找关键字</span></div><div class="line">;sp     <span class="comment">#在工程内查找关键字</span></div><div class="line">&lt;CR&gt;    <span class="comment">#进入关键字对应文件</span></div><div class="line">p       <span class="comment">#暂时在右侧显示对应文件</span></div><div class="line">q       <span class="comment">#退出</span></div><div class="line"></div><div class="line">u       <span class="comment">#撤销上步操作 </span></div><div class="line">ctl+r   <span class="comment">#撤销上步的撤销</span></div><div class="line">;ud     <span class="comment">#显示撤销树</span></div><div class="line"></div><div class="line">;f.     <span class="comment">#跳至.字符</span></div><div class="line"></div><div class="line">;cc     <span class="comment">#注释</span></div><div class="line">;cu     <span class="comment">#取消注释</span></div><div class="line"></div><div class="line">;rw     <span class="comment">#在文件内不确认得全文替换单词</span></div><div class="line"></div><div class="line">m.      <span class="comment">#添加该行为标签. </span></div><div class="line">ctl+]   <span class="comment">#跳至下一个标签</span></div><div class="line">ctl+o   <span class="comment">#跳回上次鼠标位置</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;vim-插件配置&quot;&gt;&lt;a href=&quot;#vim-插件配置&quot; class=&quot;headerlink&quot; title=&quot;vim 插件配置&quot;&gt;&lt;/a&gt;vim 插件配置&lt;/h1&gt;&lt;h2 id=&quot;安装vim&quot;&gt;&lt;a href=&quot;#安装vim&quot; class=&quot;headerlink
+    
+    </summary>
+    
+    
+      <category term="工具的使用" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>git 使用教程</title>
