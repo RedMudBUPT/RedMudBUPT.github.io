@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-05T05:36:27.300Z</updated>
+  <updated>2017-05-05T07:41:33.658Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,18 +20,14 @@
     <link href="http://yoursite.com/2017/05/04/git-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
     <id>http://yoursite.com/2017/05/04/git-使用教程/</id>
     <published>2017-05-04T14:49:17.000Z</published>
-    <updated>2017-05-05T05:36:27.300Z</updated>
+    <updated>2017-05-05T07:41:33.658Z</updated>
     
     <content type="html"><![CDATA[<h1 id="使用ssh"><a href="#使用ssh" class="headerlink" title="使用ssh"></a>使用ssh</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
 <li>用作认证的私钥最好通过passphrase进行加密，否则会有很大安全隐患，只要私钥泄露，别人就能访问你能访问的所有远程机器，不过每次登陆都得输入passphrase。</li>
-<li>ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入agent管理时输入passphrase，之后的ssh相关操作就不必输入passphrase了。如果ssh-agent中有多个私钥, 会依次尝试，直到认证通过或遍历所有私钥。<blockquote>
-<p><em>more info</em> </p>
-</blockquote>
-</li>
+<li>ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入agent管理时输入passphrase，之后的ssh相关操作就不必输入passphrase了。如果ssh-agent中有多个私钥, 会依次尝试，直到认证通过或遍历所有私钥。</li>
 </ul>
 <blockquote>
-<p><a href="http://blog.csdn.net/sdcxyz/article/details/41487897" target="_blank" rel="external">SSH Agent Forwarding原理</a></p>
-<p><a href="http://www.unixwiz.net/techtips/ssh-agent-forwarding.html" target="_blank" rel="external">An Illustrated Guide to SSH Agent Forwarding</a></p>
+<p><em>more info</em><br><a href="http://blog.csdn.net/sdcxyz/article/details/41487897" target="_blank" rel="external">SSH Agent Forwarding原理</a><br><a href="http://www.unixwiz.net/techtips/ssh-agent-forwarding.html" target="_blank" rel="external">An Illustrated Guide to SSH Agent Forwarding</a></p>
 </blockquote>
 <h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh-kengen -t rsa -C <span class="string">"some words(email usually)"</span></div><div class="line">$ ssh-agent <span class="_">-s</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa <span class="comment">#添加私钥</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa2</div><div class="line">$ vim ~/.ssh/config</div></pre></td></tr></table></figure>
 <h2 id="config-文件类似如下"><a href="#config-文件类似如下" class="headerlink" title="config 文件类似如下"></a>config 文件类似如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Host  redmudbupt.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa </div><div class="line">    User git </div><div class="line"></div><div class="line">host bkseastone.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa2</div><div class="line">    User git</div></pre></td></tr></table></figure>
