@@ -95,8 +95,6 @@
 
 
 
-  
-
 
   <link rel="alternate" href="/atom.xml" title="RedMudBUPT" type="application/atom+xml" />
 
@@ -356,13 +354,12 @@
 <blockquote>
 <p><a href="http://blog.csdn.net/sdcxyz/article/details/41487897" target="_blank" rel="external">SSH Agent Forwarding原理</a></p>
 <p><a href="http://www.unixwiz.net/techtips/ssh-agent-forwarding.html" target="_blank" rel="external">An Illustrated Guide to SSH Agent Forwarding</a></p>
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh-kengen -t rsa -C <span class="string">"some words(email usually)"</span></div><div class="line">$ ssh-agent <span class="_">-s</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa <span class="comment">#添加私钥</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa2</div><div class="line">$ vim ~/.ssh/config</div></pre></td></tr></table></figure>
 </blockquote>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh-kengen -t rsa -C <span class="string">"some words(email usually)"</span></div><div class="line">$ ssh-agent <span class="_">-s</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa <span class="comment">#添加私钥</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa2</div><div class="line">$ vim ~/.ssh/config</div></pre></td></tr></table></figure>
 <h2 id="config-文件类似如下"><a href="#config-文件类似如下" class="headerlink" title="config 文件类似如下"></a>config 文件类似如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Host  redmudbupt.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa </div><div class="line">    User git </div><div class="line"></div><div class="line">host bkseastone.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa2</div><div class="line">    User git</div></pre></td></tr></table></figure>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin git@bkseastone.github.com:bkseastone/lab_test.git <span class="comment">#添加远程库</span></div><div class="line">$ git config user.name <span class="string">"one_name"</span> </div><div class="line">$ git config user.email <span class="string">"one_email"</span> <span class="comment">#给仓库设置局部用户名和邮箱</span></div></pre></td></tr></table></figure>
 <h1 id="git-使用"><a href="#git-使用" class="headerlink" title="git 使用"></a>git 使用</h1><blockquote>
-<p><em>more info</em></p>
-<p><a href="https://github.com/bkseastone/learngit/blob/master/git-cheatsheet-CN-dark.pdf" target="_blank" rel="external">git command</a></p>
+<p><em>more info</em><br><a href="https://github.com/bkseastone/learngit/blob/master/git-cheatsheet-CN-dark.pdf" target="_blank" rel="external">git command</a></p>
 </blockquote>
 
           
