@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="工具的使用," />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -108,17 +108,17 @@
 
 
 
-<meta name="description" content="使用ssh背景 用作认证的私钥最好通过passphrase进行加密，否则会有很大安全隐患，只要私钥泄露，别人就能访问你能访问的所有远程机器，不过每次登陆都得输入passphrase。 ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入agent管理时输入passphrase，之后的ssh相关操作就不必输入passphrase了。如果ss">
-<meta name="keywords" content="工具的使用">
+<meta name="description" content="预备知识 程序只是一段代码，独立的程序没有任何实际意义，只有将它置于一定的环境（上下文）内才有其意义。比如说，一个用C#写成的一段hello world代码在windows环境下编译生成的一个程序文件，将它放在ARM机里，在它实例化之前（即执行前），它与ARM机里其他可以执行的程序是一样的，只是一个占据着一定内存空间的二进制文件；一旦将这些二进制文件执行，实例化后产生的东西（称为进程）便具有了实际">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git 使用教程">
-<meta property="og:url" content="http://yoursite.com/2017/05/04/git-使用教程/index.html">
+<meta property="og:title" content="简要剖析linux操作系统下执行一个程序的原理">
+<meta property="og:url" content="http://yoursite.com/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
-<meta property="og:description" content="使用ssh背景 用作认证的私钥最好通过passphrase进行加密，否则会有很大安全隐患，只要私钥泄露，别人就能访问你能访问的所有远程机器，不过每次登陆都得输入passphrase。 ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入agent管理时输入passphrase，之后的ssh相关操作就不必输入passphrase了。如果ss">
-<meta property="og:updated_time" content="2017-05-05T07:41:33.658Z">
+<meta property="og:description" content="预备知识 程序只是一段代码，独立的程序没有任何实际意义，只有将它置于一定的环境（上下文）内才有其意义。比如说，一个用C#写成的一段hello world代码在windows环境下编译生成的一个程序文件，将它放在ARM机里，在它实例化之前（即执行前），它与ARM机里其他可以执行的程序是一样的，只是一个占据着一定内存空间的二进制文件；一旦将这些二进制文件执行，实例化后产生的东西（称为进程）便具有了实际">
+<meta property="og:updated_time" content="2017-05-26T12:18:03.744Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git 使用教程">
-<meta name="twitter:description" content="使用ssh背景 用作认证的私钥最好通过passphrase进行加密，否则会有很大安全隐患，只要私钥泄露，别人就能访问你能访问的所有远程机器，不过每次登陆都得输入passphrase。 ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入agent管理时输入passphrase，之后的ssh相关操作就不必输入passphrase了。如果ss">
+<meta name="twitter:title" content="简要剖析linux操作系统下执行一个程序的原理">
+<meta name="twitter:description" content="预备知识 程序只是一段代码，独立的程序没有任何实际意义，只有将它置于一定的环境（上下文）内才有其意义。比如说，一个用C#写成的一段hello world代码在windows环境下编译生成的一个程序文件，将它放在ARM机里，在它实例化之前（即执行前），它与ARM机里其他可以执行的程序是一样的，只是一个占据着一定内存空间的二进制文件；一旦将这些二进制文件执行，实例化后产生的东西（称为进程）便具有了实际">
 
 
 
@@ -146,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/04/git-使用教程/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/"/>
 
 
 
 
 
-  <title>git 使用教程 | RedMudBUPT</title>
+  <title>简要剖析linux操作系统下执行一个程序的原理 | RedMudBUPT</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -271,7 +271,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/git-使用教程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="redmud">
@@ -292,7 +292,7 @@
             
             
               
-                git 使用教程
+                简要剖析linux操作系统下执行一个程序的原理
               
             
           </h1>
@@ -307,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-04T22:49:17+08:00">
-                2017-05-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-21T17:46:55+08:00">
+                2017-05-21
               </time>
             
 
@@ -342,20 +342,31 @@
       
 
       
-        <h1 id="使用ssh"><a href="#使用ssh" class="headerlink" title="使用ssh"></a>使用ssh</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
-<li>用作认证的私钥最好通过passphrase进行加密，否则会有很大安全隐患，只要私钥泄露，别人就能访问你能访问的所有远程机器，不过每次登陆都得输入passphrase。</li>
-<li>ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入agent管理时输入passphrase，之后的ssh相关操作就不必输入passphrase了。如果ssh-agent中有多个私钥, 会依次尝试，直到认证通过或遍历所有私钥。</li>
+        <h1 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h1><ul>
+<li>程序只是一段代码，独立的程序没有任何实际意义，只有将它置于一定的环境（上下文）<br>内才有其意义。比如说，一个用C#写成的一段hello world代码在windows环境下编译生成的<br>一个程序文件，将它放在ARM机里，在它实例化之前（即执行前），它与ARM机里其他可以执<br>行的程序是一样的，只是一个占据着一定内存空间的二进制文件；一旦将这些二进制文件执<br>行，实例化后产生的东西（称为进程）便具有了实际意义，即这个进程所能实现的功能，当<br>然前提是它能在该环境中实例化，前面所提的C#程序文件便不能在ARM机中实例化。<ul>
+<li>综上，程序可认为是进程的抽象，一个程序可以实例化出任意多个进程。</li>
 </ul>
-<blockquote>
-<p><em>more info</em><br><a href="http://blog.csdn.net/sdcxyz/article/details/41487897" target="_blank" rel="external">SSH Agent Forwarding原理</a><br><a href="http://www.unixwiz.net/techtips/ssh-agent-forwarding.html" target="_blank" rel="external">An Illustrated Guide to SSH Agent Forwarding</a></p>
-</blockquote>
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh-kengen -t rsa -C <span class="string">"some words(email usually)"</span></div><div class="line">$ ssh-agent <span class="_">-s</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa <span class="comment">#添加私钥</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa2</div><div class="line">$ vim ~/.ssh/config</div></pre></td></tr></table></figure>
-<h2 id="config-文件类似如下"><a href="#config-文件类似如下" class="headerlink" title="config 文件类似如下"></a>config 文件类似如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Host  redmudbupt.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa </div><div class="line">    User git </div><div class="line"></div><div class="line">host bkseastone.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa2</div><div class="line">    User git</div></pre></td></tr></table></figure>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin git@bkseastone.github.com:bkseastone/lab_test.git <span class="comment">#添加远程库</span></div><div class="line">$ git config user.name <span class="string">"one_name"</span> </div><div class="line">$ git config user.email <span class="string">"one_email"</span> <span class="comment">#给仓库设置局部用户名和邮箱</span></div></pre></td></tr></table></figure>
-<h1 id="git-使用"><a href="#git-使用" class="headerlink" title="git 使用"></a>git 使用</h1><blockquote>
-<p><em>more info</em><br><a href="https://github.com/bkseastone/learngit/blob/master/git-cheatsheet-CN-dark.pdf" target="_blank" rel="external">git command</a></p>
-</blockquote>
-
+</li>
+</ul>
+<ul>
+<li>linux系统中所有的进程都是在0号进程的基础上fork生成的，故在开机后，运行的任何一<br>个程序都是在某个程序的基础上fork生成后继而执行的。<ul>
+<li>因此，若要分析执行一个程序的原理，可用任意一个具体的例子进行说明，其中关键<br>性部分几乎不会存在差异。</li>
+</ul>
+</li>
+</ul>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p><em>以在shell中执行ls命令为例，进行说明。</em></p>
+<h2 id="预备知识1"><a href="#预备知识1" class="headerlink" title="预备知识1"></a>预备知识1</h2><p>建立“子栈”的概念。从一个函数A跳转到另一个函数B时会创建一个临时堆栈，称函数A所在<br>的堆栈为父栈，称函数B所在的堆栈为子栈。建立一个子栈的基本框架如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">pushl %ebp //enter</div><div class="line">movl %esp %ebp</div><div class="line">...</div><div class="line">movl %ebp %esp //leave</div><div class="line">popl %ebp</div></pre></td></tr></table></figure>
+<p>为深入理解该框架，要明确以下几点：</p>
+<ul>
+<li><p>首先要明确一个CPU在某一确定的时刻只能运行在一个堆栈空间中，当建立起子栈后，CPU<br>便已运行在了子栈中，当前起作用的堆栈空间便是子栈，而当CPU离开子栈后，起作用的堆<br>栈空间便成了父栈，且方才用过的子栈不复存在，即永远也不可能再次回到方才起作用的<br>子栈，但能再次创建一个新的子栈。这也是将子栈称为临时堆栈、子函数的变量称为临时<br>变量的原因。</p>
+</li>
+<li><p>其次要明确因为所有堆栈都是建立在内核堆栈里的，故子栈与父栈在地址空间上是连续的。</p>
+</li>
+<li><p>最后要明确现今的编译器为防止程序运行时发生堆栈越界，一般先利用esp将临时堆栈空间<br>占据，然后利用ebp作为基址进行堆栈中数据的存储与访问。为方便形象化的理解，希望子栈<br>的ebp是定值，esp是可变的，用于缩放临时堆栈空间的大小，从而确定可操作的临时堆栈大<br>小。从根本上来看，除最初开机时建立的堆栈外，所有的堆栈都是临时堆栈，而子父关系便<br>是相对而言。</p>
+</li>
+</ul>
+<h2 id="预备知识2"><a href="#预备知识2" class="headerlink" title="预备知识2"></a>预备知识2</h2>
       
     </div>
 
@@ -384,7 +395,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工具的使用/" rel="tag"># 工具的使用</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
         </div>
       
@@ -397,18 +408,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/05/vim-使用教程/" rel="next" title="vim-使用教程">
-                <i class="fa fa-chevron-left"></i> vim-使用教程
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/04/使用hexo+gitpage搭建个人博客(ubuntu16.04环境)/" rel="prev" title="使用hexo+gitpage搭建个人博客（ubuntu16.04环境）">
-                使用hexo+gitpage搭建个人博客（ubuntu16.04环境） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/05/vim-使用教程/" rel="prev" title="vim-使用教程">
+                vim-使用教程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -547,7 +554,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ssh"><span class="nav-number">1.</span> <span class="nav-text">使用ssh</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令"><span class="nav-number">1.2.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-文件类似如下"><span class="nav-number">1.3.</span> <span class="nav-text">config 文件类似如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">1.4.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-使用"><span class="nav-number">2.</span> <span class="nav-text">git 使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#预备知识"><span class="nav-number">1.</span> <span class="nav-text">预备知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识1"><span class="nav-number">2.1.</span> <span class="nav-text">预备知识1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识2"><span class="nav-number">2.2.</span> <span class="nav-text">预备知识2</span></a></li></ol></li></ol></div>
             
 
           </div>
