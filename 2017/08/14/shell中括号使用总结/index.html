@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="shell script," />
 
 
 
@@ -108,17 +108,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords">
+<meta name="description" content="${var}限定变量名称范围 1234#!/bin/sh# test.shvar=testecho $&amp;#123;var&amp;#125;12 效果如下 12$ ./test.sh$ var12 $(cmd)命令替换 123#!/bin/sh# test.shecho $(ls) 运行效果与 ls 相同 {}或()一串命令的执行 1234$ &amp;#123; echo 1;echo &quot;A&quot;;&amp;#125; &amp;">
+<meta name="keywords" content="shell script">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/04/24/hello-world/index.html">
+<meta property="og:title" content="shell中括号使用总结">
+<meta property="og:url" content="http://yoursite.com/2017/08/14/shell中括号使用总结/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-04-24T06:35:28.184Z">
+<meta property="og:description" content="${var}限定变量名称范围 1234#!/bin/sh# test.shvar=testecho $&amp;#123;var&amp;#125;12 效果如下 12$ ./test.sh$ var12 $(cmd)命令替换 123#!/bin/sh# test.shecho $(ls) 运行效果与 ls 相同 {}或()一串命令的执行 1234$ &amp;#123; echo 1;echo &quot;A&quot;;&amp;#125; &amp;">
+<meta property="og:updated_time" content="2017-08-14T13:27:40.112Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="shell中括号使用总结">
+<meta name="twitter:description" content="${var}限定变量名称范围 1234#!/bin/sh# test.shvar=testecho $&amp;#123;var&amp;#125;12 效果如下 12$ ./test.sh$ var12 $(cmd)命令替换 123#!/bin/sh# test.shecho $(ls) 运行效果与 ls 相同 {}或()一串命令的执行 1234$ &amp;#123; echo 1;echo &quot;A&quot;;&amp;#125; &amp;">
 
 
 
@@ -146,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/24/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/14/shell中括号使用总结/"/>
 
 
 
 
 
-  <title>Hello World | RedMudBUPT</title>
+  <title>shell中括号使用总结 | RedMudBUPT</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -271,7 +271,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/24/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/shell中括号使用总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="redmud">
@@ -292,7 +292,7 @@
             
             
               
-                Hello World
+                shell中括号使用总结
               
             
           </h1>
@@ -307,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-24T14:35:28+08:00">
-                2017-04-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-14T20:19:45+08:00">
+                2017-08-14
               </time>
             
 
@@ -342,15 +342,28 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h1 id="var"><a href="#var" class="headerlink" title="${var}"></a>${var}</h1><p>限定变量名称范围</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment"># test.sh</span></div><div class="line">var=<span class="built_in">test</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var&#125;</span>12</div></pre></td></tr></table></figure>
+<p>效果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh</div><div class="line">$ var12</div></pre></td></tr></table></figure>
+<h1 id="cmd"><a href="#cmd" class="headerlink" title="$(cmd)"></a>$(cmd)</h1><p>命令替换</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment"># test.sh</span></div><div class="line"><span class="built_in">echo</span> $(ls)</div></pre></td></tr></table></figure>
+<p>运行效果与 <code>ls</code> 相同</p>
+<h1 id="或"><a href="#或" class="headerlink" title="{}或()"></a>{}或()</h1><p>一串命令的执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ &#123; <span class="built_in">echo</span> 1;<span class="built_in">echo</span> <span class="string">"A"</span>;&#125; &gt; tmp</div><div class="line">$ cat ./tmp</div><div class="line">$ 1</div><div class="line">$ A</div></pre></td></tr></table></figure>
+<h1 id="var-string-var-string-var-string-var-string"><a href="#var-string-var-string-var-string-var-string" class="headerlink" title="${var:-string},${var:+string},${var:=string},${var:?string}"></a>${var:-string},${var:+string},${var:=string},${var:?string}</h1><p>几种特殊的替换结构</p>
+<h2 id="var-string"><a href="#var-string" class="headerlink" title="${var:-string}"></a>${var:-string}</h2><p>若<code>var</code>为空，则结果为<code>&quot;string&quot;</code>，否则结果为<code>$var</code>。</p>
+<h2 id="var-string-1"><a href="#var-string-1" class="headerlink" title="${var:=string}"></a>${var:=string}</h2><p>若<code>var</code>为空，则结果为<code>&quot;string&quot;</code>，并将该字符串赋给<code>var</code>，否则结果为<code>$var</code>。</p>
+<h2 id="var-string-2"><a href="#var-string-2" class="headerlink" title="${var:+string}"></a>${var:+string}</h2><p>若<code>var</code>不为空，则结果为<code>&quot;string&quot;</code>，否则结果为<code>$var</code>。</p>
+<h2 id="var-string-3"><a href="#var-string-3" class="headerlink" title="${var:?string}"></a>${var:?string}</h2><p>若<code>var</code>不为空，则结果为<code>$var</code>，否则将<code>&quot;string&quot;</code>输出到标准错误中，并从脚本退出。</p>
+<h1 id="exp"><a href="#exp" class="headerlink" title="$((exp))"></a>$((exp))</h1><p>POSIX标准的扩展计算，只要符合C的运算符都可用在$((exp))，甚至是三目运算符。</p>
+<h1 id="var-pattern-var-pattern-var-pattern-var-pattern"><a href="#var-pattern-var-pattern-var-pattern-var-pattern" class="headerlink" title="${var%pattern},${var%%pattern},${var#pattern},${var##pattern}"></a>${var%pattern},${var%%pattern},${var#pattern},${var##pattern}</h1><p>四种模式匹配替换结构</p>
+<h1 id="或-1"><a href="#或-1" class="headerlink" title="[]或[[]]"></a>[]或[[]]</h1><p>类似test</p>
+<h1 id=""><a href="#" class="headerlink" title="()"></a>()</h1><p>在子shell中运行</p>
+<h1 id="-1"><a href="#-1" class="headerlink" title="{}"></a>{}</h1><p>{1..30} 就是1-30，或者是/{,s}bin/表示/bin/和/sbin/，ab{c,d,e}表示abc、abd、abe</p>
+<blockquote>
+<p><a href="http://www.jb51.net/article/60326.htm" target="_blank" rel="external">reference</a></p>
+</blockquote>
 
       
     </div>
@@ -378,6 +391,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/shell-script/" rel="tag"># shell script</a>
+          
+        </div>
+      
 
       
         
@@ -387,15 +406,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/04/使用hexo+gitpage搭建个人博客(ubuntu16.04环境)/" rel="next" title="使用hexo+gitpage搭建个人博客（ubuntu16.04环境）">
-                <i class="fa fa-chevron-left"></i> 使用hexo+gitpage搭建个人博客（ubuntu16.04环境）
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/" rel="prev" title="简要剖析linux操作系统下执行一个程序的原理">
+                简要剖析linux操作系统下执行一个程序的原理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -533,7 +552,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#var"><span class="nav-number">1.</span> <span class="nav-text">${var}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cmd"><span class="nav-number">2.</span> <span class="nav-text">$(cmd)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#或"><span class="nav-number">3.</span> <span class="nav-text">{}或()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-string-var-string-var-string-var-string"><span class="nav-number">4.</span> <span class="nav-text">${var:-string},${var:+string},${var:=string},${var:?string}</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string"><span class="nav-number">4.1.</span> <span class="nav-text">${var:-string}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string-1"><span class="nav-number">4.2.</span> <span class="nav-text">${var:=string}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string-2"><span class="nav-number">4.3.</span> <span class="nav-text">${var:+string}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string-3"><span class="nav-number">4.4.</span> <span class="nav-text">${var:?string}</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exp"><span class="nav-number">5.</span> <span class="nav-text">$((exp))</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-pattern-var-pattern-var-pattern-var-pattern"><span class="nav-number">6.</span> <span class="nav-text">${var%pattern},${var%%pattern},${var#pattern},${var##pattern}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#或-1"><span class="nav-number">7.</span> <span class="nav-text">[]或[[]]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">8.</span> <span class="nav-text">()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-number">9.</span> <span class="nav-text">{}</span></a></li></ol></div>
             
 
           </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-26T12:18:03.744Z</updated>
+  <updated>2017-08-14T13:27:40.112Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>shell中括号使用总结</title>
+    <link href="http://yoursite.com/2017/08/14/shell%E4%B8%AD%E6%8B%AC%E5%8F%B7%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2017/08/14/shell中括号使用总结/</id>
+    <published>2017-08-14T12:19:45.000Z</published>
+    <updated>2017-08-14T13:27:40.112Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="var"><a href="#var" class="headerlink" title="${var}"></a>${var}</h1><p>限定变量名称范围</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment"># test.sh</span></div><div class="line">var=<span class="built_in">test</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var&#125;</span>12</div></pre></td></tr></table></figure>
+<p>效果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh</div><div class="line">$ var12</div></pre></td></tr></table></figure>
+<h1 id="cmd"><a href="#cmd" class="headerlink" title="$(cmd)"></a>$(cmd)</h1><p>命令替换</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment"># test.sh</span></div><div class="line"><span class="built_in">echo</span> $(ls)</div></pre></td></tr></table></figure>
+<p>运行效果与 <code>ls</code> 相同</p>
+<h1 id="或"><a href="#或" class="headerlink" title="{}或()"></a>{}或()</h1><p>一串命令的执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ &#123; <span class="built_in">echo</span> 1;<span class="built_in">echo</span> <span class="string">"A"</span>;&#125; &gt; tmp</div><div class="line">$ cat ./tmp</div><div class="line">$ 1</div><div class="line">$ A</div></pre></td></tr></table></figure>
+<h1 id="var-string-var-string-var-string-var-string"><a href="#var-string-var-string-var-string-var-string" class="headerlink" title="${var:-string},${var:+string},${var:=string},${var:?string}"></a>${var:-string},${var:+string},${var:=string},${var:?string}</h1><p>几种特殊的替换结构</p>
+<h2 id="var-string"><a href="#var-string" class="headerlink" title="${var:-string}"></a>${var:-string}</h2><p>若<code>var</code>为空，则结果为<code>&quot;string&quot;</code>，否则结果为<code>$var</code>。</p>
+<h2 id="var-string-1"><a href="#var-string-1" class="headerlink" title="${var:=string}"></a>${var:=string}</h2><p>若<code>var</code>为空，则结果为<code>&quot;string&quot;</code>，并将该字符串赋给<code>var</code>，否则结果为<code>$var</code>。</p>
+<h2 id="var-string-2"><a href="#var-string-2" class="headerlink" title="${var:+string}"></a>${var:+string}</h2><p>若<code>var</code>不为空，则结果为<code>&quot;string&quot;</code>，否则结果为<code>$var</code>。</p>
+<h2 id="var-string-3"><a href="#var-string-3" class="headerlink" title="${var:?string}"></a>${var:?string}</h2><p>若<code>var</code>不为空，则结果为<code>$var</code>，否则将<code>&quot;string&quot;</code>输出到标准错误中，并从脚本退出。</p>
+<h1 id="exp"><a href="#exp" class="headerlink" title="$((exp))"></a>$((exp))</h1><p>POSIX标准的扩展计算，只要符合C的运算符都可用在$((exp))，甚至是三目运算符。</p>
+<h1 id="var-pattern-var-pattern-var-pattern-var-pattern"><a href="#var-pattern-var-pattern-var-pattern-var-pattern" class="headerlink" title="${var%pattern},${var%%pattern},${var#pattern},${var##pattern}"></a>${var%pattern},${var%%pattern},${var#pattern},${var##pattern}</h1><p>四种模式匹配替换结构</p>
+<h1 id="或-1"><a href="#或-1" class="headerlink" title="[]或[[]]"></a>[]或[[]]</h1><p>类似test</p>
+<h1 id=""><a href="#" class="headerlink" title="()"></a>()</h1><p>在子shell中运行</p>
+<h1 id="-1"><a href="#-1" class="headerlink" title="{}"></a>{}</h1><p>{1..30} 就是1-30，或者是/{,s}bin/表示/bin/和/sbin/，ab{c,d,e}表示abc、abd、abe</p>
+<blockquote>
+<p><a href="http://www.jb51.net/article/60326.htm" target="_blank" rel="external">reference</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;var&quot;&gt;&lt;a href=&quot;#var&quot; class=&quot;headerlink&quot; title=&quot;${var}&quot;&gt;&lt;/a&gt;${var}&lt;/h1&gt;&lt;p&gt;限定变量名称范围&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td c
+    
+    </summary>
+    
+    
+      <category term="shell script" scheme="http://yoursite.com/tags/shell-script/"/>
+    
+  </entry>
   
   <entry>
     <title>简要剖析linux操作系统下执行一个程序的原理</title>

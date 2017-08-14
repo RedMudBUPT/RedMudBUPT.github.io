@@ -268,6 +268,147 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/shell中括号使用总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="redmud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://yt3.ggpht.com/-O_p350X0Ro8/AAAAAAAAAAI/AAAAAAAAAAA/GXwgMZYHsZ0/s900-c-k-no-mo-rj-c0xffffff/photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RedMudBUPT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/14/shell中括号使用总结/" itemprop="url">
+                  shell中括号使用总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-14T20:19:45+08:00">
+                2017-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="var"><a href="#var" class="headerlink" title="${var}"></a>${var}</h1><p>限定变量名称范围</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment"># test.sh</span></div><div class="line">var=<span class="built_in">test</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var&#125;</span>12</div></pre></td></tr></table></figure>
+<p>效果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh</div><div class="line">$ var12</div></pre></td></tr></table></figure>
+<h1 id="cmd"><a href="#cmd" class="headerlink" title="$(cmd)"></a>$(cmd)</h1><p>命令替换</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment"># test.sh</span></div><div class="line"><span class="built_in">echo</span> $(ls)</div></pre></td></tr></table></figure>
+<p>运行效果与 <code>ls</code> 相同</p>
+<h1 id="或"><a href="#或" class="headerlink" title="{}或()"></a>{}或()</h1><p>一串命令的执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ &#123; <span class="built_in">echo</span> 1;<span class="built_in">echo</span> <span class="string">"A"</span>;&#125; &gt; tmp</div><div class="line">$ cat ./tmp</div><div class="line">$ 1</div><div class="line">$ A</div></pre></td></tr></table></figure>
+<h1 id="var-string-var-string-var-string-var-string"><a href="#var-string-var-string-var-string-var-string" class="headerlink" title="${var:-string},${var:+string},${var:=string},${var:?string}"></a>${var:-string},${var:+string},${var:=string},${var:?string}</h1><p>几种特殊的替换结构</p>
+<h2 id="var-string"><a href="#var-string" class="headerlink" title="${var:-string}"></a>${var:-string}</h2><p>若<code>var</code>为空，则结果为<code>&quot;string&quot;</code>，否则结果为<code>$var</code>。</p>
+<h2 id="var-string-1"><a href="#var-string-1" class="headerlink" title="${var:=string}"></a>${var:=string}</h2><p>若<code>var</code>为空，则结果为<code>&quot;string&quot;</code>，并将该字符串赋给<code>var</code>，否则结果为<code>$var</code>。</p>
+<h2 id="var-string-2"><a href="#var-string-2" class="headerlink" title="${var:+string}"></a>${var:+string}</h2><p>若<code>var</code>不为空，则结果为<code>&quot;string&quot;</code>，否则结果为<code>$var</code>。</p>
+<h2 id="var-string-3"><a href="#var-string-3" class="headerlink" title="${var:?string}"></a>${var:?string}</h2><p>若<code>var</code>不为空，则结果为<code>$var</code>，否则将<code>&quot;string&quot;</code>输出到标准错误中，并从脚本退出。</p>
+<h1 id="exp"><a href="#exp" class="headerlink" title="$((exp))"></a>$((exp))</h1><p>POSIX标准的扩展计算，只要符合C的运算符都可用在$((exp))，甚至是三目运算符。</p>
+<h1 id="var-pattern-var-pattern-var-pattern-var-pattern"><a href="#var-pattern-var-pattern-var-pattern-var-pattern" class="headerlink" title="${var%pattern},${var%%pattern},${var#pattern},${var##pattern}"></a>${var%pattern},${var%%pattern},${var#pattern},${var##pattern}</h1><p>四种模式匹配替换结构</p>
+<h1 id="或-1"><a href="#或-1" class="headerlink" title="[]或[[]]"></a>[]或[[]]</h1><p>类似test</p>
+<h1 id=""><a href="#" class="headerlink" title="()"></a>()</h1><p>在子shell中运行</p>
+<h1 id="-1"><a href="#-1" class="headerlink" title="{}"></a>{}</h1><p>{1..30} 就是1-30，或者是/{,s}bin/表示/bin/和/sbin/，ab{c,d,e}表示abc、abd、abe</p>
+<blockquote>
+<p><a href="http://www.jb51.net/article/60326.htm" target="_blank" rel="external">reference</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -986,7 +1127,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -999,7 +1140,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
