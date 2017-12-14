@@ -1,13 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
 
 
 
@@ -31,54 +37,11 @@
 
 
 
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -87,7 +50,22 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
 
 
   <meta name="keywords" content="linux," />
@@ -101,11 +79,6 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
 
 
 <meta name="description" content="预备知识 程序只是一段代码，独立的程序没有任何实际意义，只有将它置于一定的环境（上下文）内才有其意义。比如说，一个用C#写成的一段hello world代码在windows环境下编译生成的一个程序文件，将它放在ARM机里，在它实例化之前（即执行前），它与ARM机里其他可以执行的程序是一样的，只是一个占据着一定内存空间的二进制文件；一旦将这些二进制文件执行，实例化后产生的东西（称为进程）便具有了实际">
@@ -115,6 +88,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
 <meta property="og:description" content="预备知识 程序只是一段代码，独立的程序没有任何实际意义，只有将它置于一定的环境（上下文）内才有其意义。比如说，一个用C#写成的一段hello world代码在windows环境下编译生成的一个程序文件，将它放在ARM机里，在它实例化之前（即执行前），它与ARM机里其他可以执行的程序是一样的，只是一个占据着一定内存空间的二进制文件；一旦将这些二进制文件执行，实例化后产生的东西（称为进程）便具有了实际">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-08-19T10:49:25.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简要剖析linux操作系统下执行一个程序的原理">
@@ -126,10 +100,12 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -153,10 +129,6 @@
 
 
   <title>简要剖析linux操作系统下执行一个程序的原理 | RedMudBUPT</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -166,18 +138,16 @@
 
 
 
+</head>
 
-
-
-
-
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -223,8 +193,38 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -233,12 +233,32 @@
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
             
-            标签
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
           </a>
         </li>
       
@@ -270,13 +290,17 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="redmud">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://yt3.ggpht.com/-O_p350X0Ro8/AAAAAAAAAAI/AAAAAAAAAAA/GXwgMZYHsZ0/s900-c-k-no-mo-rj-c0xffffff/photo.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -288,14 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                简要剖析linux操作系统下执行一个程序的原理
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">简要剖析linux操作系统下执行一个程序的原理</h1>
         
 
         <div class="post-meta">
@@ -336,6 +353,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -394,33 +414,21 @@
 <p>假设可执行文件是静态链接的（不考虑共享库），实例一个程序只需将程序的文本段、数据段、bss段和堆栈段映射到进程线性区，然后结合上述的第二点，调度到这个尚未创建栈环境的进程，之后只运行上述的第三点即可，从而便实现了对一个程序的实例化。</p>
 <h2 id="附：fork-返回两次的本质"><a href="#附：fork-返回两次的本质" class="headerlink" title="附：fork()返回两次的本质"></a>附：fork()返回两次的本质</h2><p>待续</p>
 <blockquote>
-<p>refernece0: <a href="http://www.cnblogs.com/latifrons/archive/2009/09/17/1568198.html" target="_blank" rel="external">C语言ASM汇编内嵌语法zz</a></p>
-<p>reference1: <a href="http://mooc.study.163.com/course/USTC-1000029000" target="_blank" rel="external">linux内核分析</a></p>
+<p>refernece0: <a href="http://www.cnblogs.com/latifrons/archive/2009/09/17/1568198.html" target="_blank" rel="noopener">C语言ASM汇编内嵌语法zz</a></p>
+<p>reference1: <a href="http://mooc.study.163.com/course/USTC-1000029000" target="_blank" rel="noopener">linux内核分析</a></p>
 </blockquote>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -432,15 +440,15 @@
       
 
       
-        
+      
       
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/14/shell中括号使用总结/" rel="next" title="shell中括号使用总结">
-                <i class="fa fa-chevron-left"></i> shell中括号使用总结
+              <a href="/2017/05/05/vim-使用教程/" rel="next" title="vim-使用教程">
+                <i class="fa fa-chevron-left"></i> vim-使用教程
               </a>
             
           </div>
@@ -449,8 +457,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/05/vim-使用教程/" rel="prev" title="vim-使用教程">
-                vim-使用教程 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/14/shell中括号使用总结/" rel="prev" title="shell中括号使用总结">
+                shell中括号使用总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -460,6 +468,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -475,9 +487,9 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
+
+  
+
 
 
         </div>
@@ -493,90 +505,109 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             站点概览
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://yt3.ggpht.com/-O_p350X0Ro8/AAAAAAAAAAI/AAAAAAAAAAA/GXwgMZYHsZ0/s900-c-k-no-mo-rj-c0xffffff/photo.jpg"
-               alt="redmud" />
-          <p class="site-author-name" itemprop="name">redmud</p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
               <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
 
           
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">6</span>
-                <span class="site-state-item-name">日志</span>
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
               </a>
             </div>
           
 
-          
-
-          
+          <div class="links-of-author motion-element">
             
+              
+                <span class="links-of-author-item">
+                  <a href="cherrysunshine.site" target="_blank" title="友情链接">
+                    
+                      <i class="fa fa-fw fa-globe"></i>友情链接</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
             
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
           </div>
-        
 
-        <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
           
+
+          
+          
+
+          
+
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -589,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#预备知识"><span class="nav-number">1.</span> <span class="nav-text">预备知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识1——简易“子栈”"><span class="nav-number">2.1.</span> <span class="nav-text">预备知识1——简易“子栈”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识2——GCC内联汇编"><span class="nav-number">2.2.</span> <span class="nav-text">预备知识2——GCC内联汇编</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识3——ELF文件"><span class="nav-number">2.3.</span> <span class="nav-text">预备知识3——ELF文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.4.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附：fork-返回两次的本质"><span class="nav-number">2.5.</span> <span class="nav-text">附：fork()返回两次的本质</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#预备知识"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x9884;&#x5907;&#x77E5;&#x8BC6;" class="headerlink" title="&#x9884;&#x5907;&#x77E5;&#x8BC6;"></a>&#x9884;&#x5907;&#x77E5;&#x8BC6;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4F8B;&#x5B50;" class="headerlink" title="&#x4F8B;&#x5B50;"></a>&#x4F8B;&#x5B50;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识1——简易“子栈”"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x9884;&#x5907;&#x77E5;&#x8BC6;1&#x2014;&#x2014;&#x7B80;&#x6613;&#x201C;&#x5B50;&#x6808;&#x201D;" class="headerlink" title="&#x9884;&#x5907;&#x77E5;&#x8BC6;1&#x2014;&#x2014;&#x7B80;&#x6613;&#x201C;&#x5B50;&#x6808;&#x201D;"></a>&#x9884;&#x5907;&#x77E5;&#x8BC6;1&#x2014;&#x2014;&#x7B80;&#x6613;&#x201C;&#x5B50;&#x6808;&#x201D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识2——GCC内联汇编"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x9884;&#x5907;&#x77E5;&#x8BC6;2&#x2014;&#x2014;GCC&#x5185;&#x8054;&#x6C47;&#x7F16;" class="headerlink" title="&#x9884;&#x5907;&#x77E5;&#x8BC6;2&#x2014;&#x2014;GCC&#x5185;&#x8054;&#x6C47;&#x7F16;"></a>&#x9884;&#x5907;&#x77E5;&#x8BC6;2&#x2014;&#x2014;GCC&#x5185;&#x8054;&#x6C47;&#x7F16;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识3——ELF文件"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x9884;&#x5907;&#x77E5;&#x8BC6;3&#x2014;&#x2014;ELF&#x6587;&#x4EF6;" class="headerlink" title="&#x9884;&#x5907;&#x77E5;&#x8BC6;3&#x2014;&#x2014;ELF&#x6587;&#x4EF6;"></a>&#x9884;&#x5907;&#x77E5;&#x8BC6;3&#x2014;&#x2014;ELF&#x6587;&#x4EF6;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#&#x6B63;&#x6587;" class="headerlink" title="&#x6B63;&#x6587;"></a>&#x6B63;&#x6587;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附：fork-返回两次的本质"><span class="nav-number">2.5.</span> <span class="nav-text"><a href="#&#x9644;&#xFF1A;fork-&#x8FD4;&#x56DE;&#x4E24;&#x6B21;&#x7684;&#x672C;&#x8D28;" class="headerlink" title="&#x9644;&#xFF1A;fork()&#x8FD4;&#x56DE;&#x4E24;&#x6B21;&#x7684;&#x672C;&#x8D28;"></a>&#x9644;&#xFF1A;fork()&#x8FD4;&#x56DE;&#x4E24;&#x6B21;&#x7684;&#x672C;&#x8D28;</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -609,30 +640,36 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -643,6 +680,8 @@
         <i class="fa fa-arrow-up"></i>
         
       </div>
+    
+
     
 
   </div>
@@ -668,9 +707,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -680,59 +716,65 @@
 
 
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
   
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/three/three.min.js"></script>
-
-  
-  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
 
 
 
@@ -762,14 +804,8 @@
 
 
 
-  
 
 
-
-
-
-
-  
 
 
 
@@ -777,6 +813,17 @@
 
   
 
+
+
+
+
+  
+
+  
+
+  
+
+  
   
 
   

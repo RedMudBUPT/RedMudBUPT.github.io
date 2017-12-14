@@ -1,13 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
 
 
 
@@ -31,54 +37,11 @@
 
 
 
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -87,7 +50,22 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
 
 
   <meta name="keywords" content="shell script," />
@@ -101,11 +79,6 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
 
 
 <meta name="description" content="${var}限定变量名称范围 1234#!/bin/sh# test.shvar=testecho $&amp;#123;var&amp;#125;12 效果如下 12$ ./test.sh$ var12 $(cmd)命令替换 123#!/bin/sh# test.shecho $(ls) 运行效果与 ls 相同 {}或()一串命令的执行 1234$ &amp;#123; echo 1;echo &quot;A&quot;;&amp;#125; &amp;">
@@ -115,6 +88,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/14/shell中括号使用总结/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
 <meta property="og:description" content="${var}限定变量名称范围 1234#!/bin/sh# test.shvar=testecho $&amp;#123;var&amp;#125;12 效果如下 12$ ./test.sh$ var12 $(cmd)命令替换 123#!/bin/sh# test.shecho $(ls) 运行效果与 ls 相同 {}或()一串命令的执行 1234$ &amp;#123; echo 1;echo &quot;A&quot;;&amp;#125; &amp;">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-08-14T13:27:40.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell中括号使用总结">
@@ -126,10 +100,12 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -153,10 +129,6 @@
 
 
   <title>shell中括号使用总结 | RedMudBUPT</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -166,18 +138,16 @@
 
 
 
+</head>
 
-
-
-
-
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -223,8 +193,38 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -233,12 +233,32 @@
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
             
-            标签
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
           </a>
         </li>
       
@@ -270,13 +290,17 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/shell中括号使用总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="redmud">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://yt3.ggpht.com/-O_p350X0Ro8/AAAAAAAAAAI/AAAAAAAAAAA/GXwgMZYHsZ0/s900-c-k-no-mo-rj-c0xffffff/photo.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -288,14 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                shell中括号使用总结
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">shell中括号使用总结</h1>
         
 
         <div class="post-meta">
@@ -336,6 +353,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -362,32 +382,20 @@
 <h1 id=""><a href="#" class="headerlink" title="()"></a>()</h1><p>在子shell中运行</p>
 <h1 id="-1"><a href="#-1" class="headerlink" title="{}"></a>{}</h1><p>{1..30} 就是1-30，或者是/{,s}bin/表示/bin/和/sbin/，ab{c,d,e}表示abc、abd、abe</p>
 <blockquote>
-<p><a href="http://www.jb51.net/article/60326.htm" target="_blank" rel="external">reference</a></p>
+<p><a href="http://www.jb51.net/article/60326.htm" target="_blank" rel="noopener">reference</a></p>
 </blockquote>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -399,22 +407,22 @@
       
 
       
-        
+      
       
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/" rel="next" title="简要剖析linux操作系统下执行一个程序的原理">
+                <i class="fa fa-chevron-left"></i> 简要剖析linux操作系统下执行一个程序的原理
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/" rel="prev" title="简要剖析linux操作系统下执行一个程序的原理">
-                简要剖析linux操作系统下执行一个程序的原理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -423,6 +431,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -438,9 +450,9 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
+
+  
+
 
 
         </div>
@@ -456,90 +468,109 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             站点概览
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://yt3.ggpht.com/-O_p350X0Ro8/AAAAAAAAAAI/AAAAAAAAAAA/GXwgMZYHsZ0/s900-c-k-no-mo-rj-c0xffffff/photo.jpg"
-               alt="redmud" />
-          <p class="site-author-name" itemprop="name">redmud</p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
               <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
 
           
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">6</span>
-                <span class="site-state-item-name">日志</span>
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
               </a>
             </div>
           
 
-          
-
-          
+          <div class="links-of-author motion-element">
             
+              
+                <span class="links-of-author-item">
+                  <a href="cherrysunshine.site" target="_blank" title="友情链接">
+                    
+                      <i class="fa fa-fw fa-globe"></i>友情链接</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
             
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
           </div>
-        
 
-        <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
           
+
+          
+          
+
+          
+
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -552,7 +583,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#var"><span class="nav-number">1.</span> <span class="nav-text">${var}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cmd"><span class="nav-number">2.</span> <span class="nav-text">$(cmd)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#或"><span class="nav-number">3.</span> <span class="nav-text">{}或()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-string-var-string-var-string-var-string"><span class="nav-number">4.</span> <span class="nav-text">${var:-string},${var:+string},${var:=string},${var:?string}</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string"><span class="nav-number">4.1.</span> <span class="nav-text">${var:-string}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string-1"><span class="nav-number">4.2.</span> <span class="nav-text">${var:=string}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string-2"><span class="nav-number">4.3.</span> <span class="nav-text">${var:+string}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string-3"><span class="nav-number">4.4.</span> <span class="nav-text">${var:?string}</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exp"><span class="nav-number">5.</span> <span class="nav-text">$((exp))</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-pattern-var-pattern-var-pattern-var-pattern"><span class="nav-number">6.</span> <span class="nav-text">${var%pattern},${var%%pattern},${var#pattern},${var##pattern}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#或-1"><span class="nav-number">7.</span> <span class="nav-text">[]或[[]]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">8.</span> <span class="nav-text">()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-number">9.</span> <span class="nav-text">{}</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#var"><span class="nav-number">1.</span> <span class="nav-text"><a href="#var" class="headerlink" title="${var}"></a>${var}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cmd"><span class="nav-number">2.</span> <span class="nav-text"><a href="#cmd" class="headerlink" title="$(cmd)"></a>$(cmd)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#或"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x6216;" class="headerlink" title="{}&#x6216;()"></a>{}&#x6216;()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-string-var-string-var-string-var-string"><span class="nav-number">4.</span> <span class="nav-text"><a href="#var-string-var-string-var-string-var-string" class="headerlink" title="${var:-string},${var:+string},${var:=string},${var:?string}"></a>${var:-string},${var:+string},${var:=string},${var:?string}</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#var-string" class="headerlink" title="${var:-string}"></a>${var:-string}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string-1"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#var-string-1" class="headerlink" title="${var:=string}"></a>${var:=string}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string-2"><span class="nav-number">4.3.</span> <span class="nav-text"><a href="#var-string-2" class="headerlink" title="${var:+string}"></a>${var:+string}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-string-3"><span class="nav-number">4.4.</span> <span class="nav-text"><a href="#var-string-3" class="headerlink" title="${var:?string}"></a>${var:?string}</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exp"><span class="nav-number">5.</span> <span class="nav-text"><a href="#exp" class="headerlink" title="$((exp))"></a>$((exp))</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var-pattern-var-pattern-var-pattern-var-pattern"><span class="nav-number">6.</span> <span class="nav-text"><a href="#var-pattern-var-pattern-var-pattern-var-pattern" class="headerlink" title="${var%pattern},${var%%pattern},${var#pattern},${var##pattern}"></a>${var%pattern},${var%%pattern},${var#pattern},${var##pattern}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#或-1"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x6216;-1" class="headerlink" title="[]&#x6216;[[]]"></a>[]&#x6216;[[]]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">8.</span> <span class="nav-text"><a href="#" class="headerlink" title="()"></a>()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-number">9.</span> <span class="nav-text"><a href="#-1" class="headerlink" title="{}"></a>{}</span></a></li></ol></div>
             
 
           </div>
@@ -572,30 +603,36 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -606,6 +643,8 @@
         <i class="fa fa-arrow-up"></i>
         
       </div>
+    
+
     
 
   </div>
@@ -631,9 +670,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -643,59 +679,65 @@
 
 
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
   
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/three/three.min.js"></script>
-
-  
-  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
 
 
 
@@ -725,14 +767,8 @@
 
 
 
-  
 
 
-
-
-
-
-  
 
 
 
@@ -740,6 +776,17 @@
 
   
 
+
+
+
+
+  
+
+  
+
+  
+
+  
   
 
   
