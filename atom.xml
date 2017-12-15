@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-14T13:43:34.878Z</updated>
+  <updated>2017-12-15T08:54:32.046Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LaTex简易教程</title>
+    <link href="http://yoursite.com/2017/12/15/LaTex%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/"/>
+    <id>http://yoursite.com/2017/12/15/LaTex简易教程/</id>
+    <published>2017-12-15T05:52:21.000Z</published>
+    <updated>2017-12-15T08:54:32.046Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="文章结构控制"><a href="#文章结构控制" class="headerlink" title="文章结构控制"></a>文章结构控制</h2><ul><li>建立整体框架：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">\documentclass&#123;article&#125;</div><div class="line"> </div><div class="line">\begin&#123;document&#125;</div><div class="line">\section&#123;第一节&#125;</div><div class="line">\label&#123;sec:sec_1&#125;</div><div class="line">\section&#123;第二节&#125;</div><div class="line">\label&#123;sec:sec_2&#125;</div><div class="line">    \subsection&#123;第二节第一子节&#125;</div><div class="line">    \label&#123;sec:sec_2_1&#125;</div><div class="line">        something...</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure></li></ul><h2 id="公式控制"><a href="#公式控制" class="headerlink" title="公式控制"></a>公式控制</h2><ul><li><p>段落内公式：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">something...$X$ somthing...</div></pre></td></tr></table></figure><p>  something…$X$ somthing…</p></li><li><p>独立于段落外的公式：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\[</div><div class="line">\Delta f\approx (\nabla f, \nabla X)</div><div class="line">\]</div></pre></td></tr></table></figure><p>  $$<br>  \Delta f\approx (\nabla f, \nabla X)<br>  $$</p></li><li><p>公式对齐控制：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\begin&#123;align*&#125;</div><div class="line">\frac&#123;\partial&#123;\mathrm&#123;f&#125;&#125;&#125;&#123;\partial&#123;x&#125;&#125; &amp;= \frac&#123;\partial&#123;f&#125;&#125;&#123;\partial&#123;x^T&#125;&#125;, \\</div><div class="line">\nabla_x\mathrm&#123;f&#125; &amp;= \nabla_&#123;x^T&#125;f.</div><div class="line">\end&#123;align*&#125;</div></pre></td></tr></table></figure><p>  $$<br>  \frac{\partial{\mathrm{f}}}{\partial{x}} = \frac{\partial{f}}{\partial{x^T}},<br>  $$</p></li></ul><h2 id="列表控制："><a href="#列表控制：" class="headerlink" title="列表控制："></a>列表控制：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\begin&#123;enumerate&#125;</div><div class="line">    \item 第一项</div><div class="line">    \item 第二项</div><div class="line">\end&#123;enumerate&#125;</div></pre></td></tr></table></figure><p>或者</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\begin&#123;itemize&#125;</div><div class="line">    \item 第一项</div><div class="line">    \item 第二项</div><div class="line">\end&#123;itemize&#125;</div></pre></td></tr></table></figure><h1 id="后记：实用工具"><a href="#后记：实用工具" class="headerlink" title="后记：实用工具"></a>后记：实用工具</h1><h2 id="LaTex编译环境"><a href="#LaTex编译环境" class="headerlink" title="LaTex编译环境"></a>LaTex编译环境</h2><p>使用<a href="http://sharelatex.com/" target="_blank" rel="noopener">sharelatex</a>即可。<br>当使用中文时，建议用XeLaTex进行build。</p><h2 id="LaTex特殊符号的查询"><a href="#LaTex特殊符号的查询" class="headerlink" title="LaTex特殊符号的查询"></a>LaTex特殊符号的查询</h2><p>可使用<a href="http://detexify.kirelabs.org/classify.html" target="_blank" rel="noopener">Detexify</a>工具得到特殊符号的LaTex语法。</p><h2 id="公式编辑的实时显示"><a href="#公式编辑的实时显示" class="headerlink" title="公式编辑的实时显示"></a>公式编辑的实时显示</h2><p>可使用<a href="https://kerzol.github.io/markdown-mathjax/editor.html" target="_blank" rel="noopener">Markdown-MathJax-editor-online</a><br>工具检查公式语法的正确性。</p><blockquote><p><a href="http://www.forkosh.com/mathtextutorial.html" target="_blank" rel="noopener">ref: LaTex 完整教程</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;第一章&quot;&gt;&lt;a href=&quot;#第一章&quot; class=&quot;headerlink&quot; title=&quot;第一章&quot;&gt;&lt;/a&gt;第一章&lt;/h1&gt;&lt;h2 id=&quot;文章结构控制&quot;&gt;&lt;a href=&quot;#文章结构控制&quot; class=&quot;headerlink&quot; title=&quot;文章结构控制&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>使用hexo+gitpage搭建个人博客（ubuntu16.04环境）</title>
