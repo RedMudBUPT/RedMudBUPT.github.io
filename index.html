@@ -84,7 +84,7 @@
   
     
     
-    <link href="//fonts.lug.ustc.edu.cn/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -358,35 +358,16 @@
       
         
           
-            <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="文章结构控制"><a href="#文章结构控制" class="headerlink" title="文章结构控制"></a>文章结构控制</h2><ul>
-<li>建立整体框架：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">\documentclass&#123;article&#125;</div><div class="line"> </div><div class="line">\begin&#123;document&#125;</div><div class="line">\section&#123;第一节&#125;</div><div class="line">\label&#123;sec:sec_1&#125;</div><div class="line">\section&#123;第二节&#125;</div><div class="line">\label&#123;sec:sec_2&#125;</div><div class="line">    \subsection&#123;第二节第一子节&#125;</div><div class="line">    \label&#123;sec:sec_2_1&#125;</div><div class="line">        something...</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="公式控制"><a href="#公式控制" class="headerlink" title="公式控制"></a>公式控制</h2><ul>
-<li><p>段落内公式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">something...$X$ somthing...</div></pre></td></tr></table></figure>
-<p>  something…$X$ somthing…</p>
-</li>
-<li><p>独立于段落外的公式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\[</div><div class="line">\Delta f\approx (\nabla f, \nabla X)</div><div class="line">\]</div></pre></td></tr></table></figure>
-<p>  $$<br>  \Delta f\approx (\nabla f, \nabla X)<br>  $$</p>
-</li>
-<li><p>公式对齐控制：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\begin&#123;align*&#125;</div><div class="line">\frac&#123;\partial&#123;\mathrm&#123;f&#125;&#125;&#125;&#123;\partial&#123;x&#125;&#125; &amp;= \frac&#123;\partial&#123;f&#125;&#125;&#123;\partial&#123;x^T&#125;&#125;, \\</div><div class="line">\nabla_x\mathrm&#123;f&#125; &amp;= \nabla_&#123;x^T&#125;f.</div><div class="line">\end&#123;align*&#125;</div></pre></td></tr></table></figure>
-<p>  $$<br>  \frac{\partial{\mathrm{f}}}{\partial{x}} = \frac{\partial{f}}{\partial{x^T}},<br>  $$</p>
-</li>
-</ul>
-<h2 id="列表控制："><a href="#列表控制：" class="headerlink" title="列表控制："></a>列表控制：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\begin&#123;enumerate&#125;</div><div class="line">    \item 第一项</div><div class="line">    \item 第二项</div><div class="line">\end&#123;enumerate&#125;</div></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\begin&#123;itemize&#125;</div><div class="line">    \item 第一项</div><div class="line">    \item 第二项</div><div class="line">\end&#123;itemize&#125;</div></pre></td></tr></table></figure>
-<h1 id="后记：实用工具"><a href="#后记：实用工具" class="headerlink" title="后记：实用工具"></a>后记：实用工具</h1><h2 id="LaTex编译环境"><a href="#LaTex编译环境" class="headerlink" title="LaTex编译环境"></a>LaTex编译环境</h2><p>使用<a href="http://sharelatex.com/" target="_blank" rel="noopener">sharelatex</a>即可。<br>当使用中文时，建议用XeLaTex进行build。</p>
-<h2 id="LaTex特殊符号的查询"><a href="#LaTex特殊符号的查询" class="headerlink" title="LaTex特殊符号的查询"></a>LaTex特殊符号的查询</h2><p>可使用<a href="http://detexify.kirelabs.org/classify.html" target="_blank" rel="noopener">Detexify</a>工具得到特殊符号的LaTex语法。</p>
-<h2 id="公式编辑的实时显示"><a href="#公式编辑的实时显示" class="headerlink" title="公式编辑的实时显示"></a>公式编辑的实时显示</h2><p>可使用<a href="https://kerzol.github.io/markdown-mathjax/editor.html" target="_blank" rel="noopener">Markdown-MathJax-editor-online</a><br>工具检查公式语法的正确性。</p>
-<blockquote>
-<p><a href="http://www.forkosh.com/mathtextutorial.html" target="_blank" rel="noopener">ref: LaTex 完整教程</a></p>
-</blockquote>
-
-          
+          第一章文章结构控制
+建立整体框架：1234567891011\documentclass&#123;article&#125; \begin&#123;document&#125;\section&#123;第一节&#125;\label&#123;sec:sec_1&#125;\section&#
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/15/LaTex简易教程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -516,30 +497,16 @@
       
         
           
-            <h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h3 id="安装npm-nodejs-git-hexo工具"><a href="#安装npm-nodejs-git-hexo工具" class="headerlink" title="安装npm nodejs git hexo工具"></a>安装npm nodejs git hexo工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install npm</div><div class="line">$ sudo apt-get install nodejs</div><div class="line">$ sudo apt-get install git</div><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure>
-<h3 id="创建博客文件夹"><a href="#创建博客文件夹" class="headerlink" title="创建博客文件夹"></a>创建博客文件夹</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init BLOG <span class="comment">#假设为BLOG</span></div><div class="line">$ <span class="built_in">cd</span> BLOG</div><div class="line">$ npm install  <span class="comment">#安装依赖</span></div></pre></td></tr></table></figure>
-<h3 id="主题更改"><a href="#主题更改" class="headerlink" title="主题更改"></a>主题更改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</div><div class="line">$ <span class="built_in">cd</span> themes/next</div><div class="line">$ git pull</div><div class="line">$ hexo generate</div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<blockquote>
-<p>现在打开<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ，就发现新的主题安装成功了。<br>按ctl+c退出</p>
-<h3 id="创建git仓库"><a href="#创建git仓库" class="headerlink" title="创建git仓库"></a>创建git仓库</h3><p>[图]</p>
-</blockquote>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> BLOG</div><div class="line">$ git config --global user.name <span class="string">"username"</span> <span class="comment"># username为你自己的github用户名</span></div><div class="line">$ git config --global user.email <span class="string">"email@example.com"</span></div><div class="line">$ ssh-keygen -t rsa -C <span class="string">"email@example.com"</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>为github仓库添加SSH keys（id_rsa.pub）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git init</div><div class="line">$ git add README.md</div><div class="line">$ git commit -m <span class="string">"first commit"</span></div><div class="line">$ git remote add origin git@github.com:<span class="string">"username"</span>/<span class="string">"username"</span>.github.io.git  <span class="comment">#关联远程仓库</span></div><div class="line">$ git push -u origin master</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>More info: <a href="https://github.com/bkseastone/learngit/blob/master/git_commands.txt" target="_blank" rel="noopener">git command</a></p>
-<h4 id="修改BLOG目录下的-config-yml文件"><a href="#修改BLOG目录下的-config-yml文件" class="headerlink" title="修改BLOG目录下的_config.yml文件"></a>修改BLOG目录下的_config.yml文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: github</div><div class="line">  repo: git@github.com:<span class="string">"username"</span>/<span class="string">"username"</span>.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
-<h4 id="安装一个Hexo的插件"><a href="#安装一个Hexo的插件" class="headerlink" title="安装一个Hexo的插件"></a>安装一个Hexo的插件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-get --save</div></pre></td></tr></table></figure>
-<h4 id="修改BLOG目录下的-config-yml文件-1"><a href="#修改BLOG目录下的-config-yml文件-1" class="headerlink" title="修改BLOG目录下的_config.yml文件"></a>修改BLOG目录下的_config.yml文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repo: git@github.com:<span class="string">"username"</span>/<span class="string">"username"</span>.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
-<h4 id="hexo部署"><a href="#hexo部署" class="headerlink" title="hexo部署"></a>hexo部署</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<h3 id="浏览"><a href="#浏览" class="headerlink" title="浏览"></a>浏览</h3><blockquote>
-<p>打开网页<a href="https://&quot;username&quot;.github.io" target="_blank" rel="noopener">https://“username”.github.io</a></p>
-</blockquote>
-<h1 id="后期使用"><a href="#后期使用" class="headerlink" title="后期使用"></a>后期使用</h1><h3 id="创建新的post-并生效"><a href="#创建新的post-并生效" class="headerlink" title="创建新的post,并生效"></a>创建新的post,并生效</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"MyNewPost"</span></div><div class="line">$ gedit <span class="built_in">source</span>/_posts/MyNewPost.md</div><div class="line">$ hexo generate</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<h3 id="全局配置-config-yml"><a href="#全局配置-config-yml" class="headerlink" title="全局配置 _config.yml"></a>全局配置 _config.yml</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Hexo Configuration</span></div><div class="line"><span class="comment">## Docs: http//hexo.io/docs/configuration.html</span></div><div class="line"><span class="comment">## Source: https//github.com/hexojs/hexo/</span></div><div class="line"><span class="comment"># Site #站点信息</span></div><div class="line">title:  <span class="comment">#标题</span></div><div class="line">subtitle:  <span class="comment">#副标题</span></div><div class="line">description:  <span class="comment">#站点描述，给搜索引擎看的</span></div><div class="line">author:  <span class="comment">#作者</span></div><div class="line">email:  <span class="comment">#电子邮箱</span></div><div class="line">language: zh-CN <span class="comment">#语言</span></div><div class="line"><span class="comment"># URL #链接格式</span></div><div class="line">url:  <span class="comment">#网址</span></div><div class="line">root: / <span class="comment">#根目录</span></div><div class="line">permalink: :year/:month/:day/:title/ <span class="comment">#文章的链接格式</span></div><div class="line">tag_dir: tags <span class="comment">#标签目录</span></div><div class="line">archive_dir: archives <span class="comment">#存档目录</span></div><div class="line">category_dir: categories <span class="comment">#分类目录</span></div><div class="line">code_dir: downloads/code</div><div class="line">permalink_defaults:</div><div class="line"><span class="comment"># Directory #目录</span></div><div class="line">source_dir: <span class="built_in">source</span> <span class="comment">#源文件目录</span></div><div class="line">public_dir: public <span class="comment">#生成的网页文件目录</span></div><div class="line"><span class="comment"># Writing #写作</span></div><div class="line">new_post_name: :title.md <span class="comment">#新文章标题</span></div><div class="line">default_layout: post <span class="comment">#默认的模板，包括 post、page、photo、draft（文章、页面、照片、草稿）</span></div><div class="line">titlecase: <span class="literal">false</span> <span class="comment">#标题转换成大写</span></div><div class="line">external_link: <span class="literal">true</span> <span class="comment">#在新选项卡中打开连接</span></div><div class="line">filename_case: 0</div><div class="line">render_drafts: <span class="literal">false</span></div><div class="line">post_asset_folder: <span class="literal">false</span></div><div class="line">relative_link: <span class="literal">false</span></div><div class="line">highlight: <span class="comment">#语法高亮</span></div><div class="line">  <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment">#是否启用</span></div><div class="line">  line_number: <span class="literal">true</span> <span class="comment">#显示行号</span></div><div class="line">  tab_replace:</div><div class="line"><span class="comment"># Category &amp; Tag #分类和标签</span></div><div class="line">default_category: uncategorized <span class="comment">#默认分类</span></div><div class="line">category_map:</div><div class="line">tag_map:</div><div class="line"><span class="comment"># Archives</span></div><div class="line">2: 开启分页</div><div class="line">1: 禁用分页</div><div class="line">0: 全部禁用</div><div class="line">archive: 2</div><div class="line">category: 2</div><div class="line">tag: 2</div><div class="line"><span class="comment"># Server #本地服务器</span></div><div class="line">port: 4000 <span class="comment">#端口号</span></div><div class="line">server_ip: localhost <span class="comment">#IP 地址</span></div><div class="line">logger: <span class="literal">false</span></div><div class="line">logger_format: dev</div><div class="line"><span class="comment"># Date / Time format #日期时间格式</span></div><div class="line">date_format: YYYY-MM-DD <span class="comment">#参考http//momentjs.com/docs/#/displaying/format/</span></div><div class="line">time_format: H:mm:ss</div><div class="line"><span class="comment"># Pagination #分页</span></div><div class="line">per_page: 10 <span class="comment">#每页文章数，设置成 0 禁用分页</span></div><div class="line">pagination_dir: page</div><div class="line"><span class="comment"># Disqus #Disqus评论，替换为多说</span></div><div class="line">disqus_shortname:</div><div class="line"><span class="comment"># Extensions #拓展插件</span></div><div class="line">theme: landscape-plus <span class="comment">#主题</span></div><div class="line">exclude_generator:</div><div class="line">plugins: <span class="comment">#插件，例如生成 RSS 和站点地图的</span></div><div class="line">- hexo-generator-feed</div><div class="line">- hexo-generator-sitemap</div><div class="line"><span class="comment"># Deployment #部署，将 lmintlcx 改成用户名</span></div><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repo: 刚刚github创库地址.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
-<p>More info: <a href="http//www.jianshu.com/p/701b1095da11">reference2</a></p>
-
-          
+          博客搭建安装npm nodejs git hexo工具1234$ sudo apt-get install npm$ sudo apt-get install nodejs$ sudo apt-get install git$ npm install -g hexo
+创建博客文件夹123$ hexo
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/14/使用hexo+gitpage搭建个人博客(ubuntu16.04环境)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -669,30 +636,22 @@
       
         
           
-            <h1 id="var"><a href="#var" class="headerlink" title="${var}"></a>${var}</h1><p>限定变量名称范围</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment"># test.sh</span></div><div class="line">var=<span class="built_in">test</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var&#125;</span>12</div></pre></td></tr></table></figure>
-<p>效果如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./test.sh</div><div class="line">$ var12</div></pre></td></tr></table></figure>
-<h1 id="cmd"><a href="#cmd" class="headerlink" title="$(cmd)"></a>$(cmd)</h1><p>命令替换</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment"># test.sh</span></div><div class="line"><span class="built_in">echo</span> $(ls)</div></pre></td></tr></table></figure>
-<p>运行效果与 <code>ls</code> 相同</p>
-<h1 id="或"><a href="#或" class="headerlink" title="{}或()"></a>{}或()</h1><p>一串命令的执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ &#123; <span class="built_in">echo</span> 1;<span class="built_in">echo</span> <span class="string">"A"</span>;&#125; &gt; tmp</div><div class="line">$ cat ./tmp</div><div class="line">$ 1</div><div class="line">$ A</div></pre></td></tr></table></figure>
-<h1 id="var-string-var-string-var-string-var-string"><a href="#var-string-var-string-var-string-var-string" class="headerlink" title="${var:-string},${var:+string},${var:=string},${var:?string}"></a>${var:-string},${var:+string},${var:=string},${var:?string}</h1><p>几种特殊的替换结构</p>
-<h2 id="var-string"><a href="#var-string" class="headerlink" title="${var:-string}"></a>${var:-string}</h2><p>若<code>var</code>为空，则结果为<code>&quot;string&quot;</code>，否则结果为<code>$var</code>。</p>
-<h2 id="var-string-1"><a href="#var-string-1" class="headerlink" title="${var:=string}"></a>${var:=string}</h2><p>若<code>var</code>为空，则结果为<code>&quot;string&quot;</code>，并将该字符串赋给<code>var</code>，否则结果为<code>$var</code>。</p>
-<h2 id="var-string-2"><a href="#var-string-2" class="headerlink" title="${var:+string}"></a>${var:+string}</h2><p>若<code>var</code>不为空，则结果为<code>&quot;string&quot;</code>，否则结果为<code>$var</code>。</p>
-<h2 id="var-string-3"><a href="#var-string-3" class="headerlink" title="${var:?string}"></a>${var:?string}</h2><p>若<code>var</code>不为空，则结果为<code>$var</code>，否则将<code>&quot;string&quot;</code>输出到标准错误中，并从脚本退出。</p>
-<h1 id="exp"><a href="#exp" class="headerlink" title="$((exp))"></a>$((exp))</h1><p>POSIX标准的扩展计算，只要符合C的运算符都可用在$((exp))，甚至是三目运算符。</p>
-<h1 id="var-pattern-var-pattern-var-pattern-var-pattern"><a href="#var-pattern-var-pattern-var-pattern-var-pattern" class="headerlink" title="${var%pattern},${var%%pattern},${var#pattern},${var##pattern}"></a>${var%pattern},${var%%pattern},${var#pattern},${var##pattern}</h1><p>四种模式匹配替换结构</p>
-<h1 id="或-1"><a href="#或-1" class="headerlink" title="[]或[[]]"></a>[]或[[]]</h1><p>类似test</p>
-<h1 id=""><a href="#" class="headerlink" title="()"></a>()</h1><p>在子shell中运行</p>
-<h1 id="-1"><a href="#-1" class="headerlink" title="{}"></a>{}</h1><p>{1..30} 就是1-30，或者是/{,s}bin/表示/bin/和/sbin/，ab{c,d,e}表示abc、abd、abe</p>
-<blockquote>
-<p><a href="http://www.jb51.net/article/60326.htm" target="_blank" rel="noopener">reference</a></p>
-</blockquote>
+          ${var}限定变量名称范围
+1234#!/bin/sh# test.shvar=testecho $&#123;var&#125;12
+效果如下
+12$ ./test.sh$ var12
+$(cmd)命令替换
+123#!/bin/sh# test.shecho $(ls)
+运行效果与 ls 相同
 
-          
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/14/shell中括号使用总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -822,63 +781,16 @@
       
         
           
-            <h1 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h1><ul>
-<li>程序只是一段代码，独立的程序没有任何实际意义，只有将它置于一定的环境（上下文）内才有其意义。比如说，一个用C#写成的一段hello world代码在windows环境下编译生成的一个程序文件，将它放在ARM机里，在它实例化之前（即执行前），它与ARM机里其他可以执行的程序是一样的，只是一个占据着一定内存空间的二进制文件；一旦将这些二进制文件执行，实例化后产生的东西（称为进程）便具有了实际意义，即这个进程所能实现的功能，当然前提是它能在该环境中实例化，前面所提的C#程序文件便不能在ARM机中实例化。<ul>
-<li>综上，程序可认为是进程的抽象，一个程序可以实例化出任意多个进程。</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>linux系统中所有的进程都是在0号进程的基础上fork生成的，故在开机后，运行的任何一个程序都是在某个程序的基础上fork生成后继而执行的。<ul>
-<li>因此，若要分析执行一个程序的原理，可用任意一个具体的例子进行说明，其中关键性部分几乎不会存在差异。</li>
-</ul>
-</li>
-</ul>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p><em>以在shell中执行<code>ls</code>命令为例，进行说明。</em></p>
-<h2 id="预备知识1——简易“子栈”"><a href="#预备知识1——简易“子栈”" class="headerlink" title="预备知识1——简易“子栈”"></a>预备知识1——简易“子栈”</h2><p>建立“子栈”的概念。从一个函数A跳转到另一个函数B时会创建一个临时堆栈，称函数A所在的堆栈为父栈，称函数B所在的堆栈为子栈。在一个子栈中运行的基本框架如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">pushl %ebp <span class="comment">/*enter*/</span>        <span class="comment">//保存父栈环境</span></div><div class="line">movl %esp %ebp              <span class="comment">//新建子栈环境</span></div><div class="line">...</div><div class="line">movl %ebp %esp <span class="comment">/*leave*/</span>    <span class="comment">//恢复父栈环境</span></div><div class="line">popl %ebp                   <span class="comment">//恢复父栈环境</span></div></pre></td></tr></table></figure>
-<p><strong><em>note: <code>push</code>和<code>pop</code>都是依<code>sp</code>寻址的。</em></strong></p>
-<p>为深入理解该框架，要明确以下几点：</p>
-<ul>
-<li><p>首先要明确一个CPU在某一确定的时刻只能运行在一个堆栈空间中，当建立起子栈后，CPU便已运行在了子栈中，当前起作用的堆栈空间便是子栈，而当CPU离开子栈后，起作用的堆栈空间便成了父栈，且方才用过的子栈不复存在，即永远也不可能再次回到方才起作用的子栈，但能再次创建一个新的子栈。这也是将子栈称为临时堆栈、子函数的变量称为临时变量的原因。从根本上来看，除最初开机时建立的堆栈外，所有的堆栈都是临时堆栈，而子父关系便是相对而言。</p>
-</li>
-<li><p>其次由该框架可发现简易子栈与父栈在地址空间上是连续的,而若将子栈动态信息另存于系统中以实现再次寻回时（见正文），其框架只是加入了对子栈动态信息的保存和重载（因为子栈与父栈在地址空间上不再连续。而无法连续的原因是从子栈返回父栈后，子栈的数据极有可能被覆盖。所以连续的前提是确保子栈不会被第二次使用）。</p>
-</li>
-<li><p>最后要明确正文中的堆栈之间实际上不是父子关系，而是平等的。依然采用子栈、父栈的名称是为了结合该简易子栈的框架方便理解。依据时间顺序，称后创建的为子栈。</p>
-</li>
-</ul>
-<h2 id="预备知识2——GCC内联汇编"><a href="#预备知识2——GCC内联汇编" class="headerlink" title="预备知识2——GCC内联汇编"></a>预备知识2——GCC内联汇编</h2><p>基本格式：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">asm</span> <span class="title">volatile</span><span class="params">(</span></span></div><div class="line">    汇编语句模板:</div><div class="line">    输出部分:</div><div class="line">    输入部分:</div><div class="line">    破坏描述部分</div><div class="line">);</div><div class="line"><span class="comment">//即格式为asm("statements":output_regs:input_regs:clobbered_regs);</span></div></pre></td></tr></table></figure></p>
-<p>常用寄存器加载代码说明:<br>|代码|说明|<br>|-|:-|<br>|a|使用寄存器eax|<br>|b|使用寄存器ebx|<br>|c|使用寄存器ecx|<br>|d|使用寄存器edx|<br>|m|使用内存地址|<br>|o|使用内存地址并可以加偏移值|<br>|r|使用任意动态分配的寄存器|<br>|+|表示操作数可读可写|<br>|=|输出操作数，输出值将替换前值|</p>
-<h2 id="预备知识3——ELF文件"><a href="#预备知识3——ELF文件" class="headerlink" title="预备知识3——ELF文件"></a>预备知识3——ELF文件</h2><p>待续</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>若将之前所述的子栈的信息保存在系统中，便可实现在运行于某子栈环境中的进程退出前，总是能够再次找到该子栈。可采用类似于如下的结构实现子栈信息的保存：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Thread</span> &#123;</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> ip;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> sp;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>由此，对于进程，可用如下结构进行描述：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PCB</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> pid;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> task_entry;   <span class="comment">//进程入口点</span></div><div class="line">    <span class="keyword">char</span> <span class="built_in">stack</span>[STACK_SIZE];</div><div class="line"></div><div class="line">    <span class="keyword">volatile</span> <span class="keyword">long</span> state;</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Thread</span> <span class="title">thread</span>;</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">PCB</span> *<span class="title">next</span>;</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>运行一个进程基本需要以下第三步：</p>
-<ul>
-<li><p>创建0号进程：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">asm volatile(</div><div class="line">    "movl %1,%%esp\n\t"</div><div class="line">    "pushl %1\n\t"              //将0号进程栈底指针压栈</div><div class="line">    "movl %1,%%ebp\n\t"</div><div class="line">    "pushl %0\n\t"</div><div class="line">    "ret\n\t"                   //启动0号进程</div><div class="line">    :</div><div class="line">    :"c"(task[0].thread.ip),"d"(task[0].thread.sp)</div><div class="line">);</div></pre></td></tr></table></figure>
-</li>
-<li><p>调度到一个尚未创建栈环境的进程x（即，创建子栈）：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">asm volatile(</div><div class="line">    "pushl %%ebp\n\t"           /*保存父栈环境*/</div><div class="line">    "movl %%esp,%0\n\t"</div><div class="line">    "movl $1f,%1\n\t"</div><div class="line">    "movl %2,%%ebp\n\t"         /*新建子栈环境*/</div><div class="line">    "movl %2,%%esp\n\t"</div><div class="line">    "pushl %3\n\t"              /*启动x号进程*/</div><div class="line">    "ret\n\t"</div><div class="line">    :"=m"(task[NOW]-&gt;thread.sp),"=m"(task[NOW]-&gt;thread.ip)</div><div class="line">    :"m"(task[x]-&gt;thread.sp),"m"(task[x]-&gt;thread.ip)</div><div class="line">);</div></pre></td></tr></table></figure>
-</li>
-<li><p>调度到已经存在栈环境（即，至少运行过一次）的进程x（即，切换栈环境）：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">asm volatile(</div><div class="line">    "pushl %%ebp\n\t"           /*保存父栈环境*/</div><div class="line">    "movl %%esp,%0\n\t"</div><div class="line">    "movl $1f,%1\n\t"</div><div class="line">    "movl %2,%%esp\n\t"         /*切换栈环境*/</div><div class="line">    "pushl %3\n\t"              /*切换至x号进程*/</div><div class="line">    "ret\n\t"</div><div class="line">    "1:\t"                      //下条指令的地址即为$1f对应的地址</div><div class="line">    "popl %%ebp\n\t"            //此处pop出的是上次x进程被切换出去时push进去的ebp</div><div class="line">    :"=m"(task[NOW]-&gt;thread.sp),"=m"(task[NOW]-&gt;thread.ip)</div><div class="line">    :"m"(task[x]-&gt;thread.sp),"m"(task[x]-&gt;thread.ip)</div><div class="line">);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>结合以上三点，便可总结调度器切换进程的简要步骤（省略进程的优先级策略等）：</p>
-<ol>
-<li><p>保存栈环境：进程断点压栈（编译器自动生成该指令），进程栈底指针压栈，保存进程栈顶指针，并保存恢复栈环境指令的首地址<code>$1f</code>。</p>
-</li>
-<li><p>转移栈环境：给栈顶指针赋值，并弹出新进程栈底指针和断点。</p>
-</li>
-</ol>
-<p>假设可执行文件是静态链接的（不考虑共享库），实例一个程序只需将程序的文本段、数据段、bss段和堆栈段映射到进程线性区，然后结合上述的第二点，调度到这个尚未创建栈环境的进程，之后只运行上述的第三点即可，从而便实现了对一个程序的实例化。</p>
-<h2 id="附：fork-返回两次的本质"><a href="#附：fork-返回两次的本质" class="headerlink" title="附：fork()返回两次的本质"></a>附：fork()返回两次的本质</h2><p>待续</p>
-<blockquote>
-<p>refernece0: <a href="http://www.cnblogs.com/latifrons/archive/2009/09/17/1568198.html" target="_blank" rel="noopener">C语言ASM汇编内嵌语法zz</a></p>
-<p>reference1: <a href="http://mooc.study.163.com/course/USTC-1000029000" target="_blank" rel="noopener">linux内核分析</a></p>
-</blockquote>
-
-          
+          预备知识
+程序只是一段代码，独立的程序没有任何实际意义，只有将它置于一定的环境（上下文）内才有其意义。比如说，一个用C#写成的一段hello world代码在windows环境下编译生成的一个程序文件，将它放在ARM机里，在它实例化之前（即执行前），它与ARM机里其他可以执行的程序是一样的，只是一个
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/21/简要剖析linux操作系统下实例一个程序的原理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1030,27 +942,15 @@
       
         
           
-            <h1 id="vim-插件配置"><a href="#vim-插件配置" class="headerlink" title="vim 插件配置"></a>vim 插件配置</h1><h2 id="安装vim"><a href="#安装vim" class="headerlink" title="安装vim"></a>安装vim</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> git@github.com:vim/vim.git</div><div class="line">$ <span class="built_in">cd</span> vim/</div><div class="line">$ sudo apt install python-dev python3-dev ruby-dev libtolua-dev libx11-dev libghc-gtk-dev libghc-gtk3-dev python-gtk2-dev libghc-ncurses-dev</div><div class="line">$ ./configure --with-features=huge --enable-pythoninterp --enable-rubyinterp --enable-luainterp --enable-perlinterp --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/ --enable-gui=gtk2 --enable-cscope --prefix=/usr</div><div class="line">$ make</div><div class="line">$ make install</div></pre></td></tr></table></figure>
-<blockquote>
-<p><em>more info</em><br><a href="http://packages.ubuntu.com/" target="_blank" rel="noopener">Ubuntu Packages Search</a></p>
-</blockquote>
-<h2 id="安装-vundle"><a href="#安装-vundle" class="headerlink" title="安装 vundle"></a>安装 vundle</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</div></pre></td></tr></table></figure>
-<h2 id="vimrc-文件配置"><a href="#vimrc-文件配置" class="headerlink" title=".vimrc 文件配置"></a>.vimrc 文件配置</h2><p>参考 <a href="https://github.com/bkseastone/.back-files/blob/master/.vimrc" target="_blank" rel="noopener">.vimrc</a></p>
-<h2 id="安装插件进入vim执行："><a href="#安装插件进入vim执行：" class="headerlink" title="安装插件进入vim执行："></a>安装插件<h3>进入vim执行：</h3></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">:PluginInstall</div><div class="line">:PluginClean <span class="comment">#卸载前先删掉.vimrc文件中的配置语句</span></div><div class="line">:PluginUpdate</div></pre></td></tr></table></figure>
-<h2 id="安装YCM插件"><a href="#安装YCM插件" class="headerlink" title="安装YCM插件"></a>安装YCM插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install llvm-dev clang</div><div class="line">$ sudo apt install cmake</div><div class="line">$ <span class="built_in">cd</span> ~/.vim/bundle/YouCompleteMe</div><div class="line">$ ./install.py --clang-completer --system-libclang</div></pre></td></tr></table></figure>
-<blockquote>
-<p><em>more info</em><br><a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="noopener">use vim as IDE</a></p>
-</blockquote>
-<h1 id="gvim-的使用"><a href="#gvim-的使用" class="headerlink" title="gvim 的使用"></a>gvim 的使用</h1><h2 id="工程环境配置修改-indexer-files"><a href="#工程环境配置修改-indexer-files" class="headerlink" title="工程环境配置修改~/.indexer_files"></a>工程环境配置<h3>修改~/.indexer_files</h3></h2><blockquote>
-<p>用于产生标签</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">--------------- ~/.indexer_files ---------------  </div><div class="line">[project] </div><div class="line">/home/redmud/practice/project/src/</div></pre></td></tr></table></figure>
-<h3 id="根据你工程情况只需调整-ycm-extra-conf-py-的-flags-部分"><a href="#根据你工程情况只需调整-ycm-extra-conf-py-的-flags-部分" class="headerlink" title="根据你工程情况只需调整 .ycm_extra_conf.py 的 flags 部分"></a>根据你工程情况只需调整 .ycm_extra_conf.py 的 flags 部分</h3><blockquote>
-<p>参考<a href="https://raw.githubusercontent.com/yangyangwithgnu/use_vim_as_ide/master/.ycm_extra_conf.py" target="_blank" rel="noopener">.ycm_extra_conf.py</a></p>
-</blockquote>
-<h2 id="快捷键的使用"><a href="#快捷键的使用" class="headerlink" title="快捷键的使用"></a>快捷键的使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">;ilt    <span class="comment">#打开标签页</span></div><div class="line">;hw     <span class="comment">#跳转左侧窗口</span></div><div class="line">p       <span class="comment">#右侧窗口显示标签对应函数</span></div><div class="line"></div><div class="line">/word   <span class="comment">#在文件内查找关键字</span></div><div class="line">;sp     <span class="comment">#在工程内查找关键字</span></div><div class="line">&lt;CR&gt;    <span class="comment">#进入关键字对应文件</span></div><div class="line">p       <span class="comment">#暂时在右侧显示对应文件</span></div><div class="line">q       <span class="comment">#退出</span></div><div class="line"></div><div class="line">u       <span class="comment">#撤销上步操作 </span></div><div class="line">ctl+r   <span class="comment">#撤销上步的撤销</span></div><div class="line">;ud     <span class="comment">#显示撤销树</span></div><div class="line"></div><div class="line">;;fx     <span class="comment">#跳至x字符</span></div><div class="line"></div><div class="line">;cc     <span class="comment">#注释</span></div><div class="line">;cu     <span class="comment">#取消注释</span></div><div class="line"></div><div class="line">;rw     <span class="comment">#在文件内不确认得全文替换单词</span></div><div class="line"></div><div class="line">mx      <span class="comment">#设定/取消该行为标签x</span></div><div class="line">m,      <span class="comment">#自动设定一个可用书签名</span></div><div class="line">mn      <span class="comment">#跳转至下个书签</span></div><div class="line">mda     <span class="comment">#删除当前文件所有书签</span></div><div class="line">ctl+o   <span class="comment">#跳回上次鼠标位置</span></div></pre></td></tr></table></figure>
-
-          
+          vim 插件配置安装vim123456$ git clone git@github.com:vim/vim.git$ cd vim/$ sudo apt install python-dev python3-dev ruby-dev libtolua-dev libx11-dev libghc-gt
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/05/vim-使用教程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

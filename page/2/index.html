@@ -84,7 +84,7 @@
   
     
     
-    <link href="//fonts.lug.ustc.edu.cn/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -358,21 +358,17 @@
       
         
           
-            <h1 id="使用ssh"><a href="#使用ssh" class="headerlink" title="使用ssh"></a>使用ssh</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
-<li>用作认证的私钥最好通过passphrase进行加密，否则会有很大安全隐患，只要私钥泄露，别人就能访问你能访问的所有远程机器，不过每次登陆都得输入passphrase。</li>
-<li>ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入agent管理时输入passphrase，之后的ssh相关操作就不必输入passphrase了。如果ssh-agent中有多个私钥, 会依次尝试，直到认证通过或遍历所有私钥。</li>
-</ul>
-<blockquote>
-<p><em>more info</em><br><a href="http://blog.csdn.net/sdcxyz/article/details/41487897" target="_blank" rel="noopener">SSH Agent Forwarding原理</a><br><a href="http://www.unixwiz.net/techtips/ssh-agent-forwarding.html" target="_blank" rel="noopener">An Illustrated Guide to SSH Agent Forwarding</a></p>
-</blockquote>
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh-kengen -t rsa -C <span class="string">"some words(email usually)"</span></div><div class="line">$ ssh-agent <span class="_">-s</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa <span class="comment">#添加私钥</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa2</div><div class="line">$ vim ~/.ssh/config</div></pre></td></tr></table></figure>
-<h2 id="config-文件类似如下"><a href="#config-文件类似如下" class="headerlink" title="config 文件类似如下"></a>config 文件类似如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Host  redmudbupt.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa </div><div class="line">    User git </div><div class="line"></div><div class="line">host bkseastone.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa2</div><div class="line">    User git</div></pre></td></tr></table></figure>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin git@bkseastone.github.com:bkseastone/lab_test.git <span class="comment">#添加远程库</span></div><div class="line">$ git config user.name <span class="string">"one_name"</span> </div><div class="line">$ git config user.email <span class="string">"one_email"</span> <span class="comment">#给仓库设置局部用户名和邮箱</span></div></pre></td></tr></table></figure>
-<h1 id="git-使用"><a href="#git-使用" class="headerlink" title="git 使用"></a>git 使用</h1><blockquote>
-<p><em>more info</em><br><a href="https://github.com/bkseastone/learngit/blob/master/git-cheatsheet-CN-dark.pdf" target="_blank" rel="noopener">git command</a></p>
-</blockquote>
-
-          
+          使用ssh背景
+用作认证的私钥最好通过passphrase进行加密，否则会有很大安全隐患，只要私钥泄露，别人就能访问你能访问的所有远程机器，不过每次登陆都得输入passphrase。
+ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入ag
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/04/git-使用教程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -502,17 +498,15 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/24/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
