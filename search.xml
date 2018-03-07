@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[感知机学习算法]]></title>
+    <url>%2F2018%2F03%2F06%2F%E6%84%9F%E7%9F%A5%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[PLA(perceptron learning algorithm) PLA示例代码 线性可分问题中感知机的收敛性 符号 含义 $w_{t}$ 第t次错误修正后的权重向量 $(x_t,y_t)$ 第t次发现的错误样本点 $w_f$ 真实模式f对应的最佳权重向量 有所有样本中的最大长度为$R^2=\max_n||x_n||^2$，设$\rho=\min_n {y_n\frac{w_f^T}{||w_f}x_n}$，则$$wf^Tw{t+1}=w_f^T(wt+y{t+1}x_{t+1})=w_f^Twt+y{t+1}wf^Tx{t+1}\geqslant w_f^Tw_t+\rho ||wf||,\||w{t+1}||^2=||wt+y{t+1}x_{t+1}||^2\leqslant ||w_t||^2+R^2.$$假设找到最佳权重向量需修正错误T次，则由以上两组迭代不等式和初始条件$w_0=0$得到$$w_f^Tw_T\geqslant T\rho ||w_f||,\||w_f^T||^2\leqslant TR^2.$$进而有$$(\frac{w_f^T}{||w_f||}\frac{w_T}{||w_T||})^2\geqslant TC \quad 其中C=\frac{\rho^2}{R^2},为一常量.$$故$T\leqslant \frac{R^2}{\rho^2}$，即对于有限样本的线性可分问题，PLA收敛。 感知机的学习法则 感知器法则：依照知错就改的演算策略寻找最佳的权重向量（学习到的就是各个特征的权重），但若样本线性不可分则不能收敛； $\Delta$法则：用梯度下降法寻找最小的输出误差（无法说清学习到的是什么，只是冲着最优结果去的），但对于误差曲面被拉长的情况进行学习较为困难。 感知机的局限感知机模式识别只学习特征权重，特征探测器需要手写，即特征需人工提取，故较依赖于人工提取特征的好坏，而该能力较依赖工作者特殊领域的专业经验。由此，发展出了第二代神经网络，即加入了隐藏层，从而实现了特征检测模块的训练，即不但学习特征权重还可以学习特征表示。 注：学习流入hidden units的weight其实就是学习feature。]]></content>
+      <categories>
+        <category>神经网络</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[概率论概览.md]]></title>
+    <url>%2F2018%2F03%2F04%2F%E6%A6%82%E7%8E%87%E8%AE%BA%E6%A6%82%E8%A7%88%2F</url>
+    <content type="text"><![CDATA[基本假设为解决贝特朗悖论出现的问题，作以下三点假设（概率论公理）： 样本空间$\Omega$：一个随机实验的所有可能输出的集合； 事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的定义域；其元素为事件，事件是$\Omega$中某些样本的集合； 测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$，是$\sigma$可加且非负的集合函数。 随机变量]]></content>
+      <categories>
+        <category>数学</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[linux环境编程基础]]></title>
     <url>%2F2018%2F03%2F01%2Flinux%E7%8E%AF%E5%A2%83%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%2F</url>
     <content type="text"><![CDATA[内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1： -[x] 创建文件 -[x] 对该文件建立一个硬链接 -[ ] 对该文件建立一个软链接 -[x] 每有一个进程访问该文件 一个文件包括三项，目录项（dentry结构）、索引节点（inode结构）和文件数据。 目录项包括文件名和指向索引节点的指针等信息（当用unlink函数删除该项时，便在该目录中看不见该文件）； 索引节点包括链接数、文件所有者、文件在磁盘的位置等文件属性； 文件数据便是在磁盘上的数据块。 当对该文件建立硬链接（ln src src_ln）时，会额外创建dentry结构和inode结构，但两者的节点号一样（节点号可认为是文件数据的地址）；而当建立符号链接（ln -s src src_ln）时，则是额外创建了一个文本文件，里面包含了源文件的位置信息。两者完全不同，也不能抽象地比较优劣，只能就具体情况来说。 文件系统 实际文件系统（linux为ext文件系统）包括引导块、超级块（记录文件系统的管理信息）、索引节点区（保证了ext文件系统只有一个根节点）和数据区，其中超级块与索引节点区是区分文件系统有无的界限； 虚拟文件系统只存于内存中，它的存在使得操作系统能够兼容足够多的文件系统，具体是将其他文件系统进行封装，并挂载到ext文件系统的目录树下，以使得内核能够以一致的方式访问其他文件系统； 特殊文件系统proc，也只存于内存中，是内核的窗口，用于查看内核运行的实时信息。 库 在编译链接的过程中，链接器搜索静态库（archives）时会链接所有已引用却未处理的符号，而未引用或已处理的符号不会从静态库中链接出来，故链接库的链接位置应放置在命令行尾部，否则会出现符号未处理的情况； 调用动态库的方式类似于对数据文件的读取，故只有在程序执行时才会装入内存，注意编译链接时须有链接选项-ldl； 创建静态库的命令为ar cr libtest.a test1.o test2.o，编译成动态库的命令为g++ -share -fPIC -o libtest.so test1.o test2.o。 因为c不支持函数重载（即与c++函数签名方式不同），所以在c/c++混合编程时，须用extern “c” {}将c代码封装。 僵尸进程在每个进程退出的时候，内核释放该进程所有的资源，包括打开的文件、占用的内存等，但是仍然为其保留一定的信息(包括进程号，退出状态，运行时间等)， 只有父进程通过wait/waitpid来取时才释放，否则其进程号就会一定被占用，这样就导致了僵尸进程的问题。]]></content>
@@ -10,16 +26,11 @@
   </entry>
   <entry>
     <title><![CDATA[线性代数review]]></title>
-    <url>%2F2018%2F02%2F28%2F%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0_review%2F</url>
+    <url>%2F2018%2F02%2F28%2F%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E6%A6%82%E8%A7%88%2F</url>
     <content type="text"><![CDATA[对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘的并行运算，并堆叠成一个矩阵。 矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠）【主】； 对n个列向量的线性组合，即对n个列向量各赋予不同权重后的组合（将$A$看做列向量的堆叠）。 矩阵矩阵之积$AB$： n组列向量的outer product的和（$A$ by columns, $B$ by rows）【主】； n个列向量分别进行矩阵向量之积$Ab$的并行运算； 对两个矩阵各列向量的inner product的陈列【多用于结合标量的性质进行证明矩阵性质的证明】。 矩阵的一些性质迹 满足交换性和轮换性：$\mathrm{tr}AB=\mathrm{tr}BA$，$\mathrm{tr}ABC=\mathrm{tr}CAB=\mathrm{tr}BCA$ 范数 把线性空间的一个元素（向量、矩阵、……）与一个非负实数相联系，在许多场合下，这个非负实数可以作为向量或者矩阵大小的一种度量，这个非负实数便称为范数（当说长度时，特指的是内积空间中向量的2-范数）。元素与实数的映射关系需满足4点才能称为范数：非负性、定性、齐次性和三角不等式。 范数分类：p-范数、加权范数（$||x||_A=\sqrt{x^TAx}$）、F-范数（$\sqrt{\mathrm{tr}(A^TA)}$）、…… 矩阵的列空间与零空间 $L(x_1,x_2)$意为向量$x_1$与$x_2$张成的空间； $R(A)$ 意为矩阵$A$的列向量张成的空间，称为$A$的列空间或$A$的值域； $R(A)^{\bot}$意为 $A$的列空间的正交补空间； $N(A)$意为$A$的零空间或$A$的核空间。 $A$的零空间是$A^T$的列空间的正交补空间，而A^T的列空间维度与A的列空间维度在数量上相等，故$\mathrm{dim}N(A)=\mathrm{dim}R(A^T)^{\bot}=\mathrm{dim}R(A)^{\bot}=n-rank(A)$，为简化书写与推导，常一步写为$\mathrm{dim}N(A)=n-rank(A)$。 行列式 一种几何上的解释：$\mathrm{abs}|A|$ 意为矩阵$A$的行向量限制性地张成的空间的体积。（限制性地张成，是指用于线性组合的系数在(0,1)间取值。） $|AB|=|A||B|$ $|A^{-1}|=\frac{1}{|A|}$ 如果$A$奇异，那么$A$的行向量线性相关，限制性地张成的空间是n维空间中的“flat sheet”，故此时$|A|=0$。 二次型与矩阵的定性 n个变量的二次多项式（每一项的次数都为2的多项式）称为二次型。矩阵形式的二次型为一标量$x^TAx$，其中$A$称为二次型矩阵，虽然无论$A$是否对称，$x^TAx$总是一个二次型，但A的表现形式（是否对称）并不影响这个标量的结果，故若无特殊说明，默认二次型矩阵为一对称阵。 根据二次型的正负，将矩阵分为正定阵（PD）、半正定阵（PSD）、负定阵（ND）、半负定阵（NSD）和不定阵。 度量阵$A^TA$必为半正定，若$A$的形状为“$\mathrm{I}$“，且列满秩，则该矩阵必正定。 矩阵的特征向量与特征值 默认特征向量特指单位化的特征向量（虽然因为有正负还是不唯一，但已足够）。 $\mathrm{tr}A=\sum_{i=1}^n\lambda_i$ $|A|=\prod_{i=1}^n\lambda_i$ 对称阵的特征向量与特征值 对称阵的特征值均为实数，特征向量两两正交。 若对称阵的特征值均为正数则必正定（由对称阵必能正交对角化推得），依此类推。 针对最优化问题$$\mathrm{min}x^TAx \quad s.t. ||x||_2^2=1$$结果为$A$的最小特征值，$x$为其对应的特征向量。因为$A$为对称阵，故能正交对角化$A=U\Lambda U^T$，原问题便转化为了：将原默认基换为$U$的列向量构成的基，于是$x$便成为了$y$，满足$y=U^{-1}x$ （其过程为$x$向$U$的各个列向量方向投影，并依列向量次序组织成为$y$），因为$U$为正交阵，故$||y||_2^2=1$依然成立，与此同时，优化目标变为$\mathrm{min}y^T\Lambda y$，可看做（问题本质并非这样，但脱离问题只就该式子的数学形式来看可如此看待；这种办法只可用于求解不能用于理解）在度量矩阵$\Lambda$下求单位向量$y$的方向，故得解。 线性变换正交阵，对称阵与投影阵矩阵微积分]]></content>
       <categories>
         <category>数学</category>
       </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2018%2F02%2F20%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
   <entry>
     <title><![CDATA[makefile基础]]></title>
