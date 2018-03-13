@@ -132,7 +132,7 @@
 <meta property="og:site_name" content="RedMudBUPT">
 <meta property="og:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠）【主】； 对n个列">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-03T12:49:23.198Z">
+<meta property="og:updated_time" content="2018-03-10T10:01:31.250Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性代数review">
 <meta name="twitter:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠）【主】； 对n个列">
@@ -394,7 +394,10 @@
 </ol>
 <ol>
 <li>矩阵矩阵之积$AB$：<ul>
-<li>n组列向量的outer product的和（$A$ by columns, $B$ by rows）【<strong>主</strong>】；</li>
+<li>n组列向量的outer product的和，即n个矩阵（每组矩阵为一组列向量的outer producter）的和（$A$ by columns, $B$ by rows）【<strong>主</strong>】；<ul>
+<li>应用：反向传播、方差</li>
+</ul>
+</li>
 <li>n个列向量分别进行矩阵向量之积$Ab$的并行运算；</li>
 <li>对两个矩阵各列向量的inner product的陈列【多用于结合标量的性质进行证明矩阵性质的证明】。</li>
 </ul>
@@ -592,7 +595,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -125,17 +125,17 @@
 
 
 
-<meta name="description" content="PLA(perceptron learning algorithm) PLA示例代码  线性可分问题中感知机的收敛性   符号 含义     $w_{t}$ 第t次错误修正后的权重向量   $(x_t,y_t)$ 第t次发现的错误样本点   $w_f$ 真实模式f对应的最佳权重向量    有所有样本中的最大长度为$R^2=\max_n||x_n||^2$，设$\rho=\min_n {y_n\fr">
+<meta name="description" content="PLA(perceptron learning algorithm) PLA示例代码  线性可分问题中感知机的收敛性   符号 含义     $w_{t}$ 第 t 次错误修正后的权重向量   $(x_t,y_t)$ 第 t 次发现的错误样本点   $w_f$ 真实模式 f 对应的最佳权重向量    有所有样本中的最大长度为$R^2=\max_n||x_n||^2$，设$\rho=\min_n {">
 <meta property="og:type" content="article">
 <meta property="og:title" content="感知机学习算法">
 <meta property="og:url" content="http://yoursite.com/2018/03/06/感知器学习算法/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
-<meta property="og:description" content="PLA(perceptron learning algorithm) PLA示例代码  线性可分问题中感知机的收敛性   符号 含义     $w_{t}$ 第t次错误修正后的权重向量   $(x_t,y_t)$ 第t次发现的错误样本点   $w_f$ 真实模式f对应的最佳权重向量    有所有样本中的最大长度为$R^2=\max_n||x_n||^2$，设$\rho=\min_n {y_n\fr">
+<meta property="og:description" content="PLA(perceptron learning algorithm) PLA示例代码  线性可分问题中感知机的收敛性   符号 含义     $w_{t}$ 第 t 次错误修正后的权重向量   $(x_t,y_t)$ 第 t 次发现的错误样本点   $w_f$ 真实模式 f 对应的最佳权重向量    有所有样本中的最大长度为$R^2=\max_n||x_n||^2$，设$\rho=\min_n {">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-07T07:50:59.233Z">
+<meta property="og:updated_time" content="2018-03-13T04:52:30.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="感知机学习算法">
-<meta name="twitter:description" content="PLA(perceptron learning algorithm) PLA示例代码  线性可分问题中感知机的收敛性   符号 含义     $w_{t}$ 第t次错误修正后的权重向量   $(x_t,y_t)$ 第t次发现的错误样本点   $w_f$ 真实模式f对应的最佳权重向量    有所有样本中的最大长度为$R^2=\max_n||x_n||^2$，设$\rho=\min_n {y_n\fr">
+<meta name="twitter:description" content="PLA(perceptron learning algorithm) PLA示例代码  线性可分问题中感知机的收敛性   符号 含义     $w_{t}$ 第 t 次错误修正后的权重向量   $(x_t,y_t)$ 第 t 次发现的错误样本点   $w_f$ 真实模式 f 对应的最佳权重向量    有所有样本中的最大长度为$R^2=\max_n||x_n||^2$，设$\rho=\min_n {">
 
 
 
@@ -392,26 +392,34 @@
 <tbody>
 <tr>
 <td style="text-align:center">$w_{t}$</td>
-<td style="text-align:left">第t次错误修正后的权重向量</td>
+<td style="text-align:left">第 t 次错误修正后的权重向量</td>
 </tr>
 <tr>
 <td style="text-align:center">$(x_t,y_t)$</td>
-<td style="text-align:left">第t次发现的错误样本点</td>
+<td style="text-align:left">第 t 次发现的错误样本点</td>
 </tr>
 <tr>
 <td style="text-align:center">$w_f$</td>
-<td style="text-align:left">真实模式f对应的最佳权重向量</td>
+<td style="text-align:left">真实模式 f 对应的最佳权重向量</td>
 </tr>
 </tbody>
 </table>
-<p>有所有样本中的最大长度为$R^2=\max_n||x_n||^2$，设$\rho=\min_n {y_n\frac{w_f^T}{||w_f}x_n}$，则<br>$$<br>w<em>f^Tw</em>{t+1}=w_f^T(w<em>t+y</em>{t+1}x_{t+1})=w_f^Tw<em>t+y</em>{t+1}w<em>f^Tx</em>{t+1}\geqslant w_f^Tw_t+\rho ||w<em>f||,<br>\<br>||w</em>{t+1}||^2=||w<em>t+y</em>{t+1}x_{t+1}||^2\leqslant ||w_t||^2+R^2.<br>$$<br>假设找到最佳权重向量需修正错误T次，则由以上两组迭代不等式和初始条件$w_0=0$得到<br>$$<br>w_f^Tw_T\geqslant T\rho ||w_f||,<br>\<br>||w_f^T||^2\leqslant TR^2.<br>$$<br>进而有<br>$$<br>(\frac{w_f^T}{||w_f||}\frac{w_T}{||w_T||})^2\geqslant TC \quad 其中C=\frac{\rho^2}{R^2},为一常量.<br>$$<br>故$T\leqslant \frac{R^2}{\rho^2}$，即对于有限样本的线性可分问题，PLA收敛。</p>
-<h2 id="感知机的学习法则"><a href="#感知机的学习法则" class="headerlink" title="感知机的学习法则"></a>感知机的学习法则</h2><ul>
-<li>感知器法则：依照<strong>知错就改</strong>的演算策略寻找最佳的权重向量（学习到的就是各个特征的权重），但若样本线性不可分则不能收敛；</li>
-<li>$\Delta$法则：用梯度下降法寻找最小的输出误差（无法说清学习到的是什么，只是冲着最优结果去的），但对于误差曲面被拉长的情况进行学习较为困难。</li>
+<p>有所有样本中的最大长度为$R^2=\max_n||x_n||^2$，设$\rho=\min_n {y_n\frac{w_f^T}{||w_f}x_n}$，则<br>$$<br>w<em>f^Tw</em>{t+1}=w_f^T(w<em>t+y</em>{t+1}x_{t+1})=w_f^Tw<em>t+y</em>{t+1}w<em>f^Tx</em>{t+1}\geqslant w_f^Tw_t+\rho ||w<em>f||,<br>\<br>||w</em>{t+1}||^2=||w<em>t+y</em>{t+1}x_{t+1}||^2\leqslant ||w_t||^2+R^2.<br>$$<br>假设找到最佳权重向量需修正错误T次，则由以上两组迭代不等式和初始条件$w_0=0$得到<br>$$<br>w_f^Tw_T\geqslant T\rho ||w_f||,<br>\<br>||w_f^T||^2\leqslant TR^2.<br>$$<br>进而有<br>$$<br>(\frac{w_f^T}{||w_f||}\frac{w_T}{||w_T||})^2\geqslant TC \quad 其中C=\frac{\rho^2}{R^2},为一常量.<br>$$<br>故$T\leqslant \frac{R^2}{\rho^2}$，即对于有限样本的线性可分问题，PLA 收敛。</p>
+<h2 id="感知机的学习法则"><a href="#感知机的学习法则" class="headerlink" title="感知机的学习法则"></a>感知机的学习法则</h2><blockquote>
+<p>所谓学习法则，就是权值更新的策略，即在迭代过程中如何进行权值更新。</p>
+</blockquote>
+<ul>
+<li>感知器法则：依照<strong>知错就改</strong>的演算策略寻找最佳的权重向量（学习到的是各个特征的权重），但若样本线性不可分则不能收敛；</li>
+<li>$\Delta$法则：用最小二乘法、牛顿迭代法或梯度下降法等最优化方法寻找最小的输出误差（无法说清学习到的是什么，只是冲着最优结果去的），但对于误差曲面被拉长的情况进行学习较为困难。</li>
 </ul>
 <h2 id="感知机的局限"><a href="#感知机的局限" class="headerlink" title="感知机的局限"></a>感知机的局限</h2><p>感知机模式识别只学习特征权重，特征探测器需要手写，即特征需人工提取，故较依赖于人工提取特征的好坏，而该能力较依赖工作者特殊领域的专业经验。由此，发展出了第二代神经网络，即加入了隐藏层，从而实现了特征检测模块的训练，即不但学习特征权重还可以学习特征表示。</p>
 <blockquote>
-<p>注：学习流入hidden units的weight其实就是学习feature。</p>
+<p>注：学习流入 hidden units 的 weight 其实就是学习feature。对于如何表达概念目前有三种观点：</p>
+<ol>
+<li>特征论：概念由一系列特征表示，便于解释概念之间的相似性、便于将概念表示为向量；</li>
+<li>结构主义论：概念不是孤立的，是关系图谱中的一个节点，由与其它概念的关系决定；</li>
+<li>神经网络利用特征向量构成关系图谱：许多神经元表达一个概念，一个神经元同时参与很多个概念的表示，这种多对多的表示被称为“distributed representation”。</li>
+</ol>
 </blockquote>
 
       
@@ -446,6 +454,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/08/numpy概览/" rel="prev" title="numpy概览">
+                numpy概览 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -555,7 +567,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
