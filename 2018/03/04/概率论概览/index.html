@@ -132,7 +132,7 @@
 <meta property="og:site_name" content="RedMudBUPT">
 <meta property="og:description" content="基本假设为解决贝特朗悖论出现的问题，作以下三点假设（概率论公理）：  样本空间$\Omega$：一个随机实验的所有可能输出的集合； 事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的定义域；其元素为事件，事件是$\Omega$中某些样本的集合； 测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-04T13:05:02.546Z">
+<meta property="og:updated_time" content="2018-03-16T00:16:49.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概率论概览.md">
 <meta name="twitter:description" content="基本假设为解决贝特朗悖论出现的问题，作以下三点假设（概率论公理）：  样本空间$\Omega$：一个随机实验的所有可能输出的集合； 事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的定义域；其元素为事件，事件是$\Omega$中某些样本的集合； 测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$">
@@ -385,7 +385,45 @@
 <li>事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的<strong>定义域</strong>；其元素为事件，事件是$\Omega$中某些样本的集合；</li>
 <li>测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$，是$\sigma$可加且非负的集合函数。</li>
 </ul>
-<h1 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h1>
+<h1 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h1><h1 id="数学期望"><a href="#数学期望" class="headerlink" title="数学期望"></a>数学期望</h1><blockquote>
+<p>$\xi$ 的数学期望可理解为加权平均（权重为概率值，对应于常规均值中某数出现的频率，有的资料称之为概率平均），采用的计算方法为<a href="https://www.zhihu.com/question/28700668?sort=created" target="_blank" rel="noopener">L-S积分</a>：如设$\xi=\sum_{i=1}^na<em>i \chi</em>{A_i}$ ，即将事件$A_i$ 映射为实数$a<em>i$ ，则$E(\xi)=\int</em>{\Omega} \xi(\omega) \mathrm{d}p(\omega)=\sum<em>{i=1}^n \int</em>{\Omega} a<em>i \chi</em>{A_i} \mathrm{d}p(\omega)$ ，即将$\Omega$ 中不可分事件$\omega$ 按值域划分为n类（每一类中的$p(\omega)$ 都相等，假设$A_1$ 中有10个$\omega$ ，则$p(A<em>1)=10*\mathrm{d}p(\omega)$ ），并在每一类中积分出一个值，最后将这n个值求和。当n为有限值，结果为$\sum</em>{i=1}^n a_i p(A<em>i)$ ；当$n\to \inf$ ，结果为$\int</em>{-\inf}^{+\inf} a f(a)\mathrm{d}a$ 。</p>
+<p>综上，将数学期望作$\xi$ 在$\Omega$ 上的“加权平均”看待。</p>
+</blockquote>
+<h2 id="条件数学期望"><a href="#条件数学期望" class="headerlink" title="条件数学期望"></a>条件数学期望</h2><blockquote>
+<ul>
+<li>$E(\xi)$ ：<ol>
+<li>$=E(\xi \chi_{\Omega})$ ：在$\Omega$ 上$\xi$ 的加权和</li>
+<li>$=E(\xi | \Omega)$ ：在$\Omega$ 上$\xi$ 的加权平均</li>
+</ol>
+</li>
+<li>$E(\xi \chi<em>A)$ ：在$A$ 上$\xi$ 的加权和（实质为在$\Omega$ 上$\xi \chi</em>{A}$ 的加权平均，为方便思考，如此定义其含义）</li>
+<li>$E(\xi | A)$ ：$\xi$ 在$A$ 上的加权和取平均，等于$\frac{E(\xi \chi_A)}{P(A)}$ </li>
+<li>$P(A)$ ：$\chi_A$ 在$\Omega$ 上的加权和</li>
+<li>$P(A | B)$ ：$\chi_A$ 在$B$ 上的加权平均</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>全数学期望公式</strong></li>
+</ul>
+<p>$$<br>\sum<em>{i=1}^n E(\xi \chi</em>{B_i}) = E(\xi \chi<em>B)<br>\<br>\Rightarrow \sum</em>{i=1}^n P(B_i)E(\xi | B_i) = P(B)E(\xi | B)<br>$$</p>
+<p>  将条件期望乘上条件的概率，可看做是将这个区域上的均值<strong>取消求平均</strong>的操作</p>
+<ul>
+<li><strong>全概率公式</strong></li>
+</ul>
+<p>$$<br>E(\chi<em>A)=\sum</em>{i=1}^n E(\chi<em>A \chi</em>{B<em>i})<br>\<br>\Rightarrow P(A) = \sum</em>{i=i}^n P(A | B_i) P(B_i)<br>$$</p>
+<ul>
+<li><strong>贝叶斯法则</strong></li>
+</ul>
+<p>$$<br>P(B<em>i | A) = \frac{E(\chi</em>{B_i} \chi_A)}{P(A)} = \frac{P(A|B_i)P(B_i)}{P(A)}<br>$$</p>
+<ol>
+<li>$A$ 为出现的新事件，$B_i$ 为欲求其概率的事件，$P(B_i)$ 为先验概率，多由经验知识得到；</li>
+<li>由该法则可得到基于最小错误率的贝叶斯决策规则：对于出现的$A$ ，$P(A|B_i)P(B_i)$ 最大的$B_i$​ 为最可能发生的事件。其中，$A$ 为已发生事件，为一常数，在比较大小时可去掉，因该常数的作用是使实际用于比较的项成为概率值，故有些地方称之为归一化常数。</li>
+</ol>
+<h1 id="机器学习中常用的方法"><a href="#机器学习中常用的方法" class="headerlink" title="机器学习中常用的方法"></a>机器学习中常用的方法</h1><h2 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h2><blockquote>
+<p><a href="http://www.konstantinkashin.com/notes/stat/Maximum_Likelihood_Estimation.pdf" target="_blank" rel="noopener">Maximum_Likelihood_Estimation</a></p>
+</blockquote>
+<p>似然函数 = $\sum_ip_i$ ，（其中 $p_i$ 为样本$z_i$ 的概率，一般能用一个含待估计的参数和 $z_i$ 表示的解析式表示）已出现的样本自然为最可能出现的，故可通过最大化该似然函数来估计想要的参数。有时会对似然函数取对数以简化运算。</p>
+<h2 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h2>
       
     </div>
     
@@ -531,7 +569,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -542,7 +580,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -620,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本假设"><span class="nav-number">1.</span> <span class="nav-text">基本假设</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#随机变量"><span class="nav-number">2.</span> <span class="nav-text">随机变量</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本假设"><span class="nav-number">1.</span> <span class="nav-text">基本假设</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#随机变量"><span class="nav-number">2.</span> <span class="nav-text">随机变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数学期望"><span class="nav-number">3.</span> <span class="nav-text">数学期望</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#条件数学期望"><span class="nav-number">3.1.</span> <span class="nav-text">条件数学期望</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习中常用的方法"><span class="nav-number">4.</span> <span class="nav-text">机器学习中常用的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最大似然估计"><span class="nav-number">4.1.</span> <span class="nav-text">最大似然估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉格朗日乘子法"><span class="nav-number">4.2.</span> <span class="nav-text">拉格朗日乘子法</span></a></li></ol></li></ol></div>
             
 
           </div>
