@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="RedMudBUPT" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="线性回归 所有变量的可表示的数量上的减少、衰退 regress，称为回归，即确认独立变量的过程。比如，独立变量和其他非独立变量之间的关系近似于线性时称为线性回归。 回归是一种降维方法，减少的维度为非独立变量个数。  线性回归模型 输入空间映射到整个实数区间  $$\min_w ||Xw-y||$$ 最小二乘 VS 正交投影最小二乘法与正交投影变换是对同一个问题两种不同等价形式的解决方法，且为相同的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习——线性模型">
+<meta property="og:url" content="http://yoursite.com/2018/04/01/机器学习——线性模型/index.html">
+<meta property="og:site_name" content="RedMudBUPT">
+<meta property="og:description" content="线性回归 所有变量的可表示的数量上的减少、衰退 regress，称为回归，即确认独立变量的过程。比如，独立变量和其他非独立变量之间的关系近似于线性时称为线性回归。 回归是一种降维方法，减少的维度为非独立变量个数。  线性回归模型 输入空间映射到整个实数区间  $$\min_w ||Xw-y||$$ 最小二乘 VS 正交投影最小二乘法与正交投影变换是对同一个问题两种不同等价形式的解决方法，且为相同的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/RedMudBUPT/gitpage_img/blob/master/ml/lin1.jpg?raw=true">
+<meta property="og:image" content="https://github.com/RedMudBUPT/gitpage_img/blob/master/ml/lin2_softmax.jpg?raw=true">
+<meta property="og:updated_time" content="2018-04-03T12:06:16.009Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习——线性模型">
+<meta name="twitter:description" content="线性回归 所有变量的可表示的数量上的减少、衰退 regress，称为回归，即确认独立变量的过程。比如，独立变量和其他非独立变量之间的关系近似于线性时称为线性回归。 回归是一种降维方法，减少的维度为非独立变量个数。  线性回归模型 输入空间映射到整个实数区间  $$\min_w ||Xw-y||$$ 最小二乘 VS 正交投影最小二乘法与正交投影变换是对同一个问题两种不同等价形式的解决方法，且为相同的">
+<meta name="twitter:image" content="https://github.com/RedMudBUPT/gitpage_img/blob/master/ml/lin1.jpg?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/01/机器学习——线性模型/"/>
+
+
+
+
+
+  <title>机器学习——线性模型 | RedMudBUPT</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RedMudBUPT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">RedMud's blog called RedMudBUPT</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/01/机器学习——线性模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="redmud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RedMudBUPT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习——线性模型</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T16:52:18+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/01/机器学习——线性模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/04/01/机器学习——线性模型/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><blockquote>
+<p>所有变量的可表示的数量上的减少、衰退 regress，称为回归，即确认独立变量的过程。比如，独立变量和其他非独立变量之间的关系近似于线性时称为线性回归。</p>
+<p>回归是一种降维方法，减少的维度为非独立变量个数。</p>
+</blockquote>
+<h3 id="线性回归模型"><a href="#线性回归模型" class="headerlink" title="线性回归模型"></a>线性回归模型</h3><blockquote>
+<p>输入空间映射到整个实数区间</p>
+</blockquote>
+<p>$$<br>\min_w ||Xw-y||<br>$$</p>
+<h3 id="最小二乘-VS-正交投影"><a href="#最小二乘-VS-正交投影" class="headerlink" title="最小二乘 VS 正交投影"></a>最小二乘 VS 正交投影</h3><p>最小二乘法与正交投影变换是对同一个问题两种不同等价形式的解决方法，且为相同的结果：</p>
+<p>同一个问题：对一堆点求其回归方程，即<br>$$<br> \min_w ||Xw - y ||<br>$$<br>该问题的两种等价形式为</p>
+<ol>
+<li>线性方程组$Xw=y$ 的近似解</li>
+<li>最小二乘问题$x^*=\min_w (Xw-y)^T(Xw-y)$</li>
+</ol>
+<p>对于第一个等价形式，X 的列向量的线性组合无法得到 y，那么将 y 正交投影至 X 的列空间，便可得到线性方程组的一种近似解：$Xw=X(X^TX)^{-1}X^T y \Rightarrow w = (X^TX)^{-1}X^T y$ 。</p>
+<p>对于第二个等价形式，可用导数零点解决该无约束最优化问题：$\frac{\partial (Xw-y)^T(Xw-y)}{\partial w}=2X^T(Xw-y)=0 \Rightarrow w=(X^TX)^{-1}X^T y$ 。</p>
+<blockquote>
+<p>更进一步：</p>
+<ol>
+<li>若$X^TX$不是满秩矩阵，即$X$非列满秩，则最小二乘法与正交投影变换都失效了，此时$w$自由度为$n-rank(X^TX)$，常用的一个解是加入一个归纳偏好$\min ||w||_2$：将$X^TX$进行奇异值分解进而求得伪逆，从而得到$w$。</li>
+<li>通常$X^TX$是可逆的，因为样本数$\gg$ 特征维度+1。但实践中常因为数值稳定性用$X^+$代替$(X^TX)^{-1}X^T$。</li>
+</ol>
+</blockquote>
+<h2 id="对数几率回归"><a href="#对数几率回归" class="headerlink" title="对数几率回归"></a>对数几率回归</h2><blockquote>
+<p>几率（odds）：（样本作为正例的可能性 / 反例的可能性，即$\frac{y}{1-y}$）正例的赔率，反映了样本作为正例的相对可能性。</p>
+</blockquote>
+<h3 id="对数几率回归模型"><a href="#对数几率回归模型" class="headerlink" title="对数几率回归模型"></a>对数几率回归模型</h3><blockquote>
+<p>输入空间映射到  [0, 1] 区间</p>
+</blockquote>
+<p>$$<br>\min_w ||Xw- \ln \frac{y}{1-y}||<br>$$</p>
+<p>在形式上仍是线性回归，是对线性回归模型的扩展，即令模型逼近$y$的衍生物，这里的对数几率函数起到了将线性回归模型的预测值与真实标记联系起来的作用，称之为联系函数。当考虑其使用时称之为逻辑回归模型$\frac{1}{1+e^{-Xw}}$。</p>
+<h2 id="局部加权线性回归"><a href="#局部加权线性回归" class="headerlink" title="局部加权线性回归"></a>局部加权线性回归</h2><blockquote>
+<p>解决对不规则函数进行回归时容易出现的欠拟合与过拟合问题</p>
+</blockquote>
+<p>其流程是，每次预测时都需要调用所有的样本$X$，结合预测点来拟合回归曲线。</p>
+<p>其原理是，选择与预测点$x_0$相近的点来做线性回归，忽略远处的点对预测的影响。</p>
+<p>其实现方式是加权最小二乘：<br>$$<br>\min_w ||w(Xw - y)||<br>\<br>s.t. \quad w^{i} = e^{-(x^i - x_0)^2}<br>$$</p>
+<h2 id="广义线性模型"><a href="#广义线性模型" class="headerlink" title="广义线性模型"></a><a href="https://github.com/RedMudBUPT/gitpage_img/blob/master/ml/LIN/%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B_%E9%99%88%E5%B8%8C%E5%AD%BA.pdf" target="_blank" rel="noopener">广义线性模型</a></h2><blockquote>
+<p>大多数的概率分布都能表示成指数分布族的形式，如高斯分布，对噪声和不确定性进行建模；伯努利分布，对有两个离散结果的事件建模；多项式分布（Multinomial），对有K个离散结果的事件建模；泊松分布（Poisson），对计数过程进行建模，如网站访问量的计数问题；指数分布（Exponential），对有间隔的证书进行建模，如预测公交车的到站时间的问题；等等。通过进一步的推导，就能得到各自的线性模型，这大大扩展了线性模型可解决问题的范围。</p>
+<p><strong>广义线性模型：用某种指数分布去逼近数据真实分布的广义线性回归。</strong></p>
+</blockquote>
+<p>$$<br>P(y; \eta)=be^{\eta^T T(y) - a}<br>$$</p>
+<p>GLM 的三个假设：</p>
+<ol>
+<li>$p(y | x; w ) \sim be^{\eta^T T(y) - a}$ ：y 基于 x 的条件概率服从指数分布族中以$\eta$为参数的某个分布；</li>
+<li>学习的目标是预测 T(y) 基于 x 的条件期望，因为 T(y) 通常为 y，即目标函数为$E(y∣x; w)$，故<strong>线性模型的本质是让某个指数分布的期望去逼近 y</strong>；</li>
+<li>$\eta$ 和 x 的关联是线性的，即$\eta = w^T x$，从而</li>
+</ol>
+<h3 id="linear-regression"><a href="#linear-regression" class="headerlink" title="linear regression"></a>linear regression</h3><blockquote>
+<p>线性函数是高斯分布的期望 $u$ 在线性回归模型上的表现形式，即在噪声影响下最可能的值。</p>
+<p>因为$u$ 在实数区间取值，故应用于回归。</p>
+</blockquote>
+<p>$$<br>\sigma = z<br>$$</p>
+<p>高斯分布：<br>$$<br>p(y;u) = \frac{1}{\sqrt{2 \pi} \sigma}e^{- \frac{(y-u)^2}{2 \sigma^2}}<br>\<br>= \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{1}{2}y^2} e^{uy - \frac{1}{2}u^2}<br>$$<br>将高斯分布与广义线性模型对比得到：<br>$$<br>\eta = u \Rightarrow u = \eta<br>$$<br>从而得到线性回归的数学模型（假设集）。</p>
+<h3 id="sigmod"><a href="#sigmod" class="headerlink" title="sigmod"></a>sigmod</h3><blockquote>
+<p>logistic 函数是伯努利分布的期望 $\phi$ 在线性回归模型上的表现形式，即单次正例事件发生的概率；或说是<strong>伯努利分布体现在线性回归模型上的函数</strong>。</p>
+<p>因$\phi$在 (0, 1) 区间取值，故应用于分类。</p>
+</blockquote>
+<p><img src="https://github.com/RedMudBUPT/gitpage_img/blob/master/ml/lin1.jpg?raw=true" alt="lin1"><br>$$<br>logisticfunction  \quad \sigma = \frac{1}{1+e^{- z}}<br>$$</p>
+<p>伯努利分布：<br>$$<br>p(y; \phi) = \phi^y (1-\phi)^y<br>\<br>\quad \quad \quad \quad \quad = e^{(\ln \frac{\phi}{1-\phi})y + \ln (1-\phi)}<br>$$<br>当只针对一个样本来看时，伯努利分布便降为 0 / 1 分布；当针对整体来看时，y 便是正例发生的次数统计，目标函数为$sum( \phi)$ 。</p>
+<p>将伯努利分布与广义线性模型对比得到：<br>$$<br>\eta = \ln \frac{\phi}{1- \phi} \Rightarrow \phi = \frac{1}{1+e^{- \eta}}<br>$$<br>从而得到逻辑回归的数学模型（假设集）。</p>
+<h3 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h3><blockquote>
+<p>softmax 函数是多项式分布的期望$\phi_i$在线性回归模型上的表现形式，即某类事件发生的概率。</p>
+<p>因$\phi_i$在 (0, 1) 区间取值，故应用于分类。</p>
+</blockquote>
+<p>$$<br>softmaxfunction  \quad \sigma = \frac{e^{z<em>i}}{\sum</em>{j=i}^{k} e^{z_j}}<br>$$</p>
+<p><img src="https://github.com/RedMudBUPT/gitpage_img/blob/master/ml/lin2_softmax.jpg?raw=true" alt="lin2_softmax_"></p>
+<blockquote>
+<p>上述的伯努利分布与多项式分布均是针对一个样本来说的。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>线性模型的思想是用某种指数分布去逼近数据真实分布，从而实现某种预测；其实现方法是让某个指数分布的期望去逼近 y，依照期望的取值空间划分为各种不同任务。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/30/机器学习基础/" rel="next" title="机器学习基础">
+                <i class="fa fa-chevron-left"></i> 机器学习基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/02/信息检索与知识管理/" rel="prev" title="信息检索与知识管理">
+                信息检索与知识管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/photo.png"
+                alt="redmud" />
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/101415219341008595729" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cherrysunshine.site/" title="同窗_刘" target="_blank">同窗_刘</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归"><span class="nav-number">1.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性回归模型"><span class="nav-number">1.1.</span> <span class="nav-text">线性回归模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小二乘-VS-正交投影"><span class="nav-number">1.2.</span> <span class="nav-text">最小二乘 VS 正交投影</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数几率回归"><span class="nav-number">2.</span> <span class="nav-text">对数几率回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对数几率回归模型"><span class="nav-number">2.1.</span> <span class="nav-text">对数几率回归模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部加权线性回归"><span class="nav-number">3.</span> <span class="nav-text">局部加权线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广义线性模型"><span class="nav-number">4.</span> <span class="nav-text">广义线性模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linear-regression"><span class="nav-number">4.1.</span> <span class="nav-text">linear regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sigmod"><span class="nav-number">4.2.</span> <span class="nav-text">sigmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#softmax"><span class="nav-number">4.3.</span> <span class="nav-text">softmax</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/04/01/机器学习——线性模型/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/98984/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

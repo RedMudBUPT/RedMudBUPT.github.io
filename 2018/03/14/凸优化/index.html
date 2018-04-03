@@ -125,17 +125,17 @@
 
 
 
-<meta name="description" content="凸集 集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。">
+<meta name="description" content="凸集 集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。  无约束最优化数值优化牛顿法 本质为找函数的零点，用在最优化上便是找函数导数的零点。  $$w_{t+1} = wt - (\frac{\">
 <meta property="og:type" content="article">
 <meta property="og:title" content="凸优化">
 <meta property="og:url" content="http://yoursite.com/2018/03/14/凸优化/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
-<meta property="og:description" content="凸集 集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。">
+<meta property="og:description" content="凸集 集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。  无约束最优化数值优化牛顿法 本质为找函数的零点，用在最优化上便是找函数导数的零点。  $$w_{t+1} = wt - (\frac{\">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-14T14:11:09.306Z">
+<meta property="og:updated_time" content="2018-04-02T02:41:08.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="凸优化">
-<meta name="twitter:description" content="凸集 集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。">
+<meta name="twitter:description" content="凸集 集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。  无约束最优化数值优化牛顿法 本质为找函数的零点，用在最优化上便是找函数导数的零点。  $$w_{t+1} = wt - (\frac{\">
 
 
 
@@ -382,7 +382,12 @@
         <h2 id="凸集"><a href="#凸集" class="headerlink" title="凸集"></a>凸集</h2><blockquote>
 <p>集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。</p>
 </blockquote>
-
+<h2 id="无约束最优化"><a href="#无约束最优化" class="headerlink" title="无约束最优化"></a>无约束最优化</h2><h3 id="数值优化"><a href="#数值优化" class="headerlink" title="数值优化"></a>数值优化</h3><h4 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h4><blockquote>
+<p>本质为找函数的零点，用在最优化上便是找函数导数的零点。</p>
+</blockquote>
+<p>$$<br>w_{t+1} = w<em>t - (\frac{\partial ^2 L}{\partial w \partial w^T})^{-1} \frac{\partial L}{\partial w}|</em>{w=w_t}<br>$$</p>
+<p>牛顿法相比起梯度往往法收敛速度更快，特别是迭代值距离收敛值比较近的时候，每次迭代都能使误差变成原来的平方，但是在高维时矩阵的逆计算会非常耗时。</p>
+<h3 id="解析优化"><a href="#解析优化" class="headerlink" title="解析优化"></a>解析优化</h3>
       
     </div>
     
@@ -415,6 +420,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/29/信息论基础/" rel="prev" title="信息论基础">
+                信息论基础 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -524,7 +533,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -535,7 +544,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -613,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#凸集"><span class="nav-number">1.</span> <span class="nav-text">凸集</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#凸集"><span class="nav-number">1.</span> <span class="nav-text">凸集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无约束最优化"><span class="nav-number">2.</span> <span class="nav-text">无约束最优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数值优化"><span class="nav-number">2.1.</span> <span class="nav-text">数值优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#牛顿法"><span class="nav-number">2.1.1.</span> <span class="nav-text">牛顿法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析优化"><span class="nav-number">2.2.</span> <span class="nav-text">解析优化</span></a></li></ol></li></ol></div>
             
 
           </div>
