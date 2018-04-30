@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="RedMudBUPT" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="基础概念卷积（convolution）定义$$(f*g)(n) = \int_{-\infin}^{+\infin}f(x)g(n-x) \mathrm{d} x$$ 两个在某种角度上具有一定关联性的函数 f 与 g，在二者自变量之和为一常数 n 的约束（更一般化地，在二者自变量的线性组合为一常数的约束）下，两函数之积在某个区间上的积分称为这两个函数在该区间上的卷积。 总之，两函数的卷积是两函数之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="卷及神经网络基础">
+<meta property="og:url" content="http://yoursite.com/2018/04/15/卷积神经网络基础/index.html">
+<meta property="og:site_name" content="RedMudBUPT">
+<meta property="og:description" content="基础概念卷积（convolution）定义$$(f*g)(n) = \int_{-\infin}^{+\infin}f(x)g(n-x) \mathrm{d} x$$ 两个在某种角度上具有一定关联性的函数 f 与 g，在二者自变量之和为一常数 n 的约束（更一般化地，在二者自变量的线性组合为一常数的约束）下，两函数之积在某个区间上的积分称为这两个函数在该区间上的卷积。 总之，两函数的卷积是两函数之">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/nn/inception_v1.jpg">
+<meta property="og:updated_time" content="2018-04-30T06:28:28.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="卷及神经网络基础">
+<meta name="twitter:description" content="基础概念卷积（convolution）定义$$(f*g)(n) = \int_{-\infin}^{+\infin}f(x)g(n-x) \mathrm{d} x$$ 两个在某种角度上具有一定关联性的函数 f 与 g，在二者自变量之和为一常数 n 的约束（更一般化地，在二者自变量的线性组合为一常数的约束）下，两函数之积在某个区间上的积分称为这两个函数在该区间上的卷积。 总之，两函数的卷积是两函数之">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/nn/inception_v1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/15/卷积神经网络基础/"/>
+
+
+
+
+
+  <title>卷及神经网络基础 | RedMudBUPT</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RedMudBUPT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">RedMud's blog called RedMudBUPT</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/15/卷积神经网络基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="redmud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RedMudBUPT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">卷及神经网络基础</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T16:57:43+08:00">
+                2018-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/15/卷积神经网络基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/04/15/卷积神经网络基础/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="卷积（convolution）"><a href="#卷积（convolution）" class="headerlink" title="卷积（convolution）"></a>卷积（convolution）</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>$$<br>(f*g)(n) = \int_{-\infin}^{+\infin}f(x)g(n-x) \mathrm{d} x<br>$$</p>
+<p>两个在某种角度上具有一定关联性的函数 f 与 g，在二者自变量之和为一常数 n 的约束（更一般化地，在二者自变量的线性组合为一常数的约束）下，两函数之积在某个区间上的积分称为这两个函数在该区间上的卷积。</p>
+<p>总之，两函数的卷积是两函数之积在某种线性组合（如 x+y=n）的约束下的特殊积分。</p>
+<h4 id="命名"><a href="#命名" class="headerlink" title="命名"></a><a href="https://www.zhihu.com/question/54677157/answer/141245297" target="_blank" rel="noopener">命名</a></h4><p>之所以称为卷积，是因为该运算的结果是两函数的张量积构成的平面（或超平面）沿两函数各自自变量线性组合等式约束的轨迹做卷褶得到的降维的线（或超平面）上的某一点（线性组合等式约束决定的点）的值。</p>
+<p>简而言之就是<strong>将张量积卷褶后的重合点之和即为卷积</strong>。</p>
+<h4 id="理解角度"><a href="#理解角度" class="headerlink" title="理解角度"></a>理解角度</h4><ol>
+<li><p>从对单通道二维图像做卷积的角度理解：</p>
+<p>f 为图像像素值对位置的函数，g 为实现某种功能的滤波器（又称为卷积核、模板），其具体操作为对两矩阵的哈达玛积的所有元素求和。</p>
+<p>能实现这种这种功能的原因是由卷积结果的形式决定的：卷积结果的形式可表示为$f*g = g(f) = af_{0}+bf_2+…$，对邻域像素的线性组合即为<a href="https://blog.csdn.net/purgle/article/details/73728940" target="_blank" rel="noopener">线性滤波器</a>。</p>
+</li>
+<li><p>要想实现非线性滤波器，需要用一大堆的线性滤波器，并通过很多层的非线性组合得到。NIN（network in network）提出了一种“偷吃步”的方法（MLPconv）来降低计算复杂度和模型复杂度。可从两个角度来理解 MLPconv：</p>
+<p>（假设第一层的卷积核与输入图像相同大小）</p>
+<ul>
+<li><p>从结构形式的角度：$k_1$ 个卷积核输出到 $k_1$ 个神经元上，再假设第二层的卷积核与第一层神经元数大小相同，$k_2$ 个卷积核输出到 $k_2$ 个神经元上，即对$k_1$种线性滤波的非线性激活结果再次进行$k_2$种线性滤波，依此继续连接；能够由此实现任意一种非线性滤波器的原因与传统神经网络能够模拟任意函数的原理一样。</p>
+<p>故 <strong>MLPconv 本质为一个传统的神经网络</strong>，即将一个传统的神经网络作为卷积核，神经网络隐藏神经元数由卷积核数决定，即希望得到的非线性滤波器个数。</p>
+<p>由此，可将线性滤波器看作 MLPconv 的特殊情况，即一个感知机。</p>
+</li>
+<li><p>从物理含义的角度：$k_1$ 个卷积核输出$k_1$个特征图（此处每个图仅为一个点），而第二层的每个感知机是对$k_1$个通道的特征图的同一个位置作线性组合操作，然后做非线性激活，该操作可理解为对$k_1$个通道的特征图的同一个位置做 1×1 大小卷积核的卷积，或者理解为对$k_1$级联的特征图做 1×1 大小卷积核的池化（理解为池化，是目的导向的，因为此操作的目的是对不同特征进行不同方向的聚合；其与池化不同，因为参数都是要学习的，而非固定的）；能够由此实现任意一种非线性滤波器的原因是不同特征的不同方向的多次聚合能够得到一种任意一种非线性特征。</p>
+<p>故 <strong>MLPconv 等价于一个 k×k 卷积层后缀数个 1×1 卷积层</strong>。</p>
+<p>其中 1×1 卷积层也有人称之为跨通道参数的级联池化（cccp），实现跨通道的信息整合。</p>
+</li>
+</ul>
+</li>
+<li><p>针对不同尺度特征自然需要不同大小的卷积核，考虑到不同尺度特征可能属于同一级别的抽象，故提出了 inception 结构。该结构本质是对几个不同大小卷积核的 MLPconv 的结果的 <em>concat</em>。该结构的合理性是基于以下两点原因的：</p>
+<ul>
+<li>MLPconv 本质为一个小型神经网络，1×1 卷积层与 k×k 卷积层的先后顺序影响不大，又考虑到通道数庞大的可能性，先做 1×1 卷积可以极大地减少参数数量，提高泛化能力。</li>
+<li>不同尺度特征自然需要不同大小的卷积核，而不同尺度特征可能属于同一级别的抽象。</li>
+</ul>
+<p>inception-v1 结构如下图所示（从左至右，为提取尺度越来越大的特征，最左侧的特征可认为是在该抽象程度上尺度为零的特征）：</p>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/nn/inception_v1.jpg" alt="inception_v1"></p>
+<h4 id="在神经网络上的实现方法及理由（任务依赖的正则化）"><a href="#在神经网络上的实现方法及理由（任务依赖的正则化）" class="headerlink" title="在神经网络上的实现方法及理由（任务依赖的正则化）"></a>在神经网络上的实现方法及理由（任务依赖的正则化）</h4><ol>
+<li>局部感知：每个神经元其实没有必要对全局图像进行感知，只需要对局部进行感知，然后在更高层将局部的信息综合起来就得到了全局的信息；</li>
+<li>参数共享：图像具有一种“静态性”的属性：图像的一部分的统计特性与某些其他部分是一样的，即平移不变性的特征。由此提出了卷积核和特征图的概念。</li>
+</ol>
+<h3 id="池化（polling）"><a href="#池化（polling）" class="headerlink" title="池化（polling）"></a>池化（polling）</h3><p>池化过程本质为特征突出过程，去除特征图中的无用像素点。（查看西瓜书的样本不均衡问题）</p>
+<h2 id="对前馈神经网络的一些优化"><a href="#对前馈神经网络的一些优化" class="headerlink" title="对前馈神经网络的一些优化"></a>对前馈神经网络的一些优化</h2><h3 id="ReLu"><a href="#ReLu" class="headerlink" title="ReLu"></a>ReLu</h3><p><a href="https://www.zhihu.com/question/59031444/answer/177786603" target="_blank" rel="noopener">https://www.zhihu.com/question/59031444/answer/177786603</a></p>
+<h3 id="LRN"><a href="#LRN" class="headerlink" title="LRN"></a><a href="https://blog.csdn.net/hduxiejun/article/details/70570086" target="_blank" rel="noopener">LRN</a></h3><p>LRN层，对局部神经元的活动创建竞争机制，使得其中响应比较大的值变得相对更大，并抑制其他反馈较小的神经元，增强了模型的泛化能力。</p>
+<p>很少再用，现多用 dropout。</p>
+<h3 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h3><blockquote>
+<p>一种更恶化环境训练、更舒服环境战斗的思想。</p>
+</blockquote>
+<ol>
+<li>达到了一种Vote的作用。对于全连接神经网络而言，我们用相同的数据去训练5个不同的神经网络可能会得到多个不同的结果，我们可以通过一种vote机制来决定多票者胜出，因此相对而言提升了网络的精度与鲁棒性。同理，对于单个神经网络而言，如果我们将其进行分批，虽然不同的网络可能会产生不同程度的过拟合，但是将其公用一个损失函数，相当于对其同时进行了优化，取了平均，因此可以较为有效地防止过拟合的发生。</li>
+<li>减少神经元之间复杂的共适应性。当隐藏层神经元被随机删除之后，使得全连接网络具有了一定的稀疏化，从而有效地减轻了不同特征的协同效应。也就是说，有些特征可能会依赖于固定关系的隐含节点的共同作用，而通过Dropout的话，就有效地组织了某些特征在其他特征存在下才有效果的情况，增加了神经网络的鲁棒性。</li>
+</ol>
+<p>简而言之：Dropout在实践中能很好工作是因为其在训练阶段阻止了神经元的共适应。</p>
+<h2 id="实现方面的细节"><a href="#实现方面的细节" class="headerlink" title="实现方面的细节"></a>实现方面的细节</h2><h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><p><a href="http://www.cnblogs.com/ooon/p/5418555.html" target="_blank" rel="noopener">http://www.cnblogs.com/ooon/p/5418555.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/10/待办事项/" rel="next" title="待办事项">
+                <i class="fa fa-chevron-left"></i> 待办事项
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/19/自然语言处理基础/" rel="prev" title="自然语言处理基础">
+                自然语言处理基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/photo.png"
+                alt="redmud" />
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/101415219341008595729" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cherrysunshine.site/" title="同窗_刘" target="_blank">同窗_刘</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">1.</span> <span class="nav-text">基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积（convolution）"><span class="nav-number">1.1.</span> <span class="nav-text">卷积（convolution）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名"><span class="nav-number">1.1.2.</span> <span class="nav-text">命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解角度"><span class="nav-number">1.1.3.</span> <span class="nav-text">理解角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在神经网络上的实现方法及理由（任务依赖的正则化）"><span class="nav-number">1.1.4.</span> <span class="nav-text">在神经网络上的实现方法及理由（任务依赖的正则化）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化（polling）"><span class="nav-number">1.2.</span> <span class="nav-text">池化（polling）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对前馈神经网络的一些优化"><span class="nav-number">2.</span> <span class="nav-text">对前馈神经网络的一些优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ReLu"><span class="nav-number">2.1.</span> <span class="nav-text">ReLu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRN"><span class="nav-number">2.2.</span> <span class="nav-text">LRN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dropout"><span class="nav-number">2.3.</span> <span class="nav-text">dropout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方面的细节"><span class="nav-number">3.</span> <span class="nav-text">实现方面的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播"><span class="nav-number">3.1.</span> <span class="nav-text">反向传播</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/04/15/卷积神经网络基础/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/98984/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

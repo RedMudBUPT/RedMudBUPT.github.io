@@ -132,7 +132,7 @@
 <meta property="og:site_name" content="RedMudBUPT">
 <meta property="og:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠）【主】； 对n个列">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-10T06:42:23.101Z">
+<meta property="og:updated_time" content="2018-04-16T13:43:12.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性代数review">
 <meta name="twitter:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠）【主】； 对n个列">
@@ -464,7 +464,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="正交阵，对称阵与投影阵"><a href="#正交阵，对称阵与投影阵" class="headerlink" title="正交阵，对称阵与投影阵"></a>正交阵，对称阵与投影阵</h2><h1 id="矩阵微积分"><a href="#矩阵微积分" class="headerlink" title="矩阵微积分"></a>矩阵微积分</h1>
+<h2 id="正交阵，对称阵与投影阵"><a href="#正交阵，对称阵与投影阵" class="headerlink" title="正交阵，对称阵与投影阵"></a>正交阵，对称阵与投影阵</h2><h1 id="矩阵微积分"><a href="#矩阵微积分" class="headerlink" title="矩阵微积分"></a>矩阵微积分</h1><h1 id="附：一些常见的矩阵相关的思考方向"><a href="#附：一些常见的矩阵相关的思考方向" class="headerlink" title="附：一些常见的矩阵相关的思考方向"></a>附：一些常见的矩阵相关的思考方向</h1><ol>
+<li>设$X=(x_1,x_1,…,x_N)$，则</li>
+</ol>
+<p>$$<br>|| \sum_{i=1}^N x_i || <em>2^2 = \sum</em>{i=1}^N \sum_{j=1}^N x_i^Tx_j^T = (X^TX).sum()<br>$$</p>
+
       
     </div>
     
@@ -610,7 +614,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -621,7 +625,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -699,7 +703,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#对矩阵乘积的各种viewpoint"><span class="nav-number">1.</span> <span class="nav-text">对矩阵乘积的各种viewpoint</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵的一些性质"><span class="nav-number">2.</span> <span class="nav-text">矩阵的一些性质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迹"><span class="nav-number">2.1.</span> <span class="nav-text">迹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#范数"><span class="nav-number">2.2.</span> <span class="nav-text">范数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵的列空间与零空间"><span class="nav-number">2.3.</span> <span class="nav-text">矩阵的列空间与零空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行列式"><span class="nav-number">2.4.</span> <span class="nav-text">行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二次型与矩阵的定性"><span class="nav-number">2.5.</span> <span class="nav-text">二次型与矩阵的定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵的特征向量与特征值"><span class="nav-number">2.6.</span> <span class="nav-text">矩阵的特征向量与特征值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对称阵的特征向量与特征值"><span class="nav-number">2.6.1.</span> <span class="nav-text">对称阵的特征向量与特征值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性变换"><span class="nav-number">3.</span> <span class="nav-text">线性变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#度量阵"><span class="nav-number">3.1.</span> <span class="nav-text">度量阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#投影阵"><span class="nav-number">3.2.</span> <span class="nav-text">投影阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正交阵，对称阵与投影阵"><span class="nav-number">3.3.</span> <span class="nav-text">正交阵，对称阵与投影阵</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵微积分"><span class="nav-number">4.</span> <span class="nav-text">矩阵微积分</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#对矩阵乘积的各种viewpoint"><span class="nav-number">1.</span> <span class="nav-text">对矩阵乘积的各种viewpoint</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵的一些性质"><span class="nav-number">2.</span> <span class="nav-text">矩阵的一些性质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迹"><span class="nav-number">2.1.</span> <span class="nav-text">迹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#范数"><span class="nav-number">2.2.</span> <span class="nav-text">范数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵的列空间与零空间"><span class="nav-number">2.3.</span> <span class="nav-text">矩阵的列空间与零空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行列式"><span class="nav-number">2.4.</span> <span class="nav-text">行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二次型与矩阵的定性"><span class="nav-number">2.5.</span> <span class="nav-text">二次型与矩阵的定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵的特征向量与特征值"><span class="nav-number">2.6.</span> <span class="nav-text">矩阵的特征向量与特征值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对称阵的特征向量与特征值"><span class="nav-number">2.6.1.</span> <span class="nav-text">对称阵的特征向量与特征值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性变换"><span class="nav-number">3.</span> <span class="nav-text">线性变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#度量阵"><span class="nav-number">3.1.</span> <span class="nav-text">度量阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#投影阵"><span class="nav-number">3.2.</span> <span class="nav-text">投影阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正交阵，对称阵与投影阵"><span class="nav-number">3.3.</span> <span class="nav-text">正交阵，对称阵与投影阵</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵微积分"><span class="nav-number">4.</span> <span class="nav-text">矩阵微积分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附：一些常见的矩阵相关的思考方向"><span class="nav-number">5.</span> <span class="nav-text">附：一些常见的矩阵相关的思考方向</span></a></li></ol></div>
             
 
           </div>

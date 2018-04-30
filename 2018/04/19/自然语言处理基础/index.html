@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="RedMudBUPT" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="术语 词典（词表）：目标语言的所有单词，记为$\mathcal{D}$。 语料库（Corpus）：即手中的数据集，记为$\mathcal{C}$。 上下文（context）：词汇所处的共现词、语境、前邻词、后邻词等词汇出现的篇章语境信息。 词符（tocken）：目标语言中一个词的标记，即指一个单词。 词串：一系列词符前后连接成串。 词串共现：两个词串在同一个句子中。 历史词：出现在该词符之前的所有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自然语言处理基础">
+<meta property="og:url" content="http://yoursite.com/2018/04/19/自然语言处理基础/index.html">
+<meta property="og:site_name" content="RedMudBUPT">
+<meta property="og:description" content="术语 词典（词表）：目标语言的所有单词，记为$\mathcal{D}$。 语料库（Corpus）：即手中的数据集，记为$\mathcal{C}$。 上下文（context）：词汇所处的共现词、语境、前邻词、后邻词等词汇出现的篇章语境信息。 词符（tocken）：目标语言中一个词的标记，即指一个单词。 词串：一系列词符前后连接成串。 词串共现：两个词串在同一个句子中。 历史词：出现在该词符之前的所有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-26T13:17:43.492Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自然语言处理基础">
+<meta name="twitter:description" content="术语 词典（词表）：目标语言的所有单词，记为$\mathcal{D}$。 语料库（Corpus）：即手中的数据集，记为$\mathcal{C}$。 上下文（context）：词汇所处的共现词、语境、前邻词、后邻词等词汇出现的篇章语境信息。 词符（tocken）：目标语言中一个词的标记，即指一个单词。 词串：一系列词符前后连接成串。 词串共现：两个词串在同一个句子中。 历史词：出现在该词符之前的所有">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/19/自然语言处理基础/"/>
+
+
+
+
+
+  <title>自然语言处理基础 | RedMudBUPT</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RedMudBUPT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">RedMud's blog called RedMudBUPT</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/自然语言处理基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="redmud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RedMudBUPT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">自然语言处理基础</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-19T09:50:59+08:00">
+                2018-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/19/自然语言处理基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/04/19/自然语言处理基础/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul>
+<li>词典（词表）：目标语言的所有单词，记为$\mathcal{D}$。</li>
+<li>语料库（Corpus）：即手中的数据集，记为$\mathcal{C}$。</li>
+<li>上下文（context）：词汇所处的共现词、语境、前邻词、后邻词等词汇出现的篇章语境信息。</li>
+<li>词符（tocken）：目标语言中一个词的标记，即指一个单词。</li>
+<li>词串：一系列词符前后连接成串。</li>
+<li>词串共现：两个词串在同一个句子中。</li>
+<li>历史词：出现在该词符之前的所有词。</li>
+</ul>
+<h2 id="统计语言模型（statistical-language-model）"><a href="#统计语言模型（statistical-language-model）" class="headerlink" title="统计语言模型（statistical language model）"></a>统计语言模型（statistical language model）</h2><p>统计语言模型是基于大数定律，结合贝叶斯公式，利用语料库来计算一个句子（或词串）的概率的。n 个词串共现的概率为：<br>$$<br>P(W) = P(w_1)P(w_2|w_1)…P(w_n|w_1,w<em>2,…,w</em>{n-1})<br>\<br>where, \quad P(w_i) = \frac{count(w_i)}{count(\mathcal{C})}<br>\<br>P(w_i|w<em>1,…,w</em>{i-1}) = \frac{count(w<em>1,…,w</em>{i-1},w_i)}{count(w<em>1,…,w</em>{i-1})}<br>$$<br>求解该模型的方法有很多，n-gram 模型、决策树、最大熵模型、最大熵马尔科夫模型、条件随机场、神经网络等。</p>
+<p>当所有的概率值都计算好之后便存储起来，下次需要计算一个词串的概率时，只需找到相关的概率参数，将之连乘即可。</p>
+<h3 id="n-gram"><a href="#n-gram" class="headerlink" title="n-gram"></a>n-gram</h3><p>添加 n-1 阶马尔科夫假设，得到 n-gram 模型（假设为 3-gram）：<br>$$<br>P(w_i|w<em>1,…,w</em>{i-1}) = \frac{count(w<em>{i-2},w</em>{i-1},w<em>i)}{count(w</em>{i-2},w_{i-1})}<br>$$</p>
+<p>当 n 越大：</p>
+<ol>
+<li>模型对历史词的关联性越强，故可区别性越好（模型复杂度越高）；</li>
+<li>因模型复杂度呈指数级增高，大数定理的可靠性便越来越差（可理解为一种过拟合现象，因为模型复杂度相对于样本复杂度过高）。</li>
+</ol>
+<h4 id="数据稀疏问题"><a href="#数据稀疏问题" class="headerlink" title="数据稀疏问题"></a>数据稀疏问题</h4><blockquote>
+<p>产生该问题的根本原因是采用了统计语言模型。</p>
+</blockquote>
+<ol>
+<li>语料库中可能出现$count(w<em>1,…,w</em>{i-1},w_i) = 0$的情况，即该词串永远不会出现，但不应认为$P(w_i|w<em>1,…,w</em>{i-1})=0$；</li>
+<li>语料库中可能出现$count(w<em>1,…,w</em>{i-1}) = count(w<em>1,…,w</em>{i-1},w_i)$的情况，但不应认为$P(w_i|w<em>1,…,w</em>{i-1})=$1。</li>
+</ol>
+<p>这两种问题称为数据稀疏问题，该问题的出现与语料库的大小无关，由<a href="https://www.gelbukh.com/CV/Publications/2001/CICLing-2001-Zipf.htm" target="_blank" rel="noopener">Zipf定律</a>知，在自然语言的语料库里，一个单词出现的频率与它在频率表里的排名成反比，故增大语料库依然无法解决数据稀疏问题。</p>
+<p>在 n-gram 模型中，当 n 达到一定值后，即使样本复杂度足够，由于数据稀疏问题，n 越大，性能反而越差。</p>
+<h4 id="平滑技术"><a href="#平滑技术" class="headerlink" title="平滑技术"></a>平滑技术</h4><p>平滑技术是针对数据稀疏问题引入的技术，常用的有：</p>
+<ul>
+<li>平滑：拉普拉斯平滑（加一平滑）、Lidstone 平滑（加 delta 平滑）、good-turing 平滑。</li>
+<li>回退：backoff、interpolation（软回退）、kneser-ney smoothing。</li>
+</ul>
+<h3 id="NNLM"><a href="#NNLM" class="headerlink" title="NNLM"></a>NNLM</h3><p>Bengio et. al（2003）</p>
+<h2 id="词符表示（tocken）"><a href="#词符表示（tocken）" class="headerlink" title="词符表示（tocken）"></a>词符表示（tocken）</h2><h3 id="discrete-representation"><a href="#discrete-representation" class="headerlink" title="discrete representation"></a>discrete representation</h3><p>独热（one-hot representation）：可认为是一种基于符号的词表示方法。</p>
+<h3 id="distributed-representation"><a href="#distributed-representation" class="headerlink" title="distributed representation"></a>distributed representation</h3><blockquote>
+<p>基于分布式相似度的表示，英文全称为 distributional similarity based representations。</p>
+<p>You shall know a word by the company it keeps.    – J.R.Firth 1957:11</p>
+</blockquote>
+<h4 id="共现矩阵（cooccurence-matrix）"><a href="#共现矩阵（cooccurence-matrix）" class="headerlink" title="共现矩阵（cooccurence matrix）"></a>共现矩阵（cooccurence matrix）</h4><p>用上下文来表示一个单词的方法。有两种计算方法：</p>
+<ul>
+<li>基于整个段落的，又称为潜在语义分析。</li>
+<li>基于窗口的（窗口内一般为5~10个单词，共现矩阵的行是窗口个数，列为所有不重复单词个数），优点是将语义和语法都考虑了进去。</li>
+</ul>
+<p>缺点是维度灾难，常用 SVD 来压缩矩阵以实现降维。</p>
+<h4 id="词向量"><a href="#词向量" class="headerlink" title="词向量"></a>词向量</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/15/卷积神经网络基础/" rel="next" title="卷及神经网络基础">
+                <i class="fa fa-chevron-left"></i> 卷及神经网络基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/25/机器学习——AdaBoost/" rel="prev" title="机器学习——AdaBoost">
+                机器学习——AdaBoost <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/photo.png"
+                alt="redmud" />
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/101415219341008595729" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cherrysunshine.site/" title="同窗_刘" target="_blank">同窗_刘</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语"><span class="nav-number">1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计语言模型（statistical-language-model）"><span class="nav-number">2.</span> <span class="nav-text">统计语言模型（statistical language model）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#n-gram"><span class="nav-number">2.1.</span> <span class="nav-text">n-gram</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据稀疏问题"><span class="nav-number">2.1.1.</span> <span class="nav-text">数据稀疏问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#平滑技术"><span class="nav-number">2.1.2.</span> <span class="nav-text">平滑技术</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NNLM"><span class="nav-number">2.2.</span> <span class="nav-text">NNLM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词符表示（tocken）"><span class="nav-number">3.</span> <span class="nav-text">词符表示（tocken）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#discrete-representation"><span class="nav-number">3.1.</span> <span class="nav-text">discrete representation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distributed-representation"><span class="nav-number">3.2.</span> <span class="nav-text">distributed representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#共现矩阵（cooccurence-matrix）"><span class="nav-number">3.2.1.</span> <span class="nav-text">共现矩阵（cooccurence matrix）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#词向量"><span class="nav-number">3.2.2.</span> <span class="nav-text">词向量</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/04/19/自然语言处理基础/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/98984/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
