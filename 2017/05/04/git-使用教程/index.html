@@ -132,7 +132,7 @@
 <meta property="og:site_name" content="RedMudBUPT">
 <meta property="og:description" content="使用ssh背景 用作认证的私钥最好通过passphrase进行加密，否则会有很大安全隐患，只要私钥泄露，别人就能访问你能访问的所有远程机器，不过每次登陆都得输入passphrase。 ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入agent管理时输入passphrase，之后的ssh相关操作就不必输入passphrase了。如果ss">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-20T08:31:03.945Z">
+<meta property="og:updated_time" content="2018-06-03T12:53:24.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 使用教程">
 <meta name="twitter:description" content="使用ssh背景 用作认证的私钥最好通过passphrase进行加密，否则会有很大安全隐患，只要私钥泄露，别人就能访问你能访问的所有远程机器，不过每次登陆都得输入passphrase。 ssh-agent启动后，可通过ssh-add将私钥加入agent，使用ssh-agent后，只需在将key纳入agent管理时输入passphrase，之后的ssh相关操作就不必输入passphrase了。如果ss">
@@ -386,6 +386,7 @@
 <blockquote>
 <p><em>more info</em><br><a href="http://blog.csdn.net/sdcxyz/article/details/41487897" target="_blank" rel="noopener">SSH Agent Forwarding原理</a><br><a href="http://www.unixwiz.net/techtips/ssh-agent-forwarding.html" target="_blank" rel="noopener">An Illustrated Guide to SSH Agent Forwarding</a></p>
 </blockquote>
+<a id="more"></a> 
 <h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh-kengen -t rsa -C <span class="string">"some words(email usually)"</span></div><div class="line">$ ssh-agent <span class="_">-s</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa <span class="comment">#添加私钥</span></div><div class="line">$ ssh-add ~/.ssh/id-rsa2</div><div class="line">$ vim ~/.ssh/config</div></pre></td></tr></table></figure>
 <h2 id="config-文件类似如下"><a href="#config-文件类似如下" class="headerlink" title="config 文件类似如下"></a>config 文件类似如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Host  redmudbupt.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa </div><div class="line">    User git </div><div class="line"></div><div class="line">host bkseastone.github.com</div><div class="line">    HostName github.com</div><div class="line">    IdentityFile /home/redmud/.ssh/id_rsa2</div><div class="line">    User git</div></pre></td></tr></table></figure>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin git@bkseastone.github.com:bkseastone/lab_test.git <span class="comment">#添加远程库</span></div><div class="line">$ git config user.name <span class="string">"one_name"</span> </div><div class="line">$ git config user.email <span class="string">"one_email"</span> <span class="comment">#给仓库设置局部用户名和邮箱</span></div></pre></td></tr></table></figure>
@@ -534,7 +535,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -545,7 +546,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

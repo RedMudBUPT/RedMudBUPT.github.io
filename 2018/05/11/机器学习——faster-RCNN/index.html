@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="RedMudBUPT" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="预备知识FCN(Fully Convolutional Networks)全卷积神经网络顾名思义，FCN 即全为卷积层的神经网络，没有全连接层，或者说将全连接层以卷积层的方式实现，而非以两个矩阵乘积的方式实现（全连接层的实现方式），具体为：  对于上一层是卷积层的全连接层，该层以与输入的 feature map 大小相同的卷积核做卷积运算实现； 对于上一层是全连接层的全连接层，该层以输入的神经元个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习——faster_RCNN">
+<meta property="og:url" content="http://yoursite.com/2018/05/11/机器学习——faster-RCNN/index.html">
+<meta property="og:site_name" content="RedMudBUPT">
+<meta property="og:description" content="预备知识FCN(Fully Convolutional Networks)全卷积神经网络顾名思义，FCN 即全为卷积层的神经网络，没有全连接层，或者说将全连接层以卷积层的方式实现，而非以两个矩阵乘积的方式实现（全连接层的实现方式），具体为：  对于上一层是卷积层的全连接层，该层以与输入的 feature map 大小相同的卷积核做卷积运算实现； 对于上一层是全连接层的全连接层，该层以输入的神经元个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-03T12:57:09.568Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习——faster_RCNN">
+<meta name="twitter:description" content="预备知识FCN(Fully Convolutional Networks)全卷积神经网络顾名思义，FCN 即全为卷积层的神经网络，没有全连接层，或者说将全连接层以卷积层的方式实现，而非以两个矩阵乘积的方式实现（全连接层的实现方式），具体为：  对于上一层是卷积层的全连接层，该层以与输入的 feature map 大小相同的卷积核做卷积运算实现； 对于上一层是全连接层的全连接层，该层以输入的神经元个">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/11/机器学习——faster-RCNN/"/>
+
+
+
+
+
+  <title>机器学习——faster_RCNN | RedMudBUPT</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RedMudBUPT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">RedMud's blog called RedMudBUPT</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/机器学习——faster-RCNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="redmud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RedMudBUPT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习——faster_RCNN</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T22:14:12+08:00">
+                2018-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/11/机器学习——faster-RCNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/05/11/机器学习——faster-RCNN/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="FCN-Fully-Convolutional-Networks-全卷积神经网络"><a href="#FCN-Fully-Convolutional-Networks-全卷积神经网络" class="headerlink" title="FCN(Fully Convolutional Networks)全卷积神经网络"></a><a href="https://blog.csdn.net/app_12062011/article/details/60956357" target="_blank" rel="noopener">FCN</a>(Fully Convolutional Networks)全卷积神经网络</h3><p>顾名思义，FCN 即全为卷积层的神经网络，没有全连接层，或者说将全连接层以卷积层的方式实现，而非以两个矩阵乘积的方式实现（全连接层的实现方式），具体为：</p>
+<ul>
+<li>对于上一层是卷积层的全连接层，该层以与输入的 feature map 大小相同的卷积核做卷积运算实现；</li>
+<li>对于上一层是全连接层的全连接层，该层以输入的神经元个数为 1*1 卷积核通道数做卷积运算实现，或者说是将神经元看做了一个 feature map，或者说是将一个 feature map 看做了一个神经元的激活值（激活值不一定是个标量）。</li>
+</ul>
+<p>这样做的优点是，通过在最后一层做 pooling（核大小为 feature map 大小）的方法，可实现让一个已设计完毕的网络可以接收任意大小的图片。</p>
+<a id="more"></a> 
+<h3 id="NMS-Non-Maximum-Suppression-非极大值抑制"><a href="#NMS-Non-Maximum-Suppression-非极大值抑制" class="headerlink" title="NMS(Non-Maximum Suppression)非极大值抑制"></a><a href="https://blog.csdn.net/shuzfan/article/details/50371990" target="_blank" rel="noopener">NMS</a>(Non-Maximum Suppression)非极大值抑制</h3><p>首先选定一个 IoU（Intersection-over-Union，交并比，即两框重叠部分面积占两框并集面积的比例）阈值，例如 0.25，然后将所有 4 个窗口（bounding box）按照得分由高到低排序，然后选中得分最高的窗口，遍历计算剩余的3个窗口与该窗口的交并比（IoU），如果 IoU 大于阈值 0.25，则将窗口删除；然后再从剩余的窗口中选中一个得分最高的。重复上述过程，直至所有窗口都被处理，从而得到所有的检测框。</p>
+<h3 id="迁移学习"><a href="#迁移学习" class="headerlink" title="迁移学习"></a><a href="https://blog.csdn.net/SusanZhang1231/article/details/73249978" target="_blank" rel="noopener">迁移学习</a></h3><p>迁移学习指有监督预训练(Supervised pre-training)，即把一个任务训练好的参数，拿到另外一个任务作为初始化参数值。将一个任务得到的特征迁移到另一个任务中，故称为迁移。</p>
+<h3 id="ROIs-Pooling（Region-of-Interest-Pooling）"><a href="#ROIs-Pooling（Region-of-Interest-Pooling）" class="headerlink" title="ROIs Pooling（Region of Interest Pooling）"></a><a href="https://blog.csdn.net/zj360202/article/details/78845601" target="_blank" rel="noopener">ROIs Pooling</a>（Region of Interest Pooling）</h3><ol>
+<li>将 proposals 映射至 feature map；</li>
+<li>做 ROIs Pooling，即对每个 ROI 做同等份数的分割，对每块分割做 max/avg pooling。</li>
+</ol>
+<h2 id="faster-RCNN"><a href="#faster-RCNN" class="headerlink" title="faster-RCNN"></a>faster-RCNN</h2><blockquote>
+<p><a href="">faster-RCNN_tf</a></p>
+</blockquote>
+<p><img src="" alt="faster-rcnn网络结构"></p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><h3 id="RPN"><a href="#RPN" class="headerlink" title="RPN"></a>RPN</h3><h4 id="anchors"><a href="#anchors" class="headerlink" title="anchors"></a>anchors</h4><p>当第 i 个 anchor 与 GT 间 IoU&gt;0.7，则认为该 anchor 是 foreground，标记 label 为1；反之 IoU&lt;0.3 时，认为是该 anchor 是 background，标记 label 为0；至于那些 0.3&lt;IoU&lt;0.7 的 anchor 则不参与训练。简而言之，</p>
+<h5 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h5><p>利用 (x, y, w, h) 的形式使得 (x1, y1, x2, y2) 可批量生成。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_scale_enum</span><span class="params">(anchor, scales)</span>:</span></div><div class="line">    w, h, x_ctr, y_ctr = _whctrs(anchor)</div><div class="line">    ws = w * scales</div><div class="line">    hs = h * scales</div><div class="line">    anchors = _mkanchors(ws, hs, x_ctr, y_ctr)</div><div class="line">    <span class="keyword">return</span> anchors</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_anchors</span><span class="params">(base_size=<span class="number">16</span>, ratios=[<span class="number">0.5</span>, <span class="number">1</span>, <span class="number">2</span>],</span></span></div><div class="line">                     scales=<span class="number">2</span>**np.arange<span class="params">(<span class="number">3</span>, <span class="number">6</span>)</span>):</div><div class="line">    base_anchor = np.array([<span class="number">1</span>, <span class="number">1</span>, base_size, base_size]) - <span class="number">1</span></div><div class="line">    w, h, x_ctr, y_ctr = _whctrs(base_anchor)</div><div class="line">    size = w * h  </div><div class="line">    ws = np.round(np.sqrt(size / ratios))</div><div class="line">    hs = np.round(np.sqrt(size * ratios)) </div><div class="line">    <span class="comment"># ws/hs = [1/sqrt(ratios)] / sqrt(ratios) = 1/ratios</span></div><div class="line">    <span class="comment"># ws, hs = array([23., 16., 11.]), array([12., 16., 22.])</span></div><div class="line">    ratio_anchors = _mkanchors(ws, hs, x_ctr, y_ctr)</div><div class="line">    anchors = np.vstack([_scale_enum(ratio_anchors[i, :],</div><div class="line">                                     scales)</div><div class="line">                         <span class="keyword">for</span> i <span class="keyword">in</span> range(ratio_anchors.shape[<span class="number">0</span>])</div><div class="line">                        ])</div><div class="line">    <span class="comment">#array([[ -83.,  -39.,  100.,   56.],</span></div><div class="line">    <span class="comment">#       [-175.,  -87.,  192.,  104.],</span></div><div class="line">    <span class="comment">#       [-359., -183.,  376.,  200.],</span></div><div class="line">    <span class="comment">#       [ -55.,  -55.,   72.,   72.],</span></div><div class="line">    <span class="comment">#       [-119., -119.,  136.,  136.],</span></div><div class="line">    <span class="comment">#       [-247., -247.,  264.,  264.],</span></div><div class="line">    <span class="comment">#       [ -35.,  -79.,   52.,   96.],</span></div><div class="line">    <span class="comment">#       [ -79., -167.,   96.,  184.],</span></div><div class="line">    <span class="comment">#       [-167., -343.,  184.,  360.]])</span></div><div class="line">    <span class="keyword">return</span> anchors</div></pre></td></tr></table></figure>
+<h4 id="初始-proposals-的生成"><a href="#初始-proposals-的生成" class="headerlink" title="初始 proposals 的生成"></a>初始 proposals 的生成</h4><blockquote>
+<p>假设当输入的 anchor 与 GT 相差较小时，anchor feature map 到两个平移量和两个尺度因子的映射是一种线性变换。类比于人看到一本书的70%以上时，便能猜测出该书有多大，但若只看到一个书角便不能，当然也不期望能。</p>
+<p>由此，当 anchor 与 GT 差异巨大时便自然被排除了，合乎常理。</p>
+</blockquote>
+<p>便于回归的两个trick：</p>
+<ol>
+<li>基础尺度为原proposal 的宽和高；</li>
+<li>尺度缩放时，加上一个联系函数 $e^{()}$ ，与坐标平移的线性映射不同。</li>
+</ol>
+<p>将 anchors 做平移和尺度变换后，称为proposals。</p>
+<h3 id="训练网络的细节"><a href="#训练网络的细节" class="headerlink" title="训练网络的细节"></a>训练网络的细节</h3><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><a href="https://blog.csdn.net/eliudragon/article/details/78189491" target="_blank" rel="noopener">ref1: CNN目标检测与分割（一）：Faster RCNN详解</a></p>
+<h2 id="VOC2007"><a href="#VOC2007" class="headerlink" title="VOC2007"></a>VOC2007</h2><p><a href="https://blog.csdn.net/gaohuazhao/article/details/60871886" target="_blank" rel="noopener">ref2: VOC2007数据集制作</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/26/自然语言处理——隐马尔可夫模型/" rel="next" title="自然语言处理——隐马尔可夫模型">
+                <i class="fa fa-chevron-left"></i> 自然语言处理——隐马尔可夫模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/12/机器学习——BatchNormalization/" rel="prev" title="机器学习——BatchNormalization">
+                机器学习——BatchNormalization <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/photo.png"
+                alt="redmud" />
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/101415219341008595729" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cherrysunshine.site/" title="同窗_刘" target="_blank">同窗_刘</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识"><span class="nav-number">1.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FCN-Fully-Convolutional-Networks-全卷积神经网络"><span class="nav-number">1.1.</span> <span class="nav-text">FCN(Fully Convolutional Networks)全卷积神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NMS-Non-Maximum-Suppression-非极大值抑制"><span class="nav-number">1.2.</span> <span class="nav-text">NMS(Non-Maximum Suppression)非极大值抑制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迁移学习"><span class="nav-number">1.3.</span> <span class="nav-text">迁移学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROIs-Pooling（Region-of-Interest-Pooling）"><span class="nav-number">1.4.</span> <span class="nav-text">ROIs Pooling（Region of Interest Pooling）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#faster-RCNN"><span class="nav-number">2.</span> <span class="nav-text">faster-RCNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数"><span class="nav-number">2.1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPN"><span class="nav-number">2.2.</span> <span class="nav-text">RPN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#anchors"><span class="nav-number">2.2.1.</span> <span class="nav-text">anchors</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#代码实现"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始-proposals-的生成"><span class="nav-number">2.2.2.</span> <span class="nav-text">初始 proposals 的生成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练网络的细节"><span class="nav-number">2.3.</span> <span class="nav-text">训练网络的细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VOC2007"><span class="nav-number">3.</span> <span class="nav-text">VOC2007</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/05/11/机器学习——faster-RCNN/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/98984/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="RedMudBUPT" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="凸集 集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习——凸优化">
+<meta property="og:url" content="http://yoursite.com/2018/03/14/机器学习——凸优化/index.html">
+<meta property="og:site_name" content="RedMudBUPT">
+<meta property="og:description" content="凸集 集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-03T12:57:17.220Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习——凸优化">
+<meta name="twitter:description" content="凸集 集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/14/机器学习——凸优化/"/>
+
+
+
+
+
+  <title>机器学习——凸优化 | RedMudBUPT</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RedMudBUPT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">RedMud's blog called RedMudBUPT</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/机器学习——凸优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="redmud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RedMudBUPT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习——凸优化</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T21:48:31+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/14/机器学习——凸优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/14/机器学习——凸优化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="凸集"><a href="#凸集" class="headerlink" title="凸集"></a>凸集</h2><blockquote>
+<p>集合$C$ 内任意两点间的线段上的点仍在该集合内，则称该集合为凸集。表示为$\theta x+(1-\theta)y \in C, \theta \in (0,1)$ ，其中$\theta x+(1-\theta)y$ 称为点$x$ 与$y$ 的凸组合。</p>
+</blockquote>
+<a id="more"></a> 
+<h2 id="无约束最优化"><a href="#无约束最优化" class="headerlink" title="无约束最优化"></a>无约束最优化</h2><h3 id="数值优化"><a href="#数值优化" class="headerlink" title="数值优化"></a>数值优化</h3><h4 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h4><blockquote>
+<p>本质为找函数的零点，用在最优化上便是找函数导数的零点。</p>
+</blockquote>
+<p>$$<br>w_{t+1} = w<em>t - (\frac{\partial ^2 L}{\partial w \partial w^T})^{-1} \frac{\partial L}{\partial w}|</em>{w=w_t}<br>$$</p>
+<p>牛顿法相比起梯度往往法收敛速度更快，特别是迭代值距离收敛值比较近的时候，每次迭代都能使误差变成原来的平方，但是在高维时矩阵的逆计算会非常耗时。</p>
+<h3 id="解析优化"><a href="#解析优化" class="headerlink" title="解析优化"></a>解析优化</h3><h2 id="有约束最优化"><a href="#有约束最优化" class="headerlink" title="有约束最优化"></a>有约束最优化</h2><h3 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h3><blockquote>
+<p>通过引入拉格朗日乘子，可将有 d 个变量与 k 个约束条件的最优化问题转化为 d+k 个变量的无约束优化问题。</p>
+</blockquote>
+<h4 id="等式约束"><a href="#等式约束" class="headerlink" title="等式约束"></a>等式约束</h4><p>$$<br>\min_x f(x),<br>\<br>s.t. \quad g(x)=0.<br>$$</p>
+<p>设 x 为 d 维向量，则约束曲面 $g(x)=0$是 d-1 维曲面，目标函数$f(x)$是 d 维曲面。</p>
+<ul>
+<li>因曲面梯度与自身法线共线，所以约束曲面上任意点的梯度$\nabla g(x)$必正交于约束曲面；</li>
+<li>又目标函数在约束曲面上的最优点$x^<em>$对应的梯度$\nabla f(x^</em>)$必正交于约束曲面（不正交意味着不相切，不相切意味着至少相交于两个点，故可继续沿反梯度方向$-\nabla f(x) $找到更优解，因为梯度方向是函数增加最快的方向），故最优点$x^<em>$对应的梯度$\nabla f(x^</em>)$ 和 $\nabla g(x)$ 必共线，即必存在$\lambda \neq 0$使得</li>
+</ul>
+<p>$$<br>\nabla f(x) + \lambda \nabla g(x) = 0,<br>$$<br>由此得到等价的无约束最优化问题：<br>$$<br>\min_{x, \lambda} f(x)+ \lambda g(x). \quad (\lambda \neq 0)<br>$$</p>
+<h4 id="不等式约束"><a href="#不等式约束" class="headerlink" title="不等式约束"></a>不等式约束</h4><p>$$<br>\min_x f(x),<br>\<br>s.t. \quad g(x) \le b.<br>$$</p>
+<h5 id="等价问题（称为强对偶问题）"><a href="#等价问题（称为强对偶问题）" class="headerlink" title="等价问题（称为强对偶问题）"></a>等价问题（称为强对偶问题）</h5><p>对于不等式约束分两种情况讨论：</p>
+<ol>
+<li>当最优点 x 位于 g(x)-b&lt;0 区域时，约束形同虚设，可直接求 f(x) 的最小值，这等价于等式约束中将 $\lambda$ 置零；</li>
+<li>当最优点 x 位于 g(x)-b=0 区域时，不等式约束便退化为等式约束了。</li>
+</ol>
+<p>将分类讨论的问题合为一个式子，如下（记 g(x)-b=h(x) ）：<br>$$<br>\min<em>x \max</em>{\lambda} f(x)+ \lambda h(x), \quad \lambda \ge 0<br>$$<br>称上式为原不等式约束最优化问题的等价问题，等价的原因为：</p>
+<ol>
+<li>通过对 $\lambda$ 做大于等于零的限制，便可实现在沿 $\lambda$ 方向求最大值时，将$h(x)&lt;0$的点通过置$\lambda$为零删掉（若$\lambda$可为负数，那么在求最大值时无法删掉这些点，因为在这些点上的最优解$\lambda \ne 0$），然后因为剩下的点对应的$\lambda$均为大于零的数，故基于这个结果在沿$x$方向上求最小值时，是在$h(x)=0$的区域内求得的使 f(x) 最小的最优解，从而完成上述分类讨论的第二种情况；</li>
+<li>当然，若没有大于零的$\lambda$，那便是直接在无约束情况下求得的最优解，即分类讨论的第一种情况的解。</li>
+</ol>
+<h5 id="拉格朗日函数"><a href="#拉格朗日函数" class="headerlink" title="拉格朗日函数"></a>拉格朗日函数</h5><p>由此，原不等式约束最优化问题可转化为如下不等式约束的拉格朗日函数的最优化问题：<br>$$<br>\min_x f(x)+ \lambda h(x)<br>\<br>s.t. \quad h(x) \le 0<br>\<br>\quad \quad \lambda \ge 0<br>\<br>\quad \quad \lambda h(x) = 0<br>$$<br>称以上三个约束条件为KKT（Karush-Kuhn-Tucker）条件。</p>
+<p>为使用拉格朗日函数，须将等价问题做如下变型：</p>
+<p>对于等价问题（$\lambda \ge 0$省略不写，并记$L(x, \lambda)= f(x)+ \lambda h(x)$），因为<br>$$<br>\min<em>x \max</em>{\lambda} L(x, \lambda) \ge \min_x L(x, \lambda)<br>$$<br>所以<br>$$<br>\min<em>x \max</em>{\lambda} L(x, \lambda) \ge \max_{\lambda} \min_x L(x, \lambda)<br>$$<br>称$ L(x, \lambda)$为拉格朗日函数，称$\lambda$为对偶变量，称$\min<em>x L(x, \lambda)$为拉格朗日对偶函数，称等价问题为强对偶问题，称$\max</em>{\lambda} \min_x L(x, \lambda)$为弱对偶问题，称原不等式约束最优化问题为主问题。</p>
+<h5 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h5><p>强对偶问题与弱对偶问题统称为对偶问题，无论主问题凸性如何，对偶问题始终是凸优化问题。一般弱对偶问题不等价于强对偶问题，但当主问题为凸优化问题，且可行域中至少有一点使不等式约束严格成立，那么弱对偶问题便可等价于强对偶问题，这称为强对偶性。</p>
+<p>当强对偶性成立后，直接求解弱对偶问题便可得到主问题的解，具体为：通过拉格朗日乘子法可将不等式约束的最优化问题转为满足 KKT 条件的拉格朗日对偶函数，通过将拉格朗日函数对原变量和对偶变量的导数置零，并结合KKT条件便得到弱对偶问题的解，由强对偶性进而得主问题的解。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/11/机器学习——前馈神经网络/" rel="next" title="机器学习——前馈神经网络">
+                <i class="fa fa-chevron-left"></i> 机器学习——前馈神经网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/29/信息论基础/" rel="prev" title="信息论基础">
+                信息论基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/photo.png"
+                alt="redmud" />
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/101415219341008595729" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cherrysunshine.site/" title="同窗_刘" target="_blank">同窗_刘</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#凸集"><span class="nav-number">1.</span> <span class="nav-text">凸集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无约束最优化"><span class="nav-number">2.</span> <span class="nav-text">无约束最优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数值优化"><span class="nav-number">2.1.</span> <span class="nav-text">数值优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#牛顿法"><span class="nav-number">2.1.1.</span> <span class="nav-text">牛顿法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析优化"><span class="nav-number">2.2.</span> <span class="nav-text">解析优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有约束最优化"><span class="nav-number">3.</span> <span class="nav-text">有约束最优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日乘子法"><span class="nav-number">3.1.</span> <span class="nav-text">拉格朗日乘子法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#等式约束"><span class="nav-number">3.1.1.</span> <span class="nav-text">等式约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不等式约束"><span class="nav-number">3.1.2.</span> <span class="nav-text">不等式约束</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#等价问题（称为强对偶问题）"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">等价问题（称为强对偶问题）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#拉格朗日函数"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">拉格朗日函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#求解"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">求解</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/03/14/机器学习——凸优化/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/98984/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -132,7 +132,7 @@
 <meta property="og:site_name" content="RedMudBUPT">
 <meta property="og:description" content="基本假设为解决贝特朗悖论出现的问题，作以下三点假设（概率论公理）：  样本空间$\Omega$：一个随机实验的所有可能输出的集合； 事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的定义域；其元素为事件，事件是$\Omega$中某些样本的集合； 测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-10T10:17:56.207Z">
+<meta property="og:updated_time" content="2018-06-03T12:58:52.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概率论基础.md">
 <meta name="twitter:description" content="基本假设为解决贝特朗悖论出现的问题，作以下三点假设（概率论公理）：  样本空间$\Omega$：一个随机实验的所有可能输出的集合； 事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的定义域；其元素为事件，事件是$\Omega$中某些样本的集合； 测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$">
@@ -385,6 +385,7 @@
 <li>事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的<strong>定义域</strong>；其元素为事件，事件是$\Omega$中某些样本的集合；</li>
 <li>测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$，是$\sigma$可加且非负的集合函数。</li>
 </ul>
+<a id="more"></a> 
 <h1 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h1><h1 id="数学期望"><a href="#数学期望" class="headerlink" title="数学期望"></a>数学期望</h1><blockquote>
 <p>$\xi$ 的数学期望可理解为<strong><em>在 $\Omega$ 上的加权和</em></strong>（权重为概率值，对应于常规均值中某数出现的频率，有的资料称之为概率平均），采用的计算方法为<a href="https://www.zhihu.com/question/28700668?sort=created" target="_blank" rel="noopener">L-S积分</a>：如设$\xi=\sum_{i=1}^na<em>i \chi</em>{A_i}$ ，即将事件$A_i$ 映射为实数$a<em>i$ ，则$E(\xi)=\int</em>{\Omega} \xi(\omega) \mathrm{d}p(\omega)=\sum<em>{i=1}^n \int</em>{\Omega} a<em>i \chi</em>{A_i} \mathrm{d}p(\omega)$ ，即将$\Omega$ 中不可分事件$\omega$ 按值域划分为n类（每一类中的$p(\omega)$ 都相等，假设$A_1$ 中有10个$\omega$ ，则$p(A<em>1)=10*\mathrm{d}p(\omega)$ ），并在每一类中积分出一个值，最后将这n个值求和。当n为有限值，结果为$\sum</em>{i=1}^n a_i p(A<em>i)$ ；当$n\to \inf$ ，结果为$\int</em>{-\inf}^{+\inf} a f(a)\mathrm{d}a$ 。</p>
 <p>综上，将数学期望作$\xi$ 在$\Omega$ 上的“加权和”看待。</p>
@@ -466,8 +467,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/06/感知器学习算法/" rel="prev" title="感知机学习算法">
-                感知机学习算法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/06/机器学习——感知器学习算法/" rel="prev" title="机器学习——感知机学习算法">
+                机器学习——感知机学习算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -578,7 +579,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -589,7 +590,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

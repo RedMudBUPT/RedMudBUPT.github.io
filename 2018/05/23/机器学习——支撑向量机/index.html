@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="RedMudBUPT" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="SVM解决的问题解决了两个问题：  通过最大化 margin，解决 PLA 健壮性差的问题； 通过对偶问题的转换和核函数，解决了在引入特征转换解决线性不可分问题时导致的复杂度高的问题。  （附）软间隔：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习——支撑向量机">
+<meta property="og:url" content="http://yoursite.com/2018/05/23/机器学习——支撑向量机/index.html">
+<meta property="og:site_name" content="RedMudBUPT">
+<meta property="og:description" content="SVM解决的问题解决了两个问题：  通过最大化 margin，解决 PLA 健壮性差的问题； 通过对偶问题的转换和核函数，解决了在引入特征转换解决线性不可分问题时导致的复杂度高的问题。  （附）软间隔：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-03T12:58:15.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习——支撑向量机">
+<meta name="twitter:description" content="SVM解决的问题解决了两个问题：  通过最大化 margin，解决 PLA 健壮性差的问题； 通过对偶问题的转换和核函数，解决了在引入特征转换解决线性不可分问题时导致的复杂度高的问题。  （附）软间隔：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/23/机器学习——支撑向量机/"/>
+
+
+
+
+
+  <title>机器学习——支撑向量机 | RedMudBUPT</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RedMudBUPT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">RedMud's blog called RedMudBUPT</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/机器学习——支撑向量机/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="redmud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RedMudBUPT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习——支撑向量机</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-23T14:18:55+08:00">
+                2018-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/23/机器学习——支撑向量机/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/05/23/机器学习——支撑向量机/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><h3 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h3><p>解决了两个问题：</p>
+<ol>
+<li>通过最大化 margin，解决 PLA 健壮性差的问题；</li>
+<li>通过对偶问题的转换和核函数，解决了在引入特征转换解决线性不可分问题时导致的复杂度高的问题。</li>
+</ol>
+<p>（附）软间隔：</p>
+<a id="more"></a> 
+<h3 id="由问题引出的两个核心点"><a href="#由问题引出的两个核心点" class="headerlink" title="由问题引出的两个核心点"></a>由问题引出的两个核心点</h3><h4 id="margin-的表示形式"><a href="#margin-的表示形式" class="headerlink" title="margin 的表示形式"></a>margin 的表示形式</h4><h5 id="点到超平面的距离"><a href="#点到超平面的距离" class="headerlink" title="点到超平面的距离"></a>点到超平面的距离</h5><p>两种表示形式：</p>
+<ol>
+<li>几何间隔：常用于在欧式空间中做距离度量，通过取超平面一点指向所研究点的向量，将该向量与超平面的单位法向量做内积便得几何间隔</li>
+</ol>
+<p>$$<br>margin = \frac{|w^Tx + b|}{||w||}<br>$$</p>
+<ol>
+<li>函数间隔：常用于做正负判断，也可用于做与超平面距离远近的比较，通过将点的坐标直接带入函数得到；<strong>函数间隔本质是几何间隔乘以法向量的长度，即$||w||$。</strong></li>
+</ol>
+<p>$$<br>margin = |w^Tx + b|<br>$$</p>
+<h5 id="最大化-margin-得到的-prime-SVM"><a href="#最大化-margin-得到的-prime-SVM" class="headerlink" title="最大化 margin 得到的 prime SVM"></a>最大化 margin 得到的 prime SVM</h5><p>首先假设数据 x 经特征转换后变为的 z 线性可分。</p>
+<p>出于数学表达形式简便上的考虑，设 label 为 +1 和 -1，那么最大化 margin，便是最大化最小 margin，则优化问题为：<br>$$<br>\max<em>{w,b} { \frac{\min(label<em>(w^Tz+b))}{||w||} }<br>$$<br>因为 margin 比较的是相对大小，出于便于优化（往二次规划靠拢）上的考虑，设 $\min(label</em>(w^Tz+b))=1$ ，故优化问题化为：<br>$$<br>\max</em>{w,b} \frac{1}{||w||}<br>\<br>s.t. \quad label*(w^Tz+b) \ge 1<br>$$<br>由此，通过对函数间隔最小值的设定，将 margin 的大小化简为了法向量长度的倒数，即 $\frac{1}{||w||}$ 。</p>
+<h5 id="软间隔"><a href="#软间隔" class="headerlink" title="软间隔"></a>软间隔</h5><p>当数据 x 经特征转换后变为的 z 线性不可分时，将越过margin的点做记录，并将越过的量计入损失函数中，至于是以函数间隔还是几何间隔的形式计入损失函数中，应衡量函数间隔计算上的便易性与几何间隔物理含义上的合理性。当采用几何间隔的形式计入损失函数中时，优化问题化为：<br>$$<br>\max \frac{1}{||w||} - C \sum \frac{\lambda_i}{||w||}<br>\<br>s.t. \quad {^{label_i <em> (w^T z_i + b) \ge 1 - \lambda<em>i}
+</em>{ \lambda_i \ge 0}<br>$$<br>其中 C 是一超参数，该数越大，在优化时会越偏向于将所有点置于分界面之外。考虑到函数间隔也能体现错误点与分界面的远近，同时超参数的存在使得几何间隔确切的物理含义的意义不大，又考虑到优化的便易性，将优化问题化为：<br>$$<br>\min \frac{1}{2}||w||_2^2 + C \sum \eta_i<br>\<br>s.t. \quad {^{label_i </em> (w^T z_i + b) \ge 1 - \eta<em>i}
+</em>{ \eta_i \ge 0}<br>$$</p>
+<h4 id="对偶问题的转换"><a href="#对偶问题的转换" class="headerlink" title="对偶问题的转换"></a>对偶问题的转换</h4><p>由不等式约束的拉格朗日乘子法，得到等价的 KKT 条件下的拉格朗日对偶函数：<br>$$<br>\min_{w, b, \eta} \frac{1}{2}||w||_2^2 +C \sum \eta_i + \sum \lambda_i^0 (1- \eta_i + label_i <em>(w^T z_i + b)) +  \sum \lambda_i^1(-\eta_i)<br>\<br>s.t.<br>\<br>\quad \lambda_i^0 \ge 0<br>\<br>\quad  1- \eta_i + label_i </em>(w^T z_i + b) \le 0<br>\<br>\quad  \lambda_i^0(1- \eta_i + label_i *(w^T z_i + b) ) = 0<br>\<br>\quad  \lambda_i^1 \ge 0<br>\<br>\quad   -\eta_i \le 0<br>\<br>\quad  \lambda_i^1( -\eta_i ) = 0<br>$$<br>记拉格朗日函数为$L$，将拉格朗日函数对各变量的导数分别置零得：<br>$$<br>\frac{\partial L}{\partial w} = 0 \Rightarrow w = \sum\lambda_i^0 label_i z_i<br>\<br>\frac{\partial L}{\partial b} = 0 \Rightarrow \sum \lambda_i^0 label_i = 0<br>\<br>\frac{\partial L}{\partial \eta_i} = 0 \Rightarrow C - \lambda_i^0 - \lambda_i^1 = 0<br>$$<br>将三个结果带入最优化问题中，得拉格朗日对偶函数：<br>$$<br>L =  -\frac{1}{2}||w||_2^2 + \sum \lambda_i^0<br>\<br>=  -\frac{1}{2} \sum_i^m \sum_j^m \lambda_i^0 \lambda_j^0 label_i label_j (z_i z_j^T) + \sum \lambda_i^0  , \quad 0 \le \lambda<em>i^0 \le C.<br>$$<br>进而得到最终的对偶问题：<br>$$<br>\min</em>{\lambda^0} \frac{1}{2} \sum_i^m \sum_j^m \lambda_i^0 \lambda_j^0 label_i label_j (z_i z_j^T) - \sum \lambda_i^0<br>\<br>s.t.<br>\<br>\quad 0 \le \lambda_i^0 \le C<br>\<br>\quad  \sum \lambda_i^0 label_i = 0<br>$$</p>
+<h5 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h5><p>当采用特征转换（如高次多项式）将数据从低维空间映射到高维空间时，会带来模型复杂度的指数级增长，而核函数会解决这个问题，即即使映射到高维空间，模型复杂度依然保持低维空间时的大小。一种观点是核函数是度量两个向量在某个高维空间中的距离的度量尺，不同高维空间对应不同的核函数。具体原理以二次多项式为例：</p>
+<p>待续。。</p>
+<p>进而，原对偶问题化为：<br>$$<br>\min_{\lambda^0} \frac{1}{2} \sum_i^m \sum_j^m \lambda_i^0 \lambda_j^0 label_i label_j K(x_i x_j^T) - \sum \lambda_i^0<br>\<br>s.t.<br>\<br>\quad 0 \le \lambda_i^0 \le C<br>\<br>\quad  \sum \lambda_i^0 label_i = 0<br>$$<br>故计算复杂度由原先的$O(m^d)$降为了$O(m)$，d 指特征变化到的高维空间的维度。</p>
+<h3 id="二次规划"><a href="#二次规划" class="headerlink" title="二次规划"></a>二次规划</h3><h4 id="SMO"><a href="#SMO" class="headerlink" title="SMO"></a>SMO</h4><h2 id="SVR"><a href="#SVR" class="headerlink" title="SVR"></a>SVR</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/21/如何阅读文献/" rel="next" title="如何阅读文献">
+                <i class="fa fa-chevron-left"></i> 如何阅读文献
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/27/机器学习——特征工程/" rel="prev" title="机器学习——特征工程">
+                机器学习——特征工程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/photo.png"
+                alt="redmud" />
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/101415219341008595729" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cherrysunshine.site/" title="同窗_刘" target="_blank">同窗_刘</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SVM"><span class="nav-number">1.</span> <span class="nav-text">SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决的问题"><span class="nav-number">1.1.</span> <span class="nav-text">解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由问题引出的两个核心点"><span class="nav-number">1.2.</span> <span class="nav-text">由问题引出的两个核心点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#margin-的表示形式"><span class="nav-number">1.2.1.</span> <span class="nav-text">margin 的表示形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#点到超平面的距离"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">点到超平面的距离</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最大化-margin-得到的-prime-SVM"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">最大化 margin 得到的 prime SVM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#软间隔"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">软间隔</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对偶问题的转换"><span class="nav-number">1.2.2.</span> <span class="nav-text">对偶问题的转换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#核函数"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">核函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二次规划"><span class="nav-number">1.3.</span> <span class="nav-text">二次规划</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SMO"><span class="nav-number">1.3.1.</span> <span class="nav-text">SMO</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVR"><span class="nav-number">2.</span> <span class="nav-text">SVR</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/05/23/机器学习——支撑向量机/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/98984/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -125,17 +125,17 @@
 
 
 
-<meta name="description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠）【主】； 对n个列">
+<meta name="description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘（y 存储放大倍数）的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性代数review">
 <meta property="og:url" content="http://yoursite.com/2018/02/28/线性代数基础/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
-<meta property="og:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠）【主】； 对n个列">
+<meta property="og:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘（y 存储放大倍数）的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-16T13:43:12.504Z">
+<meta property="og:updated_time" content="2018-06-03T12:59:05.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性代数review">
-<meta name="twitter:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠）【主】； 对n个列">
+<meta name="twitter:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘（y 存储放大倍数）的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠">
 
 
 
@@ -383,7 +383,7 @@
 <li>列向量的inner product $ x^Ty $ ：n个元素之积的和</li>
 <li>列向量的outer product $xy^T$：<ul>
 <li>对两个列向量各元素之积的陈列【<strong>主</strong>】；</li>
-<li>对列向量$x$分别进行n次倍乘的并行运算，并堆叠成一个矩阵。</li>
+<li>对列向量$x$分别进行n次倍乘（y 存储放大倍数）的并行运算，并堆叠成一个矩阵。</li>
 </ul>
 </li>
 <li>矩阵向量之积$Ax$：<ul>
@@ -394,7 +394,7 @@
 </ol>
 <ol>
 <li>矩阵矩阵之积$AB$：<ul>
-<li>n组列向量的outer product的和，即n个矩阵（每个矩阵为一组列向量的outer producter）的和（$A$ by columns, $B$ by rows）【<strong>主</strong>】；<ul>
+<li>n组列向量的outer product的和，即n个矩阵（每个矩阵为同一索引下的向量的outer producter，即 A 取第几列，B 便取第几行）的和（$A$ by columns, $B$ by rows）【<strong>主</strong>】；<ul>
 <li>应用：反向传播、方差</li>
 </ul>
 </li>
@@ -403,6 +403,7 @@
 </ul>
 </li>
 </ol>
+<a id="more"></a> 
 <h1 id="矩阵的一些性质"><a href="#矩阵的一些性质" class="headerlink" title="矩阵的一些性质"></a>矩阵的一些性质</h1><h2 id="迹"><a href="#迹" class="headerlink" title="迹"></a>迹</h2><ul>
 <li>满足交换性和轮换性：$\mathrm{tr}AB=\mathrm{tr}BA$，$\mathrm{tr}ABC=\mathrm{tr}CAB=\mathrm{tr}BCA$</li>
 </ul>
@@ -451,7 +452,44 @@
 <p>对此常用结果可记住：要使一单位向量在某一度量阵下的内积最小，须使该单位向量等于该度量阵最小特征值对应的特征向量，此时内积便为该度量阵的最小特征值。</p>
 </li>
 </ul>
-<h1 id="线性变换"><a href="#线性变换" class="headerlink" title="线性变换"></a>线性变换</h1><h2 id="度量阵"><a href="#度量阵" class="headerlink" title="度量阵"></a>度量阵</h2><h2 id="投影阵"><a href="#投影阵" class="headerlink" title="投影阵"></a>投影阵</h2><blockquote>
+<h1 id="线性变换"><a href="#线性变换" class="headerlink" title="线性变换"></a>线性变换</h1><blockquote>
+<p>在线性空间（对加法和数乘封闭的集合）中，借助于基的概念，线性空间中的元素（矩阵、多项式、函数等）的运算能够转化为向量的运算，线性变换（满足$T(kx_1 + lx_2) = kT(x_1) + lT(x_2)$的$T()$称为线性变换）的运算能够化为方阵的运算，从而一般线性空间中的问题都能够转化为列向量空间中的问题。故可认为线性代数主要研究列向量空间。</p>
+</blockquote>
+<ol>
+<li><p>基 A 下的向量 Ax，称 x 为坐标向量，Ax 为向量。在计算时默认用坐标向量，以做线性变换 P 为例进行说明：</p>
+<ul>
+<li>换基之前：坐标向量 x；线性变换后的坐标向量为 Px；</li>
+<li>换基之后：坐标向量 $y=C_{A \rightarrow B}^{-1}x$；线性变换后的坐标向量为 $C^{-1}PCy$；</li>
+</ul>
+<p>其中，$C=A^{-1}B$称为过渡矩阵，亦可看做新基在旧基下的坐标；</p>
+<p>通法：</p>
+<ul>
+<li><strong>换基</strong>操作为对向量左乘新基的逆，或者对坐标向量左乘过渡矩阵的逆，从而得到该向量在新基下的坐标，由此换基操作可看做由坐标向量获得完整向量表示（即坐标向量左乘当前基）的逆操作；</li>
+<li><strong>线性变换</strong>操作为对坐标向量左乘表示线性变换的矩阵，因同一线性变换在不同基下的矩阵表示不同，故只能作用于坐标向量上，或说作用于坐标向量上便是作用于完整的向量上：$T(Ax) = APx = A(Px)$；</li>
+</ul>
+<p>通过对在换基$A \rightarrow B$前后的同一向量$Ax$做相同的线性变换$P$可以看出：</p>
+<ul>
+<li>两矩阵 $P, Q$ <strong>相似</strong>是指这两个矩阵是在不同基 $A, B$ 下表示的同一线性变换$T()$，即 $T(AC)=APC=B(B^{-1}A)PC=B(C^{-1}(PC))=BQ=BQE=T(BE)$ ，由此看出一旧基下的矩阵在新基下的相似矩阵为，旧基下带线性变换属性的新基映射到新基下的坐标，若未带线性变换属性，则映射出的坐标为 $E$ 。由此可持这种观点：线性变换是向量的属性，当向量处在不同的基下时表现为不同的矩阵形式。</li>
+<li>对表示线性变换的矩阵$P$ 左乘过渡阵的逆右乘过渡阵便可得到该矩阵在新基下的相似矩阵。</li>
+<li>若要求相似阵为对角阵，那么：<ul>
+<li>当原矩阵为实对称阵时，存在为正交阵的过渡阵；又若原矩阵的基为 $E$ ，那么该过渡阵为原矩阵的一个<strong>完备的标准正交特征向量系</strong>。</li>
+<li>当原矩阵非对称时，只能通过正交对角分解得到 $U^TPV = diag(\sigma_1, …)$ ，其中 V 是 $P^TP$ 的一个<strong>完备的标准正交特征向量系</strong>（前提为$P$ 非奇异），$U=PV diag(\sigma_1, …)^T$ ；而若当 P 为奇异阵时，可进一步拓展为通过奇异值分解得到 $U^TPV = diag(\sigma_1, …)$ ，各变量含义相同。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><h2 id="度量阵"><a href="#度量阵" class="headerlink" title="度量阵"></a>度量阵</h2></li>
+</ol>
+<blockquote>
+<p>线性空间中已有加减，而数乘算不上线性空间内的积，故引入内积的概念，其作用是度量夹角、长度，直觉上可以将 (x, y) 看做 x 在 y 上的投影与 y 长度的乘积。</p>
+<p>任何内积空间均应满足不等式$|(x,y) \le |x||y|$ 。</p>
+</blockquote>
+<p>因为向量的长度自然是不应变的，故内积的定义不应依赖于基，由此在定义内积时应用向量而非坐标向量。</p>
+<p>比如在线性空间中定义 $(x,y)=x^TGy=\sum_i \sum<em>j g</em>{i,j} x_i y_j$ ，其中 G 可以看作是在不同维度上的度量尺，至于具体工作细节可从该式看出：取基 Y，满足$(Y^{-1})^T(Y^{-1})=G$ ，则 $(x, y)= x^T (Y^{-1})^T(Y^{-1})y = (Y^{-1}x)^T(Y^{-1}y)$ ，从而实现度量尺的功能。因为计算时采用坐标向量的习惯，使得度量尺在不同基下的矩阵表示不同，称之为度量阵。</p>
+<p>同一度量尺在不同基下的表示称为合同。</p>
+<h2 id="投影阵"><a href="#投影阵" class="headerlink" title="投影阵"></a>投影阵</h2><blockquote>
 <p>若  $L \oplus M=R^n$ ，则将 $x \epsilon R^n$ 沿着 M 到 L 的投影变换在$R^n$ 的基下的矩阵称为投影矩阵，记为$P<em>{L,M}$ ，且$P</em>{L,M} = (X,0)(X,Y)^{-1}$ 。</p>
 </blockquote>
 <ul>
@@ -614,7 +652,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -625,7 +663,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

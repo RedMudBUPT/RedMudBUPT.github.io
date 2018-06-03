@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="RedMudBUPT" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="PERSPECT：好的特征能降低建模的难度。  简单数字的花式技巧 特征空间与数据空间:特征（如，每个人喜欢的一个歌单）是在特征空间中的一个向量，一个人可由特征空间中的向量表示出来；而针对某首特定的歌，每一个人对其喜爱程度构成一个维度，所有的维度构成数据空间，一首歌可由数据空间中的向量表示出来。若将一个人的所有特征并成一条向量作为矩阵的行向量，那么该矩阵（称为数据矩阵）的列向量空间便是特征空间，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习——特征工程">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/机器学习——特征工程/index.html">
+<meta property="og:site_name" content="RedMudBUPT">
+<meta property="og:description" content="PERSPECT：好的特征能降低建模的难度。  简单数字的花式技巧 特征空间与数据空间:特征（如，每个人喜欢的一个歌单）是在特征空间中的一个向量，一个人可由特征空间中的向量表示出来；而针对某首特定的歌，每一个人对其喜爱程度构成一个维度，所有的维度构成数据空间，一首歌可由数据空间中的向量表示出来。若将一个人的所有特征并成一条向量作为矩阵的行向量，那么该矩阵（称为数据矩阵）的列向量空间便是特征空间，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-03T12:58:31.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习——特征工程">
+<meta name="twitter:description" content="PERSPECT：好的特征能降低建模的难度。  简单数字的花式技巧 特征空间与数据空间:特征（如，每个人喜欢的一个歌单）是在特征空间中的一个向量，一个人可由特征空间中的向量表示出来；而针对某首特定的歌，每一个人对其喜爱程度构成一个维度，所有的维度构成数据空间，一首歌可由数据空间中的向量表示出来。若将一个人的所有特征并成一条向量作为矩阵的行向量，那么该矩阵（称为数据矩阵）的列向量空间便是特征空间，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/27/机器学习——特征工程/"/>
+
+
+
+
+
+  <title>机器学习——特征工程 | RedMudBUPT</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RedMudBUPT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">RedMud's blog called RedMudBUPT</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/机器学习——特征工程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="redmud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RedMudBUPT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习——特征工程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T15:51:29+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/27/机器学习——特征工程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/05/27/机器学习——特征工程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>PERSPECT：好的特征能降低建模的难度。</p>
+</blockquote>
+<h2 id="简单数字的花式技巧"><a href="#简单数字的花式技巧" class="headerlink" title="简单数字的花式技巧"></a>简单数字的花式技巧</h2><blockquote>
+<p>特征空间与数据空间:<br>特征（如，每个人喜欢的一个歌单）是在特征空间中的一个向量，一个人可由特征空间中的向量表示出来；而针对某首特定的歌，每一个人对其喜爱程度构成一个维度，所有的维度构成数据空间，一首歌可由数据空间中的向量表示出来。若将一个人的所有特征并成一条向量作为矩阵的行向量，那么该矩阵（称为数据矩阵）的列向量空间便是特征空间，行向量空间是数据空间。</p>
+</blockquote>
+<ol>
+<li>scale<ul>
+<li>基于输入数据的光滑函数的模型（如K-means聚类，线性函数，最近邻，REB核等）对输入数据的尺度很敏感，故通常将输入数据进行归一化，以使得输出数据在统一的尺度上。</li>
+<li>基于空间分割树的模型（如决策树、梯度提升机、随机森林等）</li>
+</ul>
+</li>
+<li>distribution<ul>
+<li>有些模型对输入数据的分布有一定要求，如线性回归模型要求预测误差服从高斯分布，通常这一要求是无需考虑的，但当输出值跨越好几个量级时，这一要求便无法满足，须将输出值取对数（log 转换，一种量级转换），这可使得预测误差更接近高斯分布（准确说，这属于 target engineering）。比如，在 Faster-R-CNN 中的目标框回归中对尺度因子的预测，将输出值取底数为 $e$ 幂。</li>
+</ul>
+</li>
+</ol>
+<a id="more"></a> 
+<h3 id="当某维的特征没有边界时（scale）"><a href="#当某维的特征没有边界时（scale）" class="headerlink" title="当某维的特征没有边界时（scale）"></a>当某维的特征没有边界时（scale）</h3><p>feature scaling 无法改变特征的分布，只能够改变特征的范围（range）。</p>
+<h4 id="min-max-scaling"><a href="#min-max-scaling" class="headerlink" title="min-max scaling"></a>min-max scaling</h4><p>$$<br>x^* = \frac{x - min(x)}{max(x) - min(x)}<br>$$</p>
+<p>scaled feature 的范围为 (0, 1)。</p>
+<h4 id="variance-scaling（standardization）"><a href="#variance-scaling（standardization）" class="headerlink" title="variance scaling（standardization）"></a>variance scaling（standardization）</h4><p>$$<br>x^* = \frac{x- mean(x)}{var(x)}<br>$$</p>
+<p>scaled feature 的均值为0，方差为1，而其范围视情况而定，不是固定数值。</p>
+<h4 id="L-2-normalization"><a href="#L-2-normalization" class="headerlink" title="L-2 normalization"></a>L-2 normalization</h4><p>$$<br>x* = \frac{x}{||x||_2}<br>$$</p>
+<h3 id="当某维特征的量级跨越过多时（distribution）"><a href="#当某维特征的量级跨越过多时（distribution）" class="headerlink" title="当某维特征的量级跨越过多时（distribution）"></a>当某维特征的量级跨越过多时（distribution）</h3><p>当某维特征的量级跨越过多时，很多模型可能会出问题。如在线性模型中，因为线性系数被期望可以接受所有可能的输入值，故当某维特征的量级跨越过多时，该维特征会在不知情的情况下被偏向成为重要性远高于其他特征的主要特征，换句话说其他特征会被自动忽略掉。</p>
+<p>最简单暴力的解决方法为 quantization / binning，如将少年年龄映射为1，青年年龄映射为2，中年年龄映射为3，老年年龄映射为4；或者将个位数映射为1，十位数映射为2，百位数映射为3，千位数映射为4，等等。</p>
+<h4 id="log-transform"><a href="#log-transform" class="headerlink" title="log transform"></a>log transform</h4><p>有个常用的连续的映射，log 转换 $data<em>{transformed} = \log (data</em>{raw} + 1)$ ：它的作用是压缩大数（大于1）的尺度，放大小数（小于1）的尺度（一般不用），常用于处理重尾分布（A heavy-tailed distribution places more probability mass in the tail ranges than a Gaussian distribution.）的正数特征，在将重尾分布的正数特征做 log 转换后，特征的分布会更趋向于高斯分布。</p>
+<p><a href="http://www.360doc.com/content/12/1201/15/10595682_251380435.shtml" target="_blank" rel="noopener">R square</a>是决定系数，意思是你拟合的模型能解释因变量的变化的百分数，例如 R square = 0.81，表示你拟合的方程能解释因变量81%的变化，还有19%是不能够解释的。<br>$$<br>R_square_score = \frac{\sum(wx - \bar y )^2}{\sum(y - \bar y )^2}<br>$$</p>
+<h4 id="Box-Cox-变换-（generalization-of-log-transform）"><a href="#Box-Cox-变换-（generalization-of-log-transform）" class="headerlink" title="Box-Cox 变换 （generalization of log transform）"></a><a href="https://blog.csdn.net/sinat_26917383/article/details/77864582" target="_blank" rel="noopener">Box-Cox 变换</a> （generalization of log transform）</h4><blockquote>
+<p>在单因子方差分析的统计模型中，需满足三个假设：</p>
+<ol>
+<li>正态性，每一维度下观察值的总体是正态总体；</li>
+<li>独立性，从每一总体中抽取的样本是相互独立的；</li>
+<li>方差齐性，各总体的方差等于常数。</li>
+</ol>
+<p>试验过程中保证随机性便可满足独立性的假设，而对于特征的选择却很难保证正态性和方差齐性。虽然正态性与方差齐性会相辅相成，互为影响，但因为方差齐性比正态性更为重要，故方差齐性变换（又称为方差稳定性变换）尤为重要，详见：</p>
+<p><a href="https://wenku.baidu.com/view/81db5e56852458fb770b562d.html" target="_blank" rel="noopener">方差稳定化变换综述</a></p>
+</blockquote>
+<p>$$<br>x^* = {^{\frac{x^\lambda - 1}{\lambda}, \lambda \ne 0}<br>_{\log x, \lambda = 0}<br>$$</p>
+<p>参数小于1时，压缩大数的尺度，参数大于1时放大大数的尺度。该参数可由极大似然或者贝叶斯法得到最佳值，当然可直接<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.boxcox.html#scipy.stats.boxcox" target="_blank" rel="noopener">调包</a>求得。</p>
+<h3 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a><a href="https://www.cnblogs.com/AHappyCat/p/5318042.html" target="_blank" rel="noopener">特征选择</a></h3><blockquote>
+<p>特征选择和降维都是为了减少数据集的属性数量，但是降维是通过创建新的属性组合，特征选择挑选数据中的属性而并不改变它们。</p>
+<p>特征选择的目的：提高预测器的预测性能，提供更快和更低成本的预测器，和提供更好的了解产生的数据的基本过程。</p>
+</blockquote>
+<p>分为以下三步：</p>
+<h4 id="filtering"><a href="#filtering" class="headerlink" title="filtering"></a>filtering</h4><p>计算每个特征与响应变量之间的相关信息和互信息，过滤掉低于阈值的特征。缺点是它不考虑模型是否采用该特征。</p>
+<h4 id="wrapper"><a href="#wrapper" class="headerlink" title="wrapper"></a>wrapper</h4><p>当模型需要特征融合时很有用。缺点是它计算很昂贵。</p>
+<h4 id="embedded-methods"><a href="#embedded-methods" class="headerlink" title="embedded methods"></a>embedded methods</h4><p>将模型选择作为模型训练的一部分，如决策树，再如L-1正则化。它平衡了以上两点。</p>
+<h2 id="用PCA压缩数据集"><a href="#用PCA压缩数据集" class="headerlink" title="用PCA压缩数据集"></a>用PCA压缩数据集</h2><blockquote>
+<p>主成分分析命名：投影数据被称为原始数据的主成分。</p>
+<p>其优化方向为两个：最近重构性（样本点到这个超平面的距离都足够近）和最大可分性（样本点在这个超平面上的投影能尽可能分开，常用）</p>
+<p>PCA 通过查找线性相关模式来减少特征空间的维度。</p>
+</blockquote>
+<p>PCA 侧重于线性依赖的概念，关键思想是<strong>用一些充分总结原始特征空间中包含信息的新特征取代冗余特征</strong>。</p>
+<p>为保证新特征的最大可分性，可以寻找一个超平面使得投影后的任意两点之间的距离最大化。但事实证明，这是一个非常困难的数学优化问题。另一种方法是测量任意两点之间的平均距离，或者等价地，<strong>每个点与它们的平均值之间的平均距离</strong>，即方差。事实证明，这优化起来要容易得多。由此 PCA 的最优化问题为：<br>$$<br>\max_W tr(\sum_i (x_iW)^T(x_iW))<br>\<br>s.t.  \quad W^TW = I<br>$$<br>即：<br>$$<br>\max_W tr(W^T X^TXW)<br>\<br>s.t.  \quad W^TW = I<br>$$<br>其中，X 为数据矩阵，每一行为一条数据，记为$x_i$，W 为基，每一列为一个基向量，投影后的数据点为$XW$ 。</p>
+<p>该问题的数学本质为：输入为单位向量，寻找该单位向量能够使得输出的范数最大化的方向。故$W$ 为$X^T X$ 的主要特征值（按从大到小排序，较大的那些特征值）对应的单位特征向量，或者说 <strong>X 的主要右奇异向量</strong>（奇异值按从大到小排序），两者一样。数学原理见<a href="http://redmud.xyz/2018/02/28/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/" target="_blank" rel="noopener">对称阵的特征向量与特征值</a>与<a href="https://www.sciencedirect.com/science/article/pii/0024379587901145" target="_blank" rel="noopener">A generalization of the Eckart-Young-Mirsky matrix approximation theorem</a>。</p>
+<p>由此通过对中心化的数据矩阵作奇异值分解，便可得到 PCA 的解：<br>$$<br>X^* = XW = (U \Sigma V^T) V_k = U_k \Sigma_k.<br>$$</p>
+<h3 id="降维、投影与换基"><a href="#降维、投影与换基" class="headerlink" title="降维、投影与换基"></a>降维、投影与换基</h3><p>降维即投影变换，通过换基后将非投影面的维度置零实现，属于可逆操作，即可升维。</p>
+<h3 id="k-值的选择"><a href="#k-值的选择" class="headerlink" title="k 值的选择"></a>k 值的选择</h3><p>对于在新的特征空间中的第 k 维特征的方差为<br>$$<br>||Xw_k||^2_2 = ||u_k \sigma_k||^2_2 = \sigma_k^2,<br>$$<br>故常称中心化的数据矩阵的奇异值列表为其频谱。</p>
+<p>而 k 值的选择常依据在新的特征空间中主成分特征的方差和占总特征的方差和的比例：<br>$$<br>\frac{\sum_i^k \sigma_i^2}{\sum_i^d \sigma_i^2} \ge proportion(usually \quad 0.8)<br>$$</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>在应用 PCA 之前最好先将特征做好 scale 和 distribution 的处理；</li>
+<li>涉及 SVD，计算成本大；</li>
+</ol>
+<h2 id="非线性特征提取和模型堆叠"><a href="#非线性特征提取和模型堆叠" class="headerlink" title="非线性特征提取和模型堆叠"></a>非线性特征提取和模型堆叠</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/23/机器学习——支撑向量机/" rel="next" title="机器学习——支撑向量机">
+                <i class="fa fa-chevron-left"></i> 机器学习——支撑向量机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/30/机器学习——图像语义分割/" rel="prev" title="机器学习——图像语义分割">
+                机器学习——图像语义分割 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/photo.png"
+                alt="redmud" />
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/101415219341008595729" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cherrysunshine.site/" title="同窗_刘" target="_blank">同窗_刘</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单数字的花式技巧"><span class="nav-number">1.</span> <span class="nav-text">简单数字的花式技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#当某维的特征没有边界时（scale）"><span class="nav-number">1.1.</span> <span class="nav-text">当某维的特征没有边界时（scale）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#min-max-scaling"><span class="nav-number">1.1.1.</span> <span class="nav-text">min-max scaling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#variance-scaling（standardization）"><span class="nav-number">1.1.2.</span> <span class="nav-text">variance scaling（standardization）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L-2-normalization"><span class="nav-number">1.1.3.</span> <span class="nav-text">L-2 normalization</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当某维特征的量级跨越过多时（distribution）"><span class="nav-number">1.2.</span> <span class="nav-text">当某维特征的量级跨越过多时（distribution）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#log-transform"><span class="nav-number">1.2.1.</span> <span class="nav-text">log transform</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Box-Cox-变换-（generalization-of-log-transform）"><span class="nav-number">1.2.2.</span> <span class="nav-text">Box-Cox 变换 （generalization of log transform）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征选择"><span class="nav-number">1.3.</span> <span class="nav-text">特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#filtering"><span class="nav-number">1.3.1.</span> <span class="nav-text">filtering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wrapper"><span class="nav-number">1.3.2.</span> <span class="nav-text">wrapper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#embedded-methods"><span class="nav-number">1.3.3.</span> <span class="nav-text">embedded methods</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用PCA压缩数据集"><span class="nav-number">2.</span> <span class="nav-text">用PCA压缩数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#降维、投影与换基"><span class="nav-number">2.1.</span> <span class="nav-text">降维、投影与换基</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-值的选择"><span class="nav-number">2.2.</span> <span class="nav-text">k 值的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">2.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非线性特征提取和模型堆叠"><span class="nav-number">3.</span> <span class="nav-text">非线性特征提取和模型堆叠</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/05/27/机器学习——特征工程/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/98984/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

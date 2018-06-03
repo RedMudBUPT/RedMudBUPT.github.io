@@ -125,17 +125,17 @@
 
 
 
-<meta name="description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1： -[x] 创建文件 -[x] 对该文件建立一个硬链接 -[ ] 对该文件建立一个软链接 -[x] 每有一个进程访问该文件 一个文件包括三项，目录项（dentry结构）、索引节点（">
+<meta name="description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1：  [x] 创建文件 [ ] 对该文件建立一个硬链接 [x] 对该文件建立一个软链接 [x] 每有一个进程访问该文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux环境编程基础">
 <meta property="og:url" content="http://yoursite.com/2018/03/01/linux环境编程基础/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
-<meta property="og:description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1： -[x] 创建文件 -[x] 对该文件建立一个硬链接 -[ ] 对该文件建立一个软链接 -[x] 每有一个进程访问该文件 一个文件包括三项，目录项（dentry结构）、索引节点（">
+<meta property="og:description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1：  [x] 创建文件 [ ] 对该文件建立一个硬链接 [x] 对该文件建立一个软链接 [x] 每有一个进程访问该文件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T09:53:39.943Z">
+<meta property="og:updated_time" content="2018-06-03T12:55:01.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux环境编程基础">
-<meta name="twitter:description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1： -[x] 创建文件 -[x] 对该文件建立一个硬链接 -[ ] 对该文件建立一个软链接 -[x] 每有一个进程访问该文件 一个文件包括三项，目录项（dentry结构）、索引节点（">
+<meta name="twitter:description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1：  [x] 创建文件 [ ] 对该文件建立一个硬链接 [x] 对该文件建立一个软链接 [x] 每有一个进程访问该文件">
 
 
 
@@ -383,10 +383,13 @@
 <h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。</p>
 <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。</p>
 <p>对于以下选中的情况，引用计数器会自加1：</p>
-<p>-[x] 创建文件</p>
-<p>-[x] 对该文件建立一个硬链接</p>
-<p>-[ ] 对该文件建立一个软链接</p>
-<p>-[x] 每有一个进程访问该文件</p>
+<ul>
+<li>[x] 创建文件</li>
+<li>[ ] 对该文件建立一个硬链接</li>
+<li>[x] 对该文件建立一个软链接</li>
+<li>[x] 每有一个进程访问该文件</li>
+</ul>
+<a id="more"></a> 
 <p>一个文件包括三项，目录项（<em>dentry</em>结构）、索引节点（<em>inode</em>结构）和文件数据。</p>
 <ol>
 <li>目录项包括文件名和指向索引节点的指针等信息（当用<em>unlink</em>函数删除该项时，便在该目录中看不见该文件）；</li>
@@ -554,7 +557,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -565,7 +568,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
