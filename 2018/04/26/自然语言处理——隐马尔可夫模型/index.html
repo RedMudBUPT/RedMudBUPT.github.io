@@ -132,7 +132,7 @@
 <meta property="og:site_name" content="RedMudBUPT">
 <meta property="og:description" content="前言词性（Part-of-Speech）POS 是依据语法功能划分，是词语在区别词类时用到的属性。 词性标注的方法 rule-based 语言专家根据词法及语言学知识编制的规则。  learning-based 从专家标注的语料库中学习到用于自动标注的模型  统计模型：隐马尔可夫模型（HMM），条件随机域模型（CRF），神经网络模型（NN） 规则学习：基于转换的学习（TBL）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-03T12:59:39.840Z">
+<meta property="og:updated_time" content="2018-06-06T03:44:02.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理——隐马尔可夫模型">
 <meta name="twitter:description" content="前言词性（Part-of-Speech）POS 是依据语法功能划分，是词语在区别词类时用到的属性。 词性标注的方法 rule-based 语言专家根据词法及语言学知识编制的规则。  learning-based 从专家标注的语料库中学习到用于自动标注的模型  统计模型：隐马尔可夫模型（HMM），条件随机域模型（CRF），神经网络模型（NN） 规则学习：基于转换的学习（TBL）">
@@ -427,11 +427,11 @@
 <p>由于语料库不可能包含所有可能出现的句子，故应得到一个更加宽泛的的表达式。利用贝叶斯法则得等价模型<br>$$<br>\max_Q P(O|Q)P(Q)<br>$$</p>
 <h2 id="隐马尔可夫模型（HMM）"><a href="#隐马尔可夫模型（HMM）" class="headerlink" title="隐马尔可夫模型（HMM）"></a>隐马尔可夫模型（HMM）</h2><h3 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h3><ol>
 <li>一阶马尔可夫假设，即语义相关性只涉及到前面 1 个词（也可设为 2 阶或 3 阶）：$P(Q) = P(q_1)P(q_2|q_1)…P(q<em>N|q</em>{N-1})$；</li>
-<li>输出独立性假设，即单词$o_i$对应的$q_i$不受其他单词影响，即$P(o_i|q_i)$相互独立：$P(O|Q)=\prod P(o_i|q_i)$。</li>
+<li>观测独立性假设，当前时刻的观测值仅与当前时刻的不可观测量的值（状态值）有关，与其他时刻的观测值无关；即单词$o_i$对应的$q_i$不受其他单词影响，即$P(o_i|q_i)$相互独立：$P(O|Q)=\prod P(o_i|q_i)$，故在该模型中，观测独立性假设也可称为条件独立性假设。注意状态之间独立性并不成立，</li>
 </ol>
 <h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>$$<br>\max_Q \prod P(o_i|q_i) * \prod P(q<em>j|q</em>{j-1}),<br>$$</p>
-<p>其中$P(o_i|q_i)$被称为发射概率，是通过统计每个单词在语料库中的出现情况得到的。对于因某个单词没有在语料库中出现导致发射概率为 0 进而导致整个句子出现概率为 0 的情况，须做一些特殊处理。</p>
-<h3 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h3><h4 id="暴力遍历"><a href="#暴力遍历" class="headerlink" title="暴力遍历"></a>暴力遍历</h4><p>对一个句子的词性标注的时间复杂度为指数级别。</p>
+<p>其中$P(o_i|q_i)$被称为发射概率，是通过统计每个单词在语料库中的出现情况得到的。对于因某个单词没有在语料库中出现导致发射概率为 0 进而导致整个句子出现概率为 0 的情况，须做一些平滑处理。</p>
+<h3 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h3><h4 id="由模型定义求解（暴力遍历）"><a href="#由模型定义求解（暴力遍历）" class="headerlink" title="由模型定义求解（暴力遍历）"></a>由模型定义求解（暴力遍历）</h4><p>对于给定的观测序列，求所有可能状态序列的概率，并将最大概率的状态序列最为所求结果。设观测序列长度为 T ，可选状态数为 M，可选观测数为 N，首先在最一开始时由初始状态概率向量 $\pi$求出后续 T-1 个状态概率向量$i_t = \pi A^{t-1}$ ，那么一个可能状态序列的概率为，对一个句子的词性标注的时间复杂度为。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>使用离散时间点、离散状态，并做了马尔可夫假设，由此系统产生了马尔可夫过程的模式，它包含一个$\pi$向量和一个状态转移矩阵。</p>
 <p>隐马尔科夫模型是在一个标准的马尔科夫过程中引入一组观察状态，以及该组观察状态与隐藏状态间的概率关系。</p>
 
@@ -468,7 +468,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/11/机器学习——faster-RCNN/" rel="prev" title="机器学习——faster_RCNN">
+              <a href="/2018/05/11/机器学习——目标检测/" rel="prev" title="机器学习——faster_RCNN">
                 机器学习——faster_RCNN <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -669,7 +669,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#词性（Part-of-Speech）"><span class="nav-number">1.1.</span> <span class="nav-text">词性（Part-of-Speech）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#词性标注的方法"><span class="nav-number">1.2.</span> <span class="nav-text">词性标注的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号规定"><span class="nav-number">1.3.</span> <span class="nav-text">符号规定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于统计语言模型的词性标注基本模型"><span class="nav-number">1.4.</span> <span class="nav-text">基于统计语言模型的词性标注基本模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐马尔可夫模型（HMM）"><span class="nav-number">2.</span> <span class="nav-text">隐马尔可夫模型（HMM）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#假设"><span class="nav-number">2.1.</span> <span class="nav-text">假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">2.2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求解"><span class="nav-number">2.3.</span> <span class="nav-text">求解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#暴力遍历"><span class="nav-number">2.3.1.</span> <span class="nav-text">暴力遍历</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#词性（Part-of-Speech）"><span class="nav-number">1.1.</span> <span class="nav-text">词性（Part-of-Speech）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#词性标注的方法"><span class="nav-number">1.2.</span> <span class="nav-text">词性标注的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号规定"><span class="nav-number">1.3.</span> <span class="nav-text">符号规定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于统计语言模型的词性标注基本模型"><span class="nav-number">1.4.</span> <span class="nav-text">基于统计语言模型的词性标注基本模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐马尔可夫模型（HMM）"><span class="nav-number">2.</span> <span class="nav-text">隐马尔可夫模型（HMM）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#假设"><span class="nav-number">2.1.</span> <span class="nav-text">假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">2.2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求解"><span class="nav-number">2.3.</span> <span class="nav-text">求解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#由模型定义求解（暴力遍历）"><span class="nav-number">2.3.1.</span> <span class="nav-text">由模型定义求解（暴力遍历）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>

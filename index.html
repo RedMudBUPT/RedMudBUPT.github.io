@@ -549,11 +549,10 @@
 <ol>
 <li>scale<ul>
 <li>基于输入数据的光滑函数的模型（如K-means聚类，线性函数，最近邻，REB核等）对输入数据的尺度很敏感，故通常将输入数据进行归一化，以使得输出数据在统一的尺度上。</li>
-<li>基于空间分割树的模型（如决策树、梯度提升机、随机森林等）</li>
 </ul>
 </li>
 <li>distribution<ul>
-<li>有些模型对输入数据的分布有一定要求，如线性回归模型要求预测误差服从高斯分布，通常这一要求是无需考虑的，但当输出值跨越好几个量级时，这一要求便无法满足，须将输出值取对数（log 转换，一种量级转换），这可使得预测误差更接近高斯分布（准确说，这属于 target engineering）。比如，在 Faster-R-CNN 中的目标框回归中对尺度因子的预测，将输出值取底数为 $e$ 幂。</li>
+<li>有些模型对输入数据的分布有一定要求，如线性回归模型要求预测误差服从高斯分布，通常这一要求是无需考虑的，但当输出值跨越好几个量级时，这一要求便无法满足，须将输出值取对数（log 转换，一种量级转换），这可使得预测误差更接近高斯分布（准确说，这属于 target engineering）。比如，在 Faster-R-CNN 中的目标框回归中对尺度因子的预测，将尺度因子取对数作为回归量。</li>
 </ul>
 </li>
 </ol>
@@ -1081,7 +1080,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/机器学习——faster-RCNN/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/机器学习——目标检测/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="redmud">
@@ -1100,7 +1099,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/11/机器学习——faster-RCNN/" itemprop="url">机器学习——faster_RCNN</a></h2>
+                <a class="post-title-link" href="/2018/05/11/机器学习——目标检测/" itemprop="url">机器学习——faster_RCNN</a></h2>
         
 
         <div class="post-meta">
@@ -1154,8 +1153,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/11/机器学习——faster-RCNN/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/05/11/机器学习——faster-RCNN/" itemprop="commentsCount"></span>
+                <a href="/2018/05/11/机器学习——目标检测/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/05/11/机器学习——目标检测/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -1185,7 +1184,7 @@
 
       
         
-          <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="FCN-Fully-Convolutional-Networks-全卷积神经网络"><a href="#FCN-Fully-Convolutional-Networks-全卷积神经网络" class="headerlink" title="FCN(Fully Convolutional Networks)全卷积神经网络"></a><a href="https://blog.csdn.net/app_12062011/article/details/60956357" target="_blank" rel="noopener">FCN</a>(Fully Convolutional Networks)全卷积神经网络</h3><p>顾名思义，FCN 即全为卷积层的神经网络，没有全连接层，或者说将全连接层以卷积层的方式实现，而非以两个矩阵乘积的方式实现（全连接层的实现方式），具体为：</p>
+          <h1 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h1><h2 id="FCN-Fully-Convolutional-Networks-全卷积神经网络"><a href="#FCN-Fully-Convolutional-Networks-全卷积神经网络" class="headerlink" title="FCN(Fully Convolutional Networks)全卷积神经网络"></a><a href="https://blog.csdn.net/app_12062011/article/details/60956357" target="_blank" rel="noopener">FCN</a>(Fully Convolutional Networks)全卷积神经网络</h2><p>顾名思义，FCN 即全为卷积层的神经网络，没有全连接层，或者说将全连接层以卷积层的方式实现，而非以两个矩阵乘积的方式实现（全连接层的实现方式），具体为：</p>
 <ul>
 <li>对于上一层是卷积层的全连接层，该层以与输入的 feature map 大小相同的卷积核做卷积运算实现；</li>
 <li>对于上一层是全连接层的全连接层，该层以输入的神经元个数为 1*1 卷积核通道数做卷积运算实现，或者说是将神经元看做了一个 feature map，或者说是将一个 feature map 看做了一个神经元的激活值（激活值不一定是个标量）。</li>
@@ -1193,7 +1192,7 @@
 <p>这样做的优点是，通过在最后一层做 pooling（核大小为 feature map 大小）的方法，可实现让一个已设计完毕的网络可以接收任意大小的图片。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/11/机器学习——faster-RCNN/#more" rel="contents">
+            <a class="btn" href="/2018/05/11/机器学习——目标检测/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
