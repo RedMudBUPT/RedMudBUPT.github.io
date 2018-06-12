@@ -125,17 +125,17 @@
 
 
 
-<meta name="description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1：  [x] 创建文件 [ ] 对该文件建立一个硬链接 [x] 对该文件建立一个软链接 [x] 每有一个进程访问该文件">
+<meta name="description" content="基本假设为解决贝特朗悖论出现的问题，作以下三点假设（概率论公理）：  样本空间$\Omega$：一个随机实验的所有可能输出的集合； 事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的定义域；其元素为事件，事件是$\Omega$中某些样本的集合； 测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux环境编程基础">
-<meta property="og:url" content="http://yoursite.com/2018/03/01/linux环境编程基础/index.html">
+<meta property="og:title" content="数学——概率论基础.md">
+<meta property="og:url" content="http://yoursite.com/2018/03/04/数学——概率论基础/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
-<meta property="og:description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1：  [x] 创建文件 [ ] 对该文件建立一个硬链接 [x] 对该文件建立一个软链接 [x] 每有一个进程访问该文件">
+<meta property="og:description" content="基本假设为解决贝特朗悖论出现的问题，作以下三点假设（概率论公理）：  样本空间$\Omega$：一个随机实验的所有可能输出的集合； 事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的定义域；其元素为事件，事件是$\Omega$中某些样本的集合； 测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-03T12:55:01.842Z">
+<meta property="og:updated_time" content="2018-06-12T07:23:08.655Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux环境编程基础">
-<meta name="twitter:description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1：  [x] 创建文件 [ ] 对该文件建立一个硬链接 [x] 对该文件建立一个软链接 [x] 每有一个进程访问该文件">
+<meta name="twitter:title" content="数学——概率论基础.md">
+<meta name="twitter:description" content="基本假设为解决贝特朗悖论出现的问题，作以下三点假设（概率论公理）：  样本空间$\Omega$：一个随机实验的所有可能输出的集合； 事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的定义域；其元素为事件，事件是$\Omega$中某些样本的集合； 测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$">
 
 
 
@@ -165,13 +165,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/01/linux环境编程基础/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/04/数学——概率论基础/"/>
 
 
 
 
 
-  <title>linux环境编程基础 | RedMudBUPT</title>
+  <title>数学——概率论基础.md | RedMudBUPT</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/linux环境编程基础/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/04/数学——概率论基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="redmud">
@@ -295,7 +295,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">linux环境编程基础</h2>
+          <h2 class="post-title" itemprop="name headline">数学——概率论基础.md</h2>
         
 
         <div class="post-meta">
@@ -307,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-01T20:22:46+08:00">
-                2018-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-04T19:41:44+08:00">
+                2018-03-04
               </time>
             
 
@@ -330,8 +330,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cs/" itemprop="url" rel="index">
-                    <span itemprop="name">cs</span>
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
                   </a>
                 </span>
 
@@ -349,8 +349,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/01/linux环境编程基础/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/01/linux环境编程基础/" itemprop="commentsCount"></span>
+                <a href="/2018/03/04/数学——概率论基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/04/数学——概率论基础/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -379,38 +379,60 @@
       
 
       
-        <h2 id="内核"><a href="#内核" class="headerlink" title="内核"></a>内核</h2><p>待续</p>
-<h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。</p>
-<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。</p>
-<p>对于以下选中的情况，引用计数器会自加1：</p>
+        <h1 id="基本假设"><a href="#基本假设" class="headerlink" title="基本假设"></a>基本假设</h1><p>为解决贝特朗悖论出现的问题，作以下三点假设（概率论公理）：</p>
 <ul>
-<li>[x] 创建文件</li>
-<li>[ ] 对该文件建立一个硬链接</li>
-<li>[x] 对该文件建立一个软链接</li>
-<li>[x] 每有一个进程访问该文件</li>
+<li>样本空间$\Omega$：一个随机实验的所有可能输出的集合；</li>
+<li>事件空间$\mathcal{F}$：$\mathcal{F}$为$\Omega$上的$\sigma$代数，是概率论中的<strong>定义域</strong>；其元素为事件，事件是$\Omega$中某些样本的集合；</li>
+<li>测度$P$：$\mathcal{F}$上的测度$P:\mathcal{F}\to R$，是$\sigma$可加且非负的集合函数。</li>
 </ul>
 <a id="more"></a> 
-<p>一个文件包括三项，目录项（<em>dentry</em>结构）、索引节点（<em>inode</em>结构）和文件数据。</p>
-<ol>
-<li>目录项包括文件名和指向索引节点的指针等信息（当用<em>unlink</em>函数删除该项时，便在该目录中看不见该文件）；</li>
-<li>索引节点包括链接数、文件所有者、文件在磁盘的位置等文件属性；</li>
-<li>文件数据便是在磁盘上的数据块。</li>
+<h1 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h1><h1 id="数学期望"><a href="#数学期望" class="headerlink" title="数学期望"></a>数学期望</h1><blockquote>
+<p>$\xi$ 的数学期望可理解为<strong><em>在 $\Omega$ 上的加权和</em></strong>（权重为概率值，对应于常规均值中某数出现的频率，有的资料称之为概率平均），采用的计算方法为<a href="https://www.zhihu.com/question/28700668?sort=created" target="_blank" rel="noopener">L-S积分</a>：如设$\xi=\sum_{i=1}^na<em>i \chi</em>{A_i}$ ，即将事件$A_i$ 映射为实数$a<em>i$ ，则$E(\xi)=\int</em>{\Omega} \xi(\omega) \mathrm{d}p(\omega)=\sum<em>{i=1}^n \int</em>{\Omega} a<em>i \chi</em>{A_i} \mathrm{d}p(\omega)$ ，即将$\Omega$ 中不可分事件$\omega$ 按值域划分为n类（每一类中的$p(\omega)$ 都相等，假设$A_1$ 中有10个$\omega$ ，则$p(A<em>1)=10*\mathrm{d}p(\omega)$ ），并在每一类中积分出一个值，最后将这n个值求和。当n为有限值，结果为$\sum</em>{i=1}^n a_i p(A<em>i)$ ；当$n\to \inf$ ，结果为$\int</em>{-\inf}^{+\inf} a f(a)\mathrm{d}a$ 。</p>
+<p>综上，将数学期望作$\xi$ 在$\Omega$ 上的“加权和”看待。</p>
+</blockquote>
+<h2 id="条件数学期望"><a href="#条件数学期望" class="headerlink" title="条件数学期望"></a>条件数学期望</h2><blockquote>
+<ul>
+<li>$E(\xi)$ ：<ol>
+<li>$=E(\xi \chi_{\Omega})$ ：在$\Omega$ 上$\xi$ 的加权和</li>
+<li>$=E(\xi | \Omega)$ ：在$\Omega$ 上$\xi$ 的加权平均</li>
 </ol>
-<p><strong>当对该文件建立硬链接（<code>ln src src_ln</code>）时，会额外创建<em>dentry</em>结构和<em>inode</em>结构，但两者的节点号一样（节点号可认为是文件数据的地址）；而当建立符号链接（<code>ln -s src src_ln</code>）时，则是额外创建了一个文本文件，里面包含了源文件的位置信息。两者完全不同，也不能抽象地比较优劣，只能就具体情况来说。</strong></p>
-<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><ul>
-<li>实际文件系统（linux为ext文件系统）包括引导块、超级块（记录文件系统的管理信息）、索引节点区（保证了ext文件系统只有一个根节点）和数据区，其中超级块与索引节点区是区分文件系统有无的界限；</li>
-<li>虚拟文件系统只存于内存中，它的存在使得操作系统能够兼容足够多的文件系统，具体是将其他文件系统进行封装，并挂载到ext文件系统的目录树下，以使得内核能够以一致的方式访问其他文件系统；</li>
-<li>特殊文件系统proc，也只存于内存中，是内核的窗口，用于查看内核运行的实时信息。</li>
-</ul>
-<h2 id="库"><a href="#库" class="headerlink" title="库"></a>库</h2><ul>
-<li>在编译链接的过程中，链接器搜索静态库（archives）时会链接所有已引用却未处理的符号，而未引用或已处理的符号不会从静态库中链接出来，故链接库的链接位置应放置在命令行尾部，否则会出现符号未处理的情况；</li>
-<li>调用动态库的方式类似于对数据文件的读取，故只有在程序执行时才会装入内存，注意编译链接时须有链接选项<code>-ldl</code>；</li>
-<li>创建静态库的命令为<code>ar cr libtest.a test1.o test2.o</code>，编译成动态库的命令为<code>g++ -share -fPIC -o libtest.so test1.o test2.o</code>。</li>
+</li>
+<li>$E(\xi \chi<em>A)$ ：在$A$ 上$\xi$ 的加权和（实质为在$\Omega$ 上$\xi \chi</em>{A}$ 的加权平均，为方便思考，如此定义其含义）</li>
+<li>$E(\xi | A)$ ：$\xi$ 在$A$ 上的加权和，然后在$A$ 上取平均，等于$\frac{E(\xi \chi_A)}{P(A)}$ </li>
+<li>$P(A)$ ：$\chi_A$ 在$\Omega$ 上的加权和</li>
+<li>$P(A | B)$ ：$\chi_A$ 在$B$ 上的加权平均</li>
 </ul>
 <blockquote>
-<p>因为c不支持函数重载（即与c++函数签名方式不同），所以在c/c++混合编程时，须用extern “c” {}将c代码封装。</p>
+<p>总结：</p>
+<ol>
+<li>$P(AB)=E( \chi_A \chi_B)$ ：单纯地在$A$ 、$B$ 交集上的加权和（也可认为在$\Omega$ 上做的归一化）</li>
+<li>$P(A|B)=E(\chi_A |B)$ ：对在$A$ 、$B$ 交集上的加权和还做了归一化，谁为条件便是在哪个集上做的归一化（A、B独立的情况暂不考虑）</li>
+<li>归一化：在哪个集上做归一化便是将全集缩减为了那个集</li>
+</ol>
 </blockquote>
-<h2 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h2><p>在每个进程退出的时候，内核释放该进程所有的资源，包括打开的文件、占用的内存等，但是仍然为其保留一定的信息(包括进程号，退出状态，运行时间等)， 只有父进程通过<em>wait/waitpid</em>来取时才释放，否则其进程号就会一定被占用，这样就导致了僵尸进程的问题。</p>
+</blockquote>
+<ul>
+<li><strong>全数学期望公式</strong></li>
+</ul>
+<p>$$<br>\sum<em>{i=1}^n E(\xi \chi</em>{B_i}) = E(\xi \chi<em>B)<br>\<br>\Rightarrow \sum</em>{i=1}^n P(B_i)E(\xi | B_i) = P(B)E(\xi | B)<br>$$</p>
+<p>  将条件期望乘上条件的概率，可看做是将这个区域上的均值<strong>取消求平均</strong>的操作</p>
+<ul>
+<li><strong>全概率公式</strong></li>
+</ul>
+<p>$$<br>E(\chi<em>A)=\sum</em>{i=1}^n E(\chi<em>A \chi</em>{B<em>i})<br>\<br>\Rightarrow P(A) = \sum</em>{i=i}^n P(A | B_i) P(B_i)<br>$$</p>
+<ul>
+<li><strong>贝叶斯法则</strong></li>
+</ul>
+<p>$$<br>P(B<em>i | A) = \frac{E(\chi</em>{B_i} \chi_A)}{P(A)} = \frac{P(A|B_i)P(B_i)}{P(A)}<br>$$</p>
+<ol>
+<li>$A$ 为出现的新事件，$B_i$ 为欲求其概率的事件，$P(B_i)$ 为先验概率，多由经验知识得到；</li>
+<li>​由该法则可得到基于最小错误率的贝叶斯决策规则：对于出现的$A$ ，$P(A|B_i)P(B_i)$ 最大的$B_i$ 为最可能发生的事件。其中，$A$ 为被归一化（该概念见条件数学期望的引注）到的集合，在比较大小时可去掉，不影响大小比较的结果。</li>
+</ol>
+<h1 id="机器学习中常用的方法"><a href="#机器学习中常用的方法" class="headerlink" title="机器学习中常用的方法"></a>机器学习中常用的方法</h1><h2 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h2><blockquote>
+<p><a href="http://www.konstantinkashin.com/notes/stat/Maximum_Likelihood_Estimation.pdf" target="_blank" rel="noopener">Maximum_Likelihood_Estimation</a></p>
+</blockquote>
+<p>数学中似然函数 = $\prod_ip_i$（其中 $p_i$ 为样本$x_i$ 的概率，一般能用一个含待估计的参数和 $x_i$ 表示的解析式表示）表示已出现的样本出现的概率，而已出现的样本通常为最可能出现的，故可通过最大化该似然函数来估计想要的参数。有时会对似然函数取对数以简化运算。</p>
+<p>在机器学习中常用最大化以假设函数$h$ 为参数的似然函数的方法使得假设函数$h$ 逼近隐藏模式$f$ 。</p>
 
       
     </div>
@@ -435,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/28/数学——线性代数基础/" rel="next" title="数学——线性代数基础">
-                <i class="fa fa-chevron-left"></i> 数学——线性代数基础
+              <a href="/2018/03/01/linux环境编程基础/" rel="next" title="linux环境编程基础">
+                <i class="fa fa-chevron-left"></i> linux环境编程基础
               </a>
             
           </div>
@@ -445,8 +467,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/04/数学——概率论基础/" rel="prev" title="数学——概率论基础.md">
-                数学——概率论基础.md <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/06/机器学习——感知器学习算法/" rel="prev" title="机器学习——感知机学习算法">
+                机器学习——感知机学习算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -646,7 +668,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内核"><span class="nav-number">1.</span> <span class="nav-text">内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件描述符"><span class="nav-number">2.</span> <span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">3.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">4.</span> <span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">5.</span> <span class="nav-text">库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#僵尸进程"><span class="nav-number">6.</span> <span class="nav-text">僵尸进程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本假设"><span class="nav-number">1.</span> <span class="nav-text">基本假设</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#随机变量"><span class="nav-number">2.</span> <span class="nav-text">随机变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数学期望"><span class="nav-number">3.</span> <span class="nav-text">数学期望</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#条件数学期望"><span class="nav-number">3.1.</span> <span class="nav-text">条件数学期望</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习中常用的方法"><span class="nav-number">4.</span> <span class="nav-text">机器学习中常用的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最大似然估计"><span class="nav-number">4.1.</span> <span class="nav-text">最大似然估计</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -806,7 +828,7 @@
 		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
 
 		
-		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/03/01/linux环境编程基础/"});
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/03/04/数学——概率论基础/"});
 		
 
 		(function() {

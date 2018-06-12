@@ -125,17 +125,19 @@
 
 
 
-<meta name="description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1：  [x] 创建文件 [ ] 对该文件建立一个硬链接 [x] 对该文件建立一个软链接 [x] 每有一个进程访问该文件">
+<meta name="description" content="机器学习基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux环境编程基础">
-<meta property="og:url" content="http://yoursite.com/2018/03/01/linux环境编程基础/index.html">
+<meta property="og:title" content="机器学习——基础">
+<meta property="og:url" content="http://yoursite.com/2018/03/30/机器学习——基础/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
-<meta property="og:description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1：  [x] 创建文件 [ ] 对该文件建立一个硬链接 [x] 对该文件建立一个软链接 [x] 每有一个进程访问该文件">
+<meta property="og:description" content="机器学习基础">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-03T12:55:01.842Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/ml/ml1.jpg">
+<meta property="og:updated_time" content="2018-06-12T07:16:37.957Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux环境编程基础">
-<meta name="twitter:description" content="内核待续 文件描述符内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。 文件采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。 对于以下选中的情况，引用计数器会自加1：  [x] 创建文件 [ ] 对该文件建立一个硬链接 [x] 对该文件建立一个软链接 [x] 每有一个进程访问该文件">
+<meta name="twitter:title" content="机器学习——基础">
+<meta name="twitter:description" content="机器学习基础">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/ml/ml1.jpg">
 
 
 
@@ -165,13 +167,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/01/linux环境编程基础/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/30/机器学习——基础/"/>
 
 
 
 
 
-  <title>linux环境编程基础 | RedMudBUPT</title>
+  <title>机器学习——基础 | RedMudBUPT</title>
   
 
 
@@ -278,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/linux环境编程基础/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/30/机器学习——基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="redmud">
@@ -295,7 +297,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">linux环境编程基础</h2>
+          <h2 class="post-title" itemprop="name headline">机器学习——基础</h2>
         
 
         <div class="post-meta">
@@ -307,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-01T20:22:46+08:00">
-                2018-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T19:05:47+08:00">
+                2018-03-30
               </time>
             
 
@@ -330,8 +332,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cs/" itemprop="url" rel="index">
-                    <span itemprop="name">cs</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -349,8 +351,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/01/linux环境编程基础/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/01/linux环境编程基础/" itemprop="commentsCount"></span>
+                <a href="/2018/03/30/机器学习——基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/30/机器学习——基础/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -379,38 +381,104 @@
       
 
       
-        <h2 id="内核"><a href="#内核" class="headerlink" title="内核"></a>内核</h2><p>待续</p>
-<h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>内核为每个进程维护一个文件打开记录表，文件描述符为该文件在表中的索引值。</p>
-<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>采用引用计数方式访问文件，当引用计数器为零时，内存管理机制便会对其进行垃圾回收。</p>
-<p>对于以下选中的情况，引用计数器会自加1：</p>
-<ul>
-<li>[x] 创建文件</li>
-<li>[ ] 对该文件建立一个硬链接</li>
-<li>[x] 对该文件建立一个软链接</li>
-<li>[x] 每有一个进程访问该文件</li>
-</ul>
+        <h1 id="机器学习基础"><a href="#机器学习基础" class="headerlink" title="机器学习基础"></a>机器学习基础</h1><p><img src="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/ml/ml1.jpg" alt="ml_flow"></p>
 <a id="more"></a> 
-<p>一个文件包括三项，目录项（<em>dentry</em>结构）、索引节点（<em>inode</em>结构）和文件数据。</p>
-<ol>
-<li>目录项包括文件名和指向索引节点的指针等信息（当用<em>unlink</em>函数删除该项时，便在该目录中看不见该文件）；</li>
-<li>索引节点包括链接数、文件所有者、文件在磁盘的位置等文件属性；</li>
-<li>文件数据便是在磁盘上的数据块。</li>
-</ol>
-<p><strong>当对该文件建立硬链接（<code>ln src src_ln</code>）时，会额外创建<em>dentry</em>结构和<em>inode</em>结构，但两者的节点号一样（节点号可认为是文件数据的地址）；而当建立符号链接（<code>ln -s src src_ln</code>）时，则是额外创建了一个文本文件，里面包含了源文件的位置信息。两者完全不同，也不能抽象地比较优劣，只能就具体情况来说。</strong></p>
-<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><ul>
-<li>实际文件系统（linux为ext文件系统）包括引导块、超级块（记录文件系统的管理信息）、索引节点区（保证了ext文件系统只有一个根节点）和数据区，其中超级块与索引节点区是区分文件系统有无的界限；</li>
-<li>虚拟文件系统只存于内存中，它的存在使得操作系统能够兼容足够多的文件系统，具体是将其他文件系统进行封装，并挂载到ext文件系统的目录树下，以使得内核能够以一致的方式访问其他文件系统；</li>
-<li>特殊文件系统proc，也只存于内存中，是内核的窗口，用于查看内核运行的实时信息。</li>
-</ul>
-<h2 id="库"><a href="#库" class="headerlink" title="库"></a>库</h2><ul>
-<li>在编译链接的过程中，链接器搜索静态库（archives）时会链接所有已引用却未处理的符号，而未引用或已处理的符号不会从静态库中链接出来，故链接库的链接位置应放置在命令行尾部，否则会出现符号未处理的情况；</li>
-<li>调用动态库的方式类似于对数据文件的读取，故只有在程序执行时才会装入内存，注意编译链接时须有链接选项<code>-ldl</code>；</li>
-<li>创建静态库的命令为<code>ar cr libtest.a test1.o test2.o</code>，编译成动态库的命令为<code>g++ -share -fPIC -o libtest.so test1.o test2.o</code>。</li>
-</ul>
+<h2 id="基础术语"><a href="#基础术语" class="headerlink" title="基础术语"></a>基础术语</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">模型</td>
+<td style="text-align:left">计算模型$\mathcal{A}$（学习法则）与数学模型$\mathcal{H}$（假设集）的合称为机器学习模型</td>
+</tr>
+<tr>
+<td style="text-align:center">$E_{in}$</td>
+<td style="text-align:left">假设 h 在已得到的资料上与真实模式 f 的误差</td>
+</tr>
+<tr>
+<td style="text-align:center">$E_{out}$</td>
+<td style="text-align:left">假设 h 在未见过的资料上与真实模式 f 的误差</td>
+</tr>
+<tr>
+<td style="text-align:center">h</td>
+<td style="text-align:left">$\mathcal{A}$ 从假设集$\mathcal{H}$ 中取出的一个假设函数</td>
+</tr>
+<tr>
+<td style="text-align:center">g</td>
+<td style="text-align:left">机器学习模型最终确定的在当前任务中用于代替真实模式 f 的估计模式</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<p>因为c不支持函数重载（即与c++函数签名方式不同），所以在c/c++混合编程时，须用extern “c” {}将c代码封装。</p>
+<p>若无特殊说明，一般模型一词特指数学模型$\mathcal{H}$ 。</p>
 </blockquote>
-<h2 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h2><p>在每个进程退出的时候，内核释放该进程所有的资源，包括打开的文件、占用的内存等，但是仍然为其保留一定的信息(包括进程号，退出状态，运行时间等)， 只有父进程通过<em>wait/waitpid</em>来取时才释放，否则其进程号就会一定被占用，这样就导致了僵尸进程的问题。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="ML-DM-statistics"><a href="#ML-DM-statistics" class="headerlink" title="ML / DM / statistics"></a>ML / DM / statistics</h3><ul>
+<li>ML 与 DM 很难区分</li>
+<li>ML 是利用资料计算出接近真实模式 f 的估计模式 g</li>
+<li>statistics 是利用资料推断一个尚不知结果的进程的结果的概率</li>
+</ul>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>当任务存在某种潜在模式，但不能很容易地程式化地总结出来时。（前提是与该模式有关的资料是要能够获取到的）</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h2 id="实现的可行性"><a href="#实现的可行性" class="headerlink" title="实现的可行性"></a>实现的可行性</h2><blockquote>
+<p>模型与数据集大小两者之间没有先确定谁再确定谁的先后顺序：因为成本问题，数据集自然希望需要得越少越好，当数据量过小时便不可选复杂度过高的模型；而为使模型误差能够足够小，模型复杂度便须足够高，高复杂度的模型需要高样本复杂度的数据。总之，这是一个<strong>数据成本与模型误差博弈的过程</strong>。</p>
+</blockquote>
+<h3 id="VC（Vapnik-Chervonenkis）维"><a href="#VC（Vapnik-Chervonenkis）维" class="headerlink" title="VC（Vapnik-Chervonenkis）维"></a>VC（Vapnik-Chervonenkis）维</h3><blockquote>
+<p>$d_{VC}$ 的含义：</p>
+<ol>
+<li>模型自由参数的个数，或称为模型的自由度（向量$w$ 的维度）</li>
+<li>模型的强度：表示模型什么时候还能够 shatter</li>
+</ol>
+<p>注意：机器学习模型的 VC 维指数学模型的有效 VC 维，会根据计算模型变化（如加入不同的正则化项）而变化；常说的模型复杂度是指数学模型有效 VC 维对应的复杂度。</p>
+</blockquote>
+<h4 id="断点（breakpoint）"><a href="#断点（breakpoint）" class="headerlink" title="断点（breakpoint）"></a>断点（breakpoint）</h4><ul>
+<li>shatter：若模型包含某次 N 个输入样本可能出现的所有情况（即模型能产生至少 $2^N$ 种假设），则称该输入能被该模型 $\mathcal{H}$ shatter</li>
+<li>成长函数 $m_{\mathcal{H}}(N)$：模型能产生的最多（相同样本量不同样本的情况下，模型会产生不同的假设个数，此处为最多）的假设个数关于样本量的函数</li>
+<li>断点 breakpoint：若N=k，成长函数首次不是指数级时，称 k 为最小断点</li>
+<li>VC 维：$d_{VC} = $（最小断点k ）- 1，即模型能 shatter 的最大样本数</li>
+</ul>
+<p>当断点出现后，模型的成长函数便与模型的细节（线性分类器还是圆形分类器等细节）无关了：当 $N \geqslant k$ 时，$m<em>{\mathcal{H}}(N)  \leqslant B(N,k)$ ，进而能得到 B(N, k) 的表格，由表格可推得 $B(N,k) \leqslant \sum^{k-1}</em>{i} C_N^i \leqslant N^{k-1}$ 。</p>
+<h4 id="模型复杂度"><a href="#模型复杂度" class="headerlink" title="模型复杂度"></a>模型复杂度</h4><p>由<a href="https://en.wikipedia.org/wiki/Hoeffding%27s_inequality" target="_blank" rel="noopener">霍夫丁不等式</a>（给出了训练集误差无法代表整体误差的概率上限）：<br>$$<br>P{ |E<em>{in}(h) - E</em>{out}(h)|&gt; \epsilon } \leqslant 2e^{-2 \epsilon^2 N}<br>$$<br>知，针对任意一个假设 h，只要取样容量 N 足够大，不好的取样发生的概率很小。</p>
+<p>因为数据集的好坏应该是针对模型来说的，故只有下列式子足够小，才能说数据集是好的（<strong>从直观上来说<u>数据集好</u>是指手中的资料已经可以代表所有已知和未知的资料了</strong>）：<br>$$<br>P{ \exists h \epsilon \mathcal{H},  s.t. |E<em>{in}(h) - E</em>{out}(h)|&gt; \epsilon  } = P{\sum<em>{h \epsilon \mathcal{H}} [ |E</em>{in}(h) - E<em>{out}(h)|&gt; \epsilon ] }<br>$$<br>设模型能产生的假设个数为$M$，由和事件的概率$ \leqslant$ 概率的和得到不好的取样发生的概率为：<br>$$<br>P{\sum</em>{h \epsilon \mathcal{H}} [ |E<em>{in}(h) - E</em>{out}(h)|&gt; \epsilon ] }  \leqslant 2 M e^{-2 \epsilon^2 N}<br>\<br>^{用E<em>{in}’ 替代E</em>{out}}<br><em>{又{|E</em>{in}-E<em>{in}’| &gt; \epsilon / 2} \Leftrightarrow {|E</em>{in}-(E<em>{in}+E</em>{in}’)/2| &gt; \epsilon / 4} }<br>\Longrightarrow<br>\<br>\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad  \leqslant 4(2N)^{d<em>{VC}} e^{-\frac{1}{8} \epsilon^2 N}<br>\<br>\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad = \delta \quad (VC bound)<br>$$<br>由 VC bound得到：<br>$$<br>\epsilon = \sqrt{\frac{8}{N} \ln (\frac{4(2N)^{d</em>{VC}}}{\delta})}<br>$$<br>一般将该值记为$\Omega(N, \mathcal{H}, \delta)$ ，称为模型复杂度，它是样本复杂度、模型的 VC 维和 VC bound 的函数。故在置信度为$1-\delta$ 的情况下，泛化误差$|E<em>{in}-E</em>{out} |  \leqslant  \Omega(N, \mathcal{H}, \delta)$ 。模型复杂度本质是由多个因素影响（<strong>此处说的模型是数学模型即假设集，该<u>模型的 VC 维</u>决定了它能 shatter 的最大样本数，模型复杂度越高能够 shatter 的样本数越大；<u>模型的 VC bound</u> 决定了该模型结果【预测结果与泛化误差合称为模型结果】的不可信度，模型复杂度越高模型结果的不可信度越低；<u>样本复杂度</u>决定了针对该模型手中样本的好坏，模型复杂度越高手中样本变坏的可能性越大，另一种理解为样本复杂度决定了该模型能产生的假设个数，模型复杂度越高能产生的假设个数越多</strong>）的函数，而泛化误差本质是在一定置信度下的一个数，二者恰巧在数量上相等。</p>
+<blockquote>
+<p>虽然给出预期的置信度、泛化误差和$d<em>{VC}$ 就能得到针对“模型能从样本中学到点什么东西”这件事模型所需的样本复杂度，但一般令$N \approx 10 d</em>{VC}$ 就足够了。</p>
+</blockquote>
+<h4 id="常见模型的-VC-维"><a href="#常见模型的-VC-维" class="headerlink" title="常见模型的 VC 维"></a>常见模型的 VC 维</h4><ul>
+<li><p>举例：n 维的二分类感知机，VC 维为 n+1</p>
+<ol>
+<li>当样本量 N=n+1 时，$X \epsilon R^{(n+1)*(n+1)}$ ，存在能够被该模型 shatter 的样本：令样本 X 可逆，则任意一种二分类情况 y 都可以被一个 w 划分出，因为 $w = X^{-1}y$ ；</li>
+<li>当样本量 N=n+2 时，$X \epsilon R^{(n+2)*(n+1)}$ ，没有一个能够被该模型 shatter 的样本：因为 n+2 个样本中总有一个样本能被其它 n+1 个样本线性表示，设线性表示的系数为 $a<em>1, … , a</em>{n+1}$ ，则模型无法产生 $(sign(a<em>1), …, sign(a</em>{n+1}), -1)$ 这种二分类情况。</li>
+</ol>
+<p>故VC 维为 n+1。</p>
+</li>
+</ul>
+<h3 id="可行性分析"><a href="#可行性分析" class="headerlink" title="可行性分析"></a>可行性分析</h3><ol>
+<li><p>no free lunch 定理：若只坚持 f 是未知的，而不作出任何假设，那么在已知资料以外的部分去说我一定学到了什么东西（即找到了能够满足在已知资料以外的部分 $g \approx f$ 的$g$ ）这件事是做不到的。故机器学习的模型一般都是有某种归纳偏好的。<br>$$<br>\downarrow 对已知和未知资料作出假设：所有数据均是独立同分布的<br>$$</p>
+</li>
+<li><p>若<strong>样本量够大，模型的 VC 维为有限值</strong>，则由霍夫丁不等式可认为样本内误差可以泛化到样本外误差，即 g 能够具有很好的泛化能力；又若计算模型能够从数学模型中找到使得<strong>样本内误差趋于零</strong>的假设 h 作为 g，则认为学习成功。</p>
+</li>
+</ol>
+<h2 id="加入噪声后"><a href="#加入噪声后" class="headerlink" title="加入噪声后"></a>加入噪声后</h2><p>噪声是指标签中的噪声，来源多为：</p>
+<ol>
+<li>打标签过程人一时走神打错标签</li>
+<li>打标签时不同的人有不同的标准</li>
+<li>打标签的数据本身有噪声</li>
+</ol>
+<p>对于含有噪声的标签，可以认为产生样本的数据源从真实模式 f(X) 变成了 P(y|X) ，即加入了些微抖动，但这只是一个变量的替换，并不影响 VC bound 的成立，故依然认为能够成功学习。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>机器学习能否成功，就考虑两件事：</p>
+<ol>
+<li>数学<strong>模型复杂度</strong>是否足够高，以有能力使得训练集误差误差够小</li>
+<li><strong>泛化误差</strong>（样本复杂度与模型 VC 维决定）是否足够低，以保证训练集误差能够代表整体误差。</li>
+</ol>
+<p>至于学习速度便是计算模型去考虑的事情了。</p>
+<blockquote>
+<p>在此可做个比拟：数学模型是天资，是人本身的智商，而计算模型是学习方法。方法用对了再加上高天资便能平步青云。</p>
+</blockquote>
 
       
     </div>
@@ -435,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/28/数学——线性代数基础/" rel="next" title="数学——线性代数基础">
-                <i class="fa fa-chevron-left"></i> 数学——线性代数基础
+              <a href="/2018/03/29/计算机硬件基础/" rel="next" title="计算机硬件基础">
+                <i class="fa fa-chevron-left"></i> 计算机硬件基础
               </a>
             
           </div>
@@ -445,8 +513,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/04/数学——概率论基础/" rel="prev" title="数学——概率论基础.md">
-                数学——概率论基础.md <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/01/机器学习——广义线性模型/" rel="prev" title="机器学习——广义线性模型">
+                机器学习——广义线性模型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -646,7 +714,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内核"><span class="nav-number">1.</span> <span class="nav-text">内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件描述符"><span class="nav-number">2.</span> <span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">3.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">4.</span> <span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">5.</span> <span class="nav-text">库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#僵尸进程"><span class="nav-number">6.</span> <span class="nav-text">僵尸进程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习基础"><span class="nav-number">1.</span> <span class="nav-text">机器学习基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础术语"><span class="nav-number">1.1.</span> <span class="nav-text">基础术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.2.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ML-DM-statistics"><span class="nav-number">1.2.1.</span> <span class="nav-text">ML / DM / statistics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">1.2.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.3.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现的可行性"><span class="nav-number">1.3.</span> <span class="nav-text">实现的可行性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VC（Vapnik-Chervonenkis）维"><span class="nav-number">1.3.1.</span> <span class="nav-text">VC（Vapnik-Chervonenkis）维</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#断点（breakpoint）"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">断点（breakpoint）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型复杂度"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">模型复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见模型的-VC-维"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">常见模型的 VC 维</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可行性分析"><span class="nav-number">1.3.2.</span> <span class="nav-text">可行性分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加入噪声后"><span class="nav-number">1.4.</span> <span class="nav-text">加入噪声后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -806,7 +874,7 @@
 		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
 
 		
-		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/03/01/linux环境编程基础/"});
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/03/30/机器学习——基础/"});
 		
 
 		(function() {

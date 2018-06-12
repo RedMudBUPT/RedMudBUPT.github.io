@@ -136,7 +136,7 @@
 <meta property="og:image" content="https://github.com/RedMudBUPT/gitpage_img/blob/master/ml/lin2_softmax.jpg?raw=true">
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/ml/overfit_1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/ml/loocv_1.png">
-<meta property="og:updated_time" content="2018-06-03T12:57:58.857Z">
+<meta property="og:updated_time" content="2018-06-10T13:31:48.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习——广义线性模型">
 <meta name="twitter:description" content="线性模型线性回归 所有变量的可表示的数量上的减少、衰退 regress，称为回归，即确认独立变量的过程。比如，独立变量和其他非独立变量之间的关系近似于线性时称为线性回归。 回归是一种降维方法，减少的维度为非独立变量个数。  线性回归模型 输入空间映射到整个实数区间  $$\min_w ||Xw-y||$$">
@@ -406,7 +406,7 @@
 <ol>
 <li>若$X^TX$不是满秩矩阵，即$X$非列满秩，则最小二乘法与正交投影变换都失效了，此时$w$自由度为$n-rank(X^TX)$，常用的一个解是加入一个归纳偏好$\min ||w||_2$：将$X^TX$进行奇异值分解进而求得伪逆，从而得到$w$。</li>
 <li>通常$X^TX$是可逆的，因为样本数$\gg$ 特征维度+1。但实践中常因为数值稳定性用$X^+$代替$(X^TX)^{-1}X^T$。</li>
-<li>如果输入矩阵X中存在线性相关或者近似线性相关的列，那么输入矩阵 X 就会变成或者近似变成奇异矩阵（singular matrix）。这是一种病态矩阵，矩阵中任何一个元素发生一点变动，整个矩阵的行列式的值和逆矩阵都会发生巨大变化。这将导致最小二乘法对观测数据的随机误差极为敏感，进而使得最后的线性模型产生非常大的方差，这个在数学上称为多重共线性（multicollinearity）。在实际数据中，变量之间的多重共线性是一个非常普遍的现象，其产生机理及相关解决方案在“特征选择和评估”中有介绍。</li>
+<li>如果输入矩阵X中存在线性相关或者近似线性相关的列，那么输入矩阵 X 就会变成或者近似变成奇异矩阵（singular matrix）。这是一种病态矩阵，矩阵中任何一个元素发生一点变动，整个矩阵的行列式的值和逆矩阵都会发生巨大变化。这将导致最小二乘法对观测数据的随机误差极为敏感，进而使得最后的线性模型产生非常大的方差，这个在数学上称为多重共线性（multicollinearity）。在实际数据中，变量之间的多重共线性是一个非常普遍的现象。</li>
 </ol>
 </blockquote>
 <h2 id="对数几率回归（逻辑回归）"><a href="#对数几率回归（逻辑回归）" class="headerlink" title="对数几率回归（逻辑回归）"></a>对数几率回归（逻辑回归）</h2><blockquote>
@@ -447,7 +447,7 @@
 <p>因$\phi$在 (0, 1) 区间取值，故应用于分类。</p>
 </blockquote>
 <p><img src="https://github.com/RedMudBUPT/gitpage_img/blob/master/ml/lin1.jpg?raw=true" alt="lin1"><br>$$<br>logisticfunction  \quad \sigma = \frac{1}{1+e^{- z}}<br>$$</p>
-<p>伯努利分布：<br>$$<br>p(y; \phi) = \phi^y (1-\phi)^y<br>\<br>\quad \quad \quad \quad \quad = e^{(\ln \frac{\phi}{1-\phi})y + \ln (1-\phi)}<br>$$<br>当只针对一个样本来看时，伯努利分布便降为 0 / 1 分布；当针对整体来看时，y 便是正例发生的次数统计，目标函数为$sum( \phi)$ 。</p>
+<p>伯努利分布：<br>$$<br>p(y; \phi) = \phi^y (1-\phi)^{N-y}<br>\<br>\quad \quad \quad \quad \quad = e^{(\ln \frac{\phi}{1-\phi})y + \ln (1-\phi)^N}<br>$$<br>当只针对一个样本来看时，伯努利分布便降为 0 / 1 分布；当针对整体来看时，y 便是正例发生的次数统计，目标函数为$sum( \phi)$ 。</p>
 <p>将伯努利分布与广义线性模型对比得到：<br>$$<br>\eta = \ln \frac{\phi}{1- \phi} \Rightarrow \phi = \frac{1}{1+e^{- \eta}}<br>$$<br>从而得到逻辑回归的数学模型（假设集）。</p>
 <h3 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h3><blockquote>
 <p>softmax 函数是多项式分布的期望$\phi_i$在线性回归模型上的表现形式，即某类事件发生的概率。</p>
@@ -484,7 +484,7 @@
 <h3 id="出现原因（4个）"><a href="#出现原因（4个）" class="headerlink" title="出现原因（4个）"></a>出现原因（4个）</h3><p><strong>模型复杂度过高、数据量有限、随机噪声或确定性噪声过大</strong>。</p>
 <ol>
 <li><p>低复杂度数据下，为什么高复杂度模型会出问题：</p>
-<p>在保证泛化误差的置信度为$1-\delta$ 的前提下（若无此保证，机器则无从谈起），由 VC bound 得到泛化误差为：</p>
+<p>在保证泛化误差的置信度为$1-\delta$ 的前提下（若无此保证，机器学习则无从谈起），由 VC bound 得到泛化误差为：</p>
 </li>
 </ol>
 <p>$$<br>\epsilon = \sqrt{\frac{8}{N} \ln (\frac{4(2N)^{d_{VC}}}{\delta})},<br>$$</p>
@@ -511,7 +511,7 @@
 <li><p>从机器学习的角度：</p>
 <p>其思想是将高复杂度模型进行退化，故用稀疏假设集来降低模型的复杂度。比如加入约束条件$\sum bool(w \neq 0) \leqslant 2$记为$\mathcal{H}_2’$，显然$\mathcal{H}_2 \subset \mathcal{H}<em>2’ \subset \mathcal{H}</em>{10}$。不过因为布尔操作，该问题的求解已被证明是 NP-hard 问题。</p>
 <p>为使原 NP-hard 问题易解，将其转化为 soft 版本：约束条件换成$\sum w^2 \leqslant C$，记为$\mathcal{H}(C)$，显然$\mathcal{H}<em>{10}(0)\subset \mathcal{H}</em>{10}(1)\subset … \subset \mathcal{H}<em>{10}( \infin) = \mathcal{H}</em>{10}$。</p>
-<p>进而机器学习模型（将约束条件看做$\mathcal{A}$的一部分，假设集$\mathcal{H}$仍为那个大的假设集$\mathcal{H}_{10}$，能否产生多大数量的假设要看数据）变为<br>$$<br>\min<em>w E</em>{in}(w)<br>\<br>s.t. \quad \sum w^2 \leqslant C<br>$$<br>由拉格朗日乘子法得到等价问题：<br>$$<br>\min<em>w E</em>{in}(w) + \lambda ||w||_2^2, \quad \lambda &gt; 0.<br>$$<br>其中常数 C 隐含在 $\lambda$中，$\lambda$被称为 C 的等价常数。</p>
+<p>进而机器学习模型（将约束条件看做$\mathcal{A}$的一部分，假设集$\mathcal{H}$仍为那个大的假设集$\mathcal{H}_{10}$，能产生多大数量的假设要看数据）变为<br>$$<br>\min<em>w E</em>{in}(w)<br>\<br>s.t. \quad \sum w^2 \leqslant C<br>$$<br>由拉格朗日乘子法及一些粗略的化简得到等价问题：<br>$$<br>\min<em>w E</em>{in}(w) + \lambda ||w||_2^2, \quad \lambda &gt; 0.<br>$$<br>其中常数 C 隐含在 $\lambda$中。</p>
 </li>
 <li><p>从统计的角度：</p>
 <p>X 存在多重共线性时，最小二乘法求得的 w 在数值上会很大，如果 x 有一点小小的变化，输出结果会有很大的差异，即对X 中的噪声非常敏感，所以其解会非常不稳定。而若能限制 w 的增长，模型对噪声的敏感度便会降低，由此引出<a href="https://blog.csdn.net/daunxx/article/details/51578787" target="_blank" rel="noopener">脊回归（Ridge regression）</a>：<br>$$<br>L = \min<em>w ||E</em>{in}(w)||_2^2+ \lambda ||w||_2^2 ,<br>$$<br>即在原损失函数上加入 w 的2-范数的惩罚项。</p>
@@ -584,8 +584,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/30/机器学习基础/" rel="next" title="机器学习基础">
-                <i class="fa fa-chevron-left"></i> 机器学习基础
+              <a href="/2018/03/30/机器学习——基础/" rel="next" title="机器学习——基础">
+                <i class="fa fa-chevron-left"></i> 机器学习——基础
               </a>
             
           </div>

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="RedMudBUPT" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘（y 存储放大倍数）的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学——线性代数基础">
+<meta property="og:url" content="http://yoursite.com/2018/02/28/数学——线性代数基础/index.html">
+<meta property="og:site_name" content="RedMudBUPT">
+<meta property="og:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘（y 存储放大倍数）的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-12T07:23:56.188Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数学——线性代数基础">
+<meta name="twitter:description" content="对矩阵乘积的各种viewpoint 列向量的inner product $ x^Ty $ ：n个元素之积的和 列向量的outer product $xy^T$： 对两个列向量各元素之积的陈列【主】； 对列向量$x$分别进行n次倍乘（y 存储放大倍数）的并行运算，并堆叠成一个矩阵。   矩阵向量之积$Ax$： 1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/28/数学——线性代数基础/"/>
+
+
+
+
+
+  <title>数学——线性代数基础 | RedMudBUPT</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RedMudBUPT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">RedMud's blog called RedMudBUPT</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/28/数学——线性代数基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="redmud">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RedMudBUPT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">数学——线性代数基础</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T20:00:00+08:00">
+                2018-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/28/数学——线性代数基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/02/28/数学——线性代数基础/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="对矩阵乘积的各种viewpoint"><a href="#对矩阵乘积的各种viewpoint" class="headerlink" title="对矩阵乘积的各种viewpoint"></a>对矩阵乘积的各种viewpoint</h1><ol>
+<li>列向量的inner product $ x^Ty $ ：n个元素之积的和</li>
+<li>列向量的outer product $xy^T$：<ul>
+<li>对两个列向量各元素之积的陈列【<strong>主</strong>】；</li>
+<li>对列向量$x$分别进行n次倍乘（y 存储放大倍数）的并行运算，并堆叠成一个矩阵。</li>
+</ul>
+</li>
+<li>矩阵向量之积$Ax$：<ul>
+<li>1个列向量分别与n个列向量的inner product的并行运算（将$A$看做行向量的堆叠）【<strong>主</strong>】；</li>
+<li>对n个列向量的线性组合，即对n个列向量各赋予不同权重后的组合（将$A$看做列向量的堆叠）。</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li>矩阵矩阵之积$AB$：<ul>
+<li>n组列向量的outer product的和，即n个矩阵（每个矩阵为同一索引下的向量的outer producter，即 A 取第几列，B 便取第几行）的和（$A$ by columns, $B$ by rows）【<strong>主</strong>】；<ul>
+<li>应用：反向传播、方差</li>
+</ul>
+</li>
+<li>n个列向量分别进行矩阵向量之积$Ab$的并行运算；</li>
+<li>对两个矩阵各列向量的inner product的陈列【多用于结合标量的性质进行证明矩阵性质的证明】。</li>
+</ul>
+</li>
+</ol>
+<a id="more"></a> 
+<h1 id="矩阵的一些性质"><a href="#矩阵的一些性质" class="headerlink" title="矩阵的一些性质"></a>矩阵的一些性质</h1><h2 id="迹"><a href="#迹" class="headerlink" title="迹"></a>迹</h2><ul>
+<li>满足交换性和轮换性：$\mathrm{tr}AB=\mathrm{tr}BA$，$\mathrm{tr}ABC=\mathrm{tr}CAB=\mathrm{tr}BCA$</li>
+</ul>
+<h2 id="范数"><a href="#范数" class="headerlink" title="范数"></a>范数</h2><blockquote>
+<p>把线性空间的一个元素（向量、矩阵、……）与一个非负实数相联系，在许多场合下，这个非负实数可以作为向量或者矩阵大小的一种度量，这个非负实数便称为范数（当说长度时，特指的是内积空间中向量的2-范数）。元素与实数的映射关系需满足4点才能称为范数：非负性、定性、齐次性和三角不等式。</p>
+</blockquote>
+<p>范数分类：<em>p</em>-范数、加权范数（$||x||_A=\sqrt{x^TAx}$）、<em>F</em>-范数（$\sqrt{\mathrm{tr}(A^TA)}$）、……</p>
+<h2 id="矩阵的列空间与零空间"><a href="#矩阵的列空间与零空间" class="headerlink" title="矩阵的列空间与零空间"></a>矩阵的列空间与零空间</h2><blockquote>
+<ul>
+<li>$L(x_1,x_2)$意为向量$x_1$与$x_2$张成的空间；</li>
+<li>$R(A)$ 意为矩阵$A$的列向量张成的空间，称为$A$的列空间或$A$的值域；</li>
+<li>$R(A)^{\bot}$意为 $A$的列空间的正交补空间；</li>
+<li>$N(A)$意为$A$的零空间或$A$的核空间。</li>
+</ul>
+</blockquote>
+<p>$A$的零空间是$A^T$的列空间的正交补空间，而A^T的列空间维度与A的列空间维度<strong>在数量上</strong>相等，故$\mathrm{dim}N(A)=\mathrm{dim}R(A^T)^{\bot}=\mathrm{dim}R(A)^{\bot}=n-rank(A)$，为简化书写与推导，常一步写为$\mathrm{dim}N(A)=n-rank(A)$。</p>
+<h2 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h2><blockquote>
+<p>一种几何上的解释：$\mathrm{abs}|A|$ 意为矩阵$A$的行向量限制性地张成的空间的体积。（限制性地张成，是指用于线性组合的系数在(0,1)间取值。）</p>
+</blockquote>
+<ul>
+<li>$|AB|=|A||B|$</li>
+<li>$|A^{-1}|=\frac{1}{|A|}$</li>
+<li>如果$A$奇异，那么$A$的行向量线性相关，限制性地张成的空间是n维空间中的“<em>flat sheet</em>”，故此时$|A|=0$。</li>
+</ul>
+<h2 id="二次型与矩阵的定性"><a href="#二次型与矩阵的定性" class="headerlink" title="二次型与矩阵的定性"></a>二次型与矩阵的定性</h2><blockquote>
+<p>n个变量的二次多项式（<strong>每一项的次数都为2</strong>的多项式）称为二次型。矩阵形式的二次型为一标量$x^TAx$，其中$A$称为二次型矩阵，虽然无论$A$是否对称，$x^TAx$总是一个二次型，但A的表现形式（是否对称）并不影响这个<strong>标量</strong>的结果，故若无特殊说明，默认二次型矩阵为一对称阵。</p>
+</blockquote>
+<ul>
+<li>根据二次型的正负，将矩阵分为正定阵（PD）、半正定阵（PSD）、负定阵（ND）、半负定阵（NSD）和不定阵。</li>
+<li>度量阵$A^TA$必为半正定，若$A$的形状为“$\mathrm{I}$“，且列满秩，则该矩阵必正定。</li>
+<li>半正定阵加正定阵必为正定阵。</li>
+</ul>
+<h2 id="矩阵的特征向量与特征值"><a href="#矩阵的特征向量与特征值" class="headerlink" title="矩阵的特征向量与特征值"></a>矩阵的特征向量与特征值</h2><blockquote>
+<p>默认特征向量特指单位化的特征向量（虽然因为有正负还是不唯一，但已足够）。</p>
+</blockquote>
+<ul>
+<li>$\mathrm{tr}A=\sum_{i=1}^n\lambda_i$</li>
+<li>$|A|=\prod_{i=1}^n\lambda_i$</li>
+</ul>
+<h3 id="对称阵的特征向量与特征值"><a href="#对称阵的特征向量与特征值" class="headerlink" title="对称阵的特征向量与特征值"></a>对称阵的特征向量与特征值</h3><ul>
+<li><p>对称阵的特征值均为实数，特征向量两两正交。</p>
+</li>
+<li><p>若对称阵的特征值均为正数则必正定（由对称阵必能正交对角化推得），依此类推。</p>
+</li>
+<li><p>针对最优化问题<br>$$<br>\mathrm{min}x^TAx \quad s.t. ||x||_2^2=1<br>$$<br>结果为$A$的最小特征值，$x$为其对应的特征向量。<strong>因为$A$为对称阵</strong>，故能正交对角化$A=U\Lambda U^T$，原问题便转化为了：将原默认基换为$U$的列向量构成的基，于是$x$便成为了$y$，满足$y=U^{-1}x$ （其过程为$x$向$U$的各个列向量方向投影，并依列向量次序组织成为$y$），因为$U$为正交阵，故$||y||_2^2=1$依然成立，与此同时，优化目标变为$\mathrm{min}y^T\Lambda y$，可看做（问题本质并非这样，但脱离问题只就该式子的数学形式来看可如此看待；这种办法只可用于求解不能用于理解）求单位向量$y$的方向使其在度量矩阵$\Lambda$下长度最小，故结果为$A$的最小特征值，而$x=Uy$ ，即只取最小特征值对应的特征向量。</p>
+<p>对此常用结果可记住：要使一单位向量在某一度量阵下的内积最小，须使该单位向量等于该度量阵最小特征值对应的特征向量，此时内积便为该度量阵的最小特征值。</p>
+</li>
+</ul>
+<h1 id="线性变换"><a href="#线性变换" class="headerlink" title="线性变换"></a>线性变换</h1><blockquote>
+<p>在线性空间（对加法和数乘封闭的集合）中，借助于基的概念，线性空间中的元素（矩阵、多项式、函数等）的运算能够转化为向量的运算，线性变换（满足$T(kx_1 + lx_2) = kT(x_1) + lT(x_2)$的$T()$称为线性变换）的运算能够化为方阵的运算，从而一般线性空间中的问题都能够转化为列向量空间中的问题。故可认为线性代数主要研究列向量空间。</p>
+</blockquote>
+<ol>
+<li><p>基 A 下的向量 Ax，称 x 为坐标向量，Ax 为向量。在计算时默认用坐标向量，以做线性变换 P 为例进行说明：</p>
+<ul>
+<li>换基之前：坐标向量 x；线性变换后的坐标向量为 Px；</li>
+<li>换基之后：坐标向量 $y=C_{A \rightarrow B}^{-1}x$；线性变换后的坐标向量为 $C^{-1}PCy$；</li>
+</ul>
+<p>其中，$C=A^{-1}B$称为过渡矩阵，亦可看做新基在旧基下的坐标；</p>
+<p>通法：</p>
+<ul>
+<li><strong>换基</strong>操作为对向量左乘新基的逆，或者对坐标向量左乘过渡矩阵的逆，从而得到该向量在新基下的坐标，由此换基操作可看做由坐标向量获得完整向量表示（即坐标向量左乘当前基）的逆操作；</li>
+<li><strong>线性变换</strong>操作为对坐标向量左乘表示线性变换的矩阵，因同一线性变换在不同基下的矩阵表示不同，故只能作用于坐标向量上，或说作用于坐标向量上便是作用于完整的向量上：$T(Ax) = APx = A(Px)$；</li>
+</ul>
+<p>通过对在换基$A \rightarrow B$前后的同一向量$Ax$做相同的线性变换$P$可以看出：</p>
+<ul>
+<li>两矩阵 $P, Q$ <strong>相似</strong>是指这两个矩阵是在不同基 $A, B$ 下表示的同一线性变换$T()$，即 $T(AC)=APC=B(B^{-1}A)PC=B(C^{-1}(PC))=BQ=BQE=T(BE)$ ，由此看出一旧基下的矩阵在新基下的相似矩阵为，旧基下带线性变换属性的新基映射到新基下的坐标，若未带线性变换属性，则映射出的坐标为 $E$ 。由此可持这种观点：线性变换是向量的属性，当向量处在不同的基下时表现为不同的矩阵形式。</li>
+<li>对表示线性变换的矩阵$P$ 左乘过渡阵的逆右乘过渡阵便可得到该矩阵在新基下的相似矩阵。</li>
+<li>若要求相似阵为对角阵，那么：<ul>
+<li>当原矩阵为实对称阵时，存在为正交阵的过渡阵；又若原矩阵的基为 $E$ ，那么该过渡阵为原矩阵的一个<strong>完备的标准正交特征向量系</strong>。</li>
+<li>当原矩阵非对称时，只能通过正交对角分解得到 $U^TPV = diag(\sigma_1, …)$ ，其中 V 是 $P^TP$ 的一个<strong>完备的标准正交特征向量系</strong>（前提为$P$ 非奇异），$U=PV diag(\sigma_1, …)^T$ ；而若当 P 为奇异阵时，可进一步拓展为通过奇异值分解得到 $U^TPV = diag(\sigma_1, …)$ ，各变量含义相同。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><h2 id="度量阵"><a href="#度量阵" class="headerlink" title="度量阵"></a>度量阵</h2></li>
+</ol>
+<blockquote>
+<p>线性空间中已有加减，而数乘算不上线性空间内的积，故引入内积的概念，其作用是度量夹角、长度，直觉上可以将 (x, y) 看做 x 在 y 上的投影与 y 长度的乘积。</p>
+<p>任何内积空间均应满足不等式$|(x,y) \le |x||y|$ 。</p>
+</blockquote>
+<p>因为向量的长度自然是不应变的，故内积的定义不应依赖于基，由此在定义内积时应用向量而非坐标向量。</p>
+<p>比如在线性空间中定义 $(x,y)=x^TGy=\sum_i \sum<em>j g</em>{i,j} x_i y_j$ ，其中 G 可以看作是在不同维度上的度量尺，至于具体工作细节可从该式看出：取基 Y，满足$(Y^{-1})^T(Y^{-1})=G$ ，则 $(x, y)= x^T (Y^{-1})^T(Y^{-1})y = (Y^{-1}x)^T(Y^{-1}y)$ ，从而实现度量尺的功能。因为计算时采用坐标向量的习惯，使得度量尺在不同基下的矩阵表示不同，称之为度量阵。</p>
+<p>同一度量尺在不同基下的表示称为合同。</p>
+<h2 id="投影阵"><a href="#投影阵" class="headerlink" title="投影阵"></a>投影阵</h2><blockquote>
+<p>若  $L \oplus M=R^n$ ，则将 $x \epsilon R^n$ 沿着 M 到 L 的投影变换在$R^n$ 的基下的矩阵称为投影矩阵，记为$P<em>{L,M}$ ，且$P</em>{L,M} = (X,0)(X,Y)^{-1}$ 。</p>
+</blockquote>
+<ul>
+<li><p>投影的本质：所谓投影便是依投影面 L 重新建立坐标系，并只保留投影面上的坐标，其余坐标置零。故私以为更准确的词应该叫截取，截取矩阵。</p>
+</li>
+<li><p>当 M 为 L 的正交补空间时，即$X^T Y = 0$ ，称其为正交投影：<br>$$<br>P_L=(X,0)(X,Y)^{-1} = X(X^T X)^{-1}X^T = XX^+ \quad (前提：X列满秩)<br>$$<br>在统计学中又称$P_L$ 为 hat matrix，记为 H：</p>
+<ul>
+<li>H：求列向量在 X 列空间上的投影</li>
+<li>I=H：求列向量对 X 列空间的余</li>
+</ul>
+</li>
+</ul>
+<h2 id="正交阵，对称阵与投影阵"><a href="#正交阵，对称阵与投影阵" class="headerlink" title="正交阵，对称阵与投影阵"></a>正交阵，对称阵与投影阵</h2><h1 id="矩阵微积分"><a href="#矩阵微积分" class="headerlink" title="矩阵微积分"></a>矩阵微积分</h1><h1 id="附：一些常见的矩阵相关的思考方向"><a href="#附：一些常见的矩阵相关的思考方向" class="headerlink" title="附：一些常见的矩阵相关的思考方向"></a>附：一些常见的矩阵相关的思考方向</h1><ol>
+<li>设$X=(x_1,x_1,…,x_N)$，则</li>
+</ol>
+<p>$$<br>|| \sum_{i=1}^N x_i || <em>2^2 = \sum</em>{i=1}^N \sum_{j=1}^N x_i^Tx_j^T = (X^TX).sum()<br>$$</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/20/makefile基础/" rel="next" title="makefile基础">
+                <i class="fa fa-chevron-left"></i> makefile基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/01/linux环境编程基础/" rel="prev" title="linux环境编程基础">
+                linux环境编程基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/photo.png"
+                alt="redmud" />
+            
+              <p class="site-author-name" itemprop="name">redmud</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/bkseastone" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:bkseastone@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/101415219341008595729" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cherrysunshine.site/" title="同窗_刘" target="_blank">同窗_刘</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#对矩阵乘积的各种viewpoint"><span class="nav-number">1.</span> <span class="nav-text">对矩阵乘积的各种viewpoint</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵的一些性质"><span class="nav-number">2.</span> <span class="nav-text">矩阵的一些性质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迹"><span class="nav-number">2.1.</span> <span class="nav-text">迹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#范数"><span class="nav-number">2.2.</span> <span class="nav-text">范数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵的列空间与零空间"><span class="nav-number">2.3.</span> <span class="nav-text">矩阵的列空间与零空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行列式"><span class="nav-number">2.4.</span> <span class="nav-text">行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二次型与矩阵的定性"><span class="nav-number">2.5.</span> <span class="nav-text">二次型与矩阵的定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵的特征向量与特征值"><span class="nav-number">2.6.</span> <span class="nav-text">矩阵的特征向量与特征值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对称阵的特征向量与特征值"><span class="nav-number">2.6.1.</span> <span class="nav-text">对称阵的特征向量与特征值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性变换"><span class="nav-number">3.</span> <span class="nav-text">线性变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#度量阵"><span class="nav-number">3.1.</span> <span class="nav-text">度量阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#投影阵"><span class="nav-number">3.2.</span> <span class="nav-text">投影阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正交阵，对称阵与投影阵"><span class="nav-number">3.3.</span> <span class="nav-text">正交阵，对称阵与投影阵</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵微积分"><span class="nav-number">4.</span> <span class="nav-text">矩阵微积分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附：一些常见的矩阵相关的思考方向"><span class="nav-number">5.</span> <span class="nav-text">附：一些常见的矩阵相关的思考方向</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">redmud</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 98984, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 98984, xid: "2018/02/28/数学——线性代数基础/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/98984/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

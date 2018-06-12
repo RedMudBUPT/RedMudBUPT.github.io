@@ -133,7 +133,7 @@
 <meta property="og:description" content="前馈神经网络 (feed-forward nueral network) 前馈神经网络一般有两种，linear perceptron network 和 RBF network，该文主要叙述前一种，其学习规则是梯度下降法，是一种无约束的最优化算法。 NN示例代码">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/nn/nn_net1.jpg">
-<meta property="og:updated_time" content="2018-06-03T12:57:27.329Z">
+<meta property="og:updated_time" content="2018-06-12T04:01:04.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习——前馈神经网络">
 <meta name="twitter:description" content="前馈神经网络 (feed-forward nueral network) 前馈神经网络一般有两种，linear perceptron network 和 RBF network，该文主要叙述前一种，其学习规则是梯度下降法，是一种无约束的最优化算法。 NN示例代码">
@@ -468,17 +468,17 @@
 </blockquote>
 <h3 id="线性激活函数与均方差-loss-函数"><a href="#线性激活函数与均方差-loss-函数" class="headerlink" title="线性激活函数与均方差 loss 函数"></a>线性激活函数与均方差 <em>loss</em> 函数</h3><p>$$<br>\sigma(z)=z<br>\<br>L=\frac{1}{2n}\sum_x||a(x)-y(x)||^2<br>$$</p>
 <ul>
-<li>$\delta^L=a-y$ ；</li>
-<li>$\delta^l=w^l\delta^{l+1},(l=1,…,L-1)$（因为 $\sigma_z’=1$ ）。</li>
+<li>$\delta^L=a-y$ （因为 $\sigma_z’=1$ ）；</li>
+<li>$\delta^l=w^l\delta^{l+1},(l=1,…,L-1)$。</li>
 </ul>
 <h3 id="sigmod-激活函数与交叉熵-loss-函数"><a href="#sigmod-激活函数与交叉熵-loss-函数" class="headerlink" title="sigmod 激活函数与交叉熵 loss 函数"></a>sigmod 激活函数与交叉熵 <em>loss</em> 函数</h3><p>$$<br>\sigma(z)=\frac{1}{1+e^{-z}}<br>\<br>L=-\frac{1}{n}\sum_x[y\ln a+(1-y)\ln (1-a)]<br>$$</p>
 <ul>
-<li>$\delta^L=a-y$ ；</li>
+<li>$\delta^L=a-y$ （因为采用交叉熵 <em>loss</em>，约掉了 $\sigma’(z)$ ）；</li>
 <li>$\delta^l=w^l\delta^{l+1}<em>a^l</em>(1-a^l)$ ，其中“ $*$ ”是<a href="https://baike.baidu.com/item/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/5446029?fr=aladdin#4" target="_blank" rel="noopener">Hadamard积</a>。</li>
 </ul>
 <blockquote>
 <ol>
-<li><p>用交叉熵而非均方差的原因是为了解决神经元饱和问题（指☞神经元因处于$\sigma’(z)$ 值很小的激活值位置而导致的梯度极小，进而带权步长极小的问题），其表现为在训练初期（即误差比较大时）<em>loss</em>下降却十分缓慢。</p>
+<li><p>用交叉熵而非均方差的原因是为了解决<strong>神经元饱和</strong>问题（指某些<strong>神经元</strong>可能因权重初始化不当或者确实已经学到了很成熟的地步，而<strong>处于 $\sigma’(z)​$ 值很小的激活值位置</strong>，进而导致在该处的梯度几近为零的现象；而其后果是神经元激活值会维持很长一段时间的近似稳定状态，这在训练终期是代表收敛的好现象，但若是在训练初期（即误差比较大时）， <em>loss</em> 下降会十分缓慢，严重拖慢收敛速度）：使用交叉熵会使得采用 sigmod 激活的神经网络中的梯度表达式中的 $\sigma’(z)​$ 被约掉，从而解决了神经元饱和问题。</p>
 </li>
 <li><p>可根据激活函数和希望的梯度形式反推得到所需的<em>loss</em>函数，见神经网络与深度学习（Michael Nielsen）3.1.3节。</p>
 </li>
