@@ -136,7 +136,7 @@
 <meta property="og:image" content="https://github.com/RedMudBUPT/gitpage_img/blob/master/ml/lin2_softmax.jpg?raw=true">
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/ml/overfit_1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/ml/loocv_1.png">
-<meta property="og:updated_time" content="2018-06-10T13:31:48.160Z">
+<meta property="og:updated_time" content="2018-06-12T09:41:33.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习——广义线性模型">
 <meta name="twitter:description" content="线性模型线性回归 所有变量的可表示的数量上的减少、衰退 regress，称为回归，即确认独立变量的过程。比如，独立变量和其他非独立变量之间的关系近似于线性时称为线性回归。 回归是一种降维方法，减少的维度为非独立变量个数。  线性回归模型 输入空间映射到整个实数区间  $$\min_w ||Xw-y||$$">
@@ -517,6 +517,9 @@
 <p>X 存在多重共线性时，最小二乘法求得的 w 在数值上会很大，如果 x 有一点小小的变化，输出结果会有很大的差异，即对X 中的噪声非常敏感，所以其解会非常不稳定。而若能限制 w 的增长，模型对噪声的敏感度便会降低，由此引出<a href="https://blog.csdn.net/daunxx/article/details/51578787" target="_blank" rel="noopener">脊回归（Ridge regression）</a>：<br>$$<br>L = \min<em>w ||E</em>{in}(w)||_2^2+ \lambda ||w||_2^2 ,<br>$$<br>即在原损失函数上加入 w 的2-范数的惩罚项。</p>
 <p>对损失函数求导置零得到解：<br>$$<br>w = (X^TX+ \lambda I)^{-1} X^Ty<br>$$</p>
 </li>
+<li><p>从贝叶斯推断的角度：</p>
+<p>正则化是对待推断参数的先验。</p>
+</li>
 </ol>
 <h4 id="正则化方向"><a href="#正则化方向" class="headerlink" title="正则化方向"></a>正则化方向</h4><blockquote>
 <p>损失函数的构造也是从这三个方向出发考虑的。</p>
@@ -706,7 +709,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

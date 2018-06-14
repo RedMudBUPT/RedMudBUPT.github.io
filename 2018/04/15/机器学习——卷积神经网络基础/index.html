@@ -136,7 +136,8 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/nn/inception_v1.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/nn/issues_deeplearning.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/nn/resnet_pros.jpg">
-<meta property="og:updated_time" content="2018-06-11T15:35:49.431Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20150318141719205?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenkzMzgx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2018-06-14T14:41:24.828Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习——卷积神经网络基础">
 <meta name="twitter:description" content="前言 卷积神经网络适用场景：输入信号在空间上和时间上存在一定关联性的场景。   左侧为基础网络结构的调整，右侧为基础网络深度的增加。">
@@ -472,7 +473,17 @@
 <p>ResNet 使得下述所需的函数变得更易拟合求解得到：通过几个非线性映射的堆叠去拟合一个恒等映射，由此使得对某个低级特征贡献不大的输入可以一下子被拉到更深的层，其对更高级特征的贡献由更深层的权重学习到。至于输入对哪种抽象特征的贡献度更大，在求解最优化的过程中可自动学习到。</p>
 <p>从集成学习的观点，可以将更深的网络看做是在增加该指数的幂次（ ResNet ），将更宽的网络看做是在增加该指数的基底（ ResNeXt ）。</p>
 <p><img src="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/nn/resnet_pros.jpg" alt="resnet_pros"></p>
-<h2 id="实现方面的细节"><a href="#实现方面的细节" class="headerlink" title="实现方面的细节"></a>实现方面的细节</h2><h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><p><a href="http://www.cnblogs.com/ooon/p/5418555.html" target="_blank" rel="noopener">http://www.cnblogs.com/ooon/p/5418555.html</a></p>
+<h2 id="实现方面的细节"><a href="#实现方面的细节" class="headerlink" title="实现方面的细节"></a>实现方面的细节</h2><h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><h4 id="卷积层的梯度反传"><a href="#卷积层的梯度反传" class="headerlink" title="卷积层的梯度反传"></a>卷积层的梯度反传</h4><p>卷积神经网络中的梯度反传是 2D，与传统神经网络中的 1D 反传不同，但其数学本质相同（见<a href="http://redmud.xyz/2018/03/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" target="_blank" rel="noopener">梯度反传</a>），只是表现形式上有略微的<a href="https://blog.csdn.net/zy3381/article/details/44409535" target="_blank" rel="noopener">不同</a>：</p>
+<p><img src="https://img-blog.csdn.net/20150318141719205?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenkzMzgx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="conv_delta_backprocess"></p>
+<ol>
+<li>当已得到卷积层误差，求对卷积核参数的梯度时，以卷积层误差为卷积核对与卷积核参数处于同一层的 feature map 做卷积（1D 反传时是误差与激活值直接做内积）得到在卷积核参数处的梯度；</li>
+<li>若要继续反传得到图中卷积层的上一层（图中称为池化层是默认一个卷机后接一个池化）误差，须将卷积核参数旋转 180 度后对卷积层误差做 full 类型（其他类型还有 valid，same ）的卷积，便得到了上一层的误差，进而递归地用第一条。</li>
+</ol>
+<h4 id="池化层的梯度反传"><a href="#池化层的梯度反传" class="headerlink" title="池化层的梯度反传"></a>池化层的梯度反传</h4><p>池化层不需要计算梯度，因为没有要训练的参数，但在梯度反传时，误差的形状需要发生变化以保证和上一层的参数能够对位，处理方式的原则是：保证传递的误差总和不变：</p>
+<ol>
+<li>对于均值池化，便是把误差每个元素等分成n份传递给前一层；</li>
+<li>对于最大值池化，需要先在前传时记住最大值的位置，反传时将误差对应到所记录的位置上，其他位置置零。</li>
+</ol>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>对 CNN 的研究主要有三种方法：</p>
 <ol>
 <li>观察学习到的 filter</li>
@@ -625,7 +636,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -714,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">2.</span> <span class="nav-text">基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积（convolution）"><span class="nav-number">2.1.</span> <span class="nav-text">卷积（convolution）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">2.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名"><span class="nav-number">2.1.2.</span> <span class="nav-text">命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解角度"><span class="nav-number">2.1.3.</span> <span class="nav-text">理解角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在神经网络上的实现方法及理由（任务依赖的正则化）"><span class="nav-number">2.1.4.</span> <span class="nav-text">在神经网络上的实现方法及理由（任务依赖的正则化）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化（polling）"><span class="nav-number">2.2.</span> <span class="nav-text">池化（polling）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对深度模型的一些优化"><span class="nav-number">3.</span> <span class="nav-text">对深度模型的一些优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ReLu"><span class="nav-number">3.1.</span> <span class="nav-text">ReLu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRN"><span class="nav-number">3.2.</span> <span class="nav-text">LRN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dropout"><span class="nav-number">3.3.</span> <span class="nav-text">dropout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应对梯度爆炸-弥散"><span class="nav-number">3.4.</span> <span class="nav-text">应对梯度爆炸/弥散</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet"><span class="nav-number">3.5.</span> <span class="nav-text">ResNet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方面的细节"><span class="nav-number">4.</span> <span class="nav-text">实现方面的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播"><span class="nav-number">4.1.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">2.</span> <span class="nav-text">基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积（convolution）"><span class="nav-number">2.1.</span> <span class="nav-text">卷积（convolution）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">2.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名"><span class="nav-number">2.1.2.</span> <span class="nav-text">命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解角度"><span class="nav-number">2.1.3.</span> <span class="nav-text">理解角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在神经网络上的实现方法及理由（任务依赖的正则化）"><span class="nav-number">2.1.4.</span> <span class="nav-text">在神经网络上的实现方法及理由（任务依赖的正则化）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化（polling）"><span class="nav-number">2.2.</span> <span class="nav-text">池化（polling）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对深度模型的一些优化"><span class="nav-number">3.</span> <span class="nav-text">对深度模型的一些优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ReLu"><span class="nav-number">3.1.</span> <span class="nav-text">ReLu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRN"><span class="nav-number">3.2.</span> <span class="nav-text">LRN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dropout"><span class="nav-number">3.3.</span> <span class="nav-text">dropout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应对梯度爆炸-弥散"><span class="nav-number">3.4.</span> <span class="nav-text">应对梯度爆炸/弥散</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet"><span class="nav-number">3.5.</span> <span class="nav-text">ResNet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方面的细节"><span class="nav-number">4.</span> <span class="nav-text">实现方面的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播"><span class="nav-number">4.1.</span> <span class="nav-text">反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#卷积层的梯度反传"><span class="nav-number">4.1.1.</span> <span class="nav-text">卷积层的梯度反传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#池化层的梯度反传"><span class="nav-number">4.1.2.</span> <span class="nav-text">池化层的梯度反传</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li></ol></div>
             
 
           </div>
