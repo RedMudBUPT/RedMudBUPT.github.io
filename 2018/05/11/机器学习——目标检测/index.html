@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://img-blog.csdn.net/20170614165625267">
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/dl/selective-search.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/dl/faster-rcnn.jpg">
-<meta property="og:updated_time" content="2018-06-12T09:15:34.302Z">
+<meta property="og:updated_time" content="2018-06-24T11:23:34.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习——faster_RCNN">
 <meta name="twitter:description" content="预备知识FCN(Fully Convolutional Networks)全卷积神经网络顾名思义，FCN 即全为卷积层的神经网络，没有全连接层，或者说将全连接层以卷积层的方式实现，而非以两个矩阵乘积的方式实现（全连接层的实现方式），具体为：  对于上一层是卷积层的全连接层，该层以与输入的 feature map 大小相同的卷积核做卷积运算实现； 对于上一层是全连接层的全连接层，该层以输入的神经元个">
@@ -414,7 +414,7 @@
 <h2 id="RCNN"><a href="#RCNN" class="headerlink" title="RCNN"></a>RCNN</h2><p>selective search 提取候选框 + 每个候选框 wrap 成统一尺寸送入后 <strong>CNN 提取特征</strong> + SVM + bounding-box-regression</p>
 <p>简单说便是：RCNN = regions + CNNs + pooling + SVM // LR</p>
 <p>创新：首次将卷积神经网络用在目标检测上。</p>
-<h2 id="SPP-net（spatial-pyramid-pooling）"><a href="#SPP-net（spatial-pyramid-pooling）" class="headerlink" title="SPP-net（spatial pyramid pooling）"></a>SPP-net（spatial pyramid pooling）</h2><p>所谓空间金字塔池化是与图片金字塔或特征金字塔以相同的理念出发的，即对于最终的 feature map 采用不同大小的池化框，相当于多尺度的 pooling。</p>
+<h2 id="SPP-net（spatial-pyramid-pooling）"><a href="#SPP-net（spatial-pyramid-pooling）" class="headerlink" title="SPP-net（spatial pyramid pooling）"></a>SPP-net（spatial pyramid pooling）</h2><p>所谓空间金字塔池化是与图片金字塔或特征金字塔以相同的理念出发的，即对于最终的 feature map 采用不同大小的池化框，相当于多尺度的 pooling。从解决的问题出发。可认为是模仿的 bag-of-words 和 spatial-pyramid-matching。</p>
 <p>SPP-net = CNN // regions + SPP + SVM // LR</p>
 <p>创新：</p>
 <ol>
@@ -434,8 +434,16 @@
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/RedMudBUPT/gitpage_img/master/dl/faster-rcnn.jpg" alt="faster-rcnn网络结构"></p>
 <h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>$$<br>rpn_cls_loss = -\sum_i (p_i^<em> \log p_i + (1-p_i^</em>) \log (1 - p_i))<br>\<br>rpn_bbox_loss = - \sum_i p_i^<em> smooth_L_1(t_i, t_i^</em>)<br>\<br>cls_loss = - \sum<em>i \log p</em>{I_i}<br>\<br>bbox_loss = - \sum_i smooth_L_1(t_i, t_i^*)<br>$$</p>
-<h3 id="RPN"><a href="#RPN" class="headerlink" title="RPN"></a>RPN</h3><h4 id="anchors"><a href="#anchors" class="headerlink" title="anchors"></a>anchors</h4><h5 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h5><p><em>trick</em>：利用 (x, y, w, h) 的形式使得 (x1, y1, x2, y2) 可批量生成。</p>
+<h3 id="RPN"><a href="#RPN" class="headerlink" title="RPN"></a>RPN</h3><blockquote>
+<ol>
+<li>RPN 中每个候选框的得分值和 bbox_delta 都是仅通过特征图上的一个点（512通道）的信息得到的（ A1 和 A2），其合理性是因为该点是候选框的中心点，认为已粗略地包含了框中特征的大部分信息。</li>
+<li>而分类网络中每个候选框的得分值和 bbox_delta 是通过候选框的范围映射到特征图上的全部信息得到的。</li>
+</ol>
+</blockquote>
+<h4 id="anchors"><a href="#anchors" class="headerlink" title="anchors"></a>anchors</h4><h5 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h5><p><em>trick</em>：利用 (x, y, w, h) 的形式使得 (x1, y1, x2, y2) 可批量生成。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_scale_enum</span><span class="params">(anchor, scales)</span>:</span></div><div class="line">    w, h, x_ctr, y_ctr = _whctrs(anchor)</div><div class="line">    ws = w * scales</div><div class="line">    hs = h * scales</div><div class="line">    anchors = _mkanchors(ws, hs, x_ctr, y_ctr)</div><div class="line">    <span class="keyword">return</span> anchors</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_anchors</span><span class="params">(base_size=<span class="number">16</span>, ratios=[<span class="number">0.5</span>, <span class="number">1</span>, <span class="number">2</span>],</span></span></div><div class="line">                     scales=<span class="number">2</span>**np.arange<span class="params">(<span class="number">3</span>, <span class="number">6</span>)</span>):</div><div class="line">    base_anchor = np.array([<span class="number">1</span>, <span class="number">1</span>, base_size, base_size]) - <span class="number">1</span></div><div class="line">    w, h, x_ctr, y_ctr = _whctrs(base_anchor)</div><div class="line">    size = w * h  </div><div class="line">    ws = np.round(np.sqrt(size / ratios))</div><div class="line">    hs = np.round(np.sqrt(size * ratios)) </div><div class="line">    <span class="comment"># ws/hs = [1/sqrt(ratios)] / sqrt(ratios) = 1/ratios</span></div><div class="line">    <span class="comment"># ws, hs = array([23., 16., 11.]), array([12., 16., 22.])</span></div><div class="line">    ratio_anchors = _mkanchors(ws, hs, x_ctr, y_ctr)</div><div class="line">    anchors = np.vstack([_scale_enum(ratio_anchors[i, :],</div><div class="line">                                     scales)</div><div class="line">                         <span class="keyword">for</span> i <span class="keyword">in</span> range(ratio_anchors.shape[<span class="number">0</span>])</div><div class="line">                        ])</div><div class="line">    <span class="comment">#array([[ -83.,  -39.,  100.,   56.],</span></div><div class="line">    <span class="comment">#       [-175.,  -87.,  192.,  104.],</span></div><div class="line">    <span class="comment">#       [-359., -183.,  376.,  200.],</span></div><div class="line">    <span class="comment">#       [ -55.,  -55.,   72.,   72.],</span></div><div class="line">    <span class="comment">#       [-119., -119.,  136.,  136.],</span></div><div class="line">    <span class="comment">#       [-247., -247.,  264.,  264.],</span></div><div class="line">    <span class="comment">#       [ -35.,  -79.,   52.,   96.],</span></div><div class="line">    <span class="comment">#       [ -79., -167.,   96.,  184.],</span></div><div class="line">    <span class="comment">#       [-167., -343.,  184.,  360.]])</span></div><div class="line">    <span class="keyword">return</span> anchors</div></pre></td></tr></table></figure>
+<p>通过利用 numpy 的 broadcast 机制，可得到所有点的候选框，举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">_anchors = np.ones((<span class="number">1</span>,<span class="number">9</span>,<span class="number">4</span>))</div><div class="line">shift = np.ones((<span class="number">1</span>,<span class="number">32</span>*<span class="number">32</span>,<span class="number">4</span>)).transpose((<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>))</div><div class="line">print(np.shape(_anchors + shift))  <span class="comment"># array(32*32, 9, 4)</span></div></pre></td></tr></table></figure>
 <h4 id="anchors-–-gt-proposals"><a href="#anchors-–-gt-proposals" class="headerlink" title="anchors –&gt; proposals"></a>anchors –&gt; proposals</h4><p>a.将 anchors 与 bbox_deltas 合并（平移+放缩）得到最初的 region proposal，并将候选框小的或跨越图像边界的删掉。</p>
 <p>b. 在训练时对每个标定的真值候选区域，与其重叠比例最大的region proposal记为前景样本（保证了每个 GT 都至少有一个候选框），剩余的region proposal，如果其与某个标定重叠比例大于0.7，记为前景样本，如果其与任意一个标定的重叠比例都小于0.3，记为背景样本（保证了候选框的合理性），其余的region proposal，弃去不用；对a)剩余的region proposal，根据每个框的 objectness 得分做排序删减。</p>
 <p>c. 对b)剩余的region proposal 做 nms，保留前一定数量的 proposals。</p>
@@ -588,7 +596,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -125,14 +125,17 @@
 
 
 
+<meta name="description" content="经过 BN 层后，使得输出的均值与方差不再与前面的网络参数有复杂的关联依赖，而只由 BN 层的参数 $\beta , \gamma$ 决定，故前面的网络参数是否学好并不影响后面 BN 层参数 $\beta , \gamma$ 的学习，若前面的网络参数尚未学好，已经学好的 BN 层参数 $\beta , \gamma$ 的存在，会使得最近一层的网络参数更快地朝好的方向发展，进而一步步反传使得所有网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习——BatchNormalization">
 <meta property="og:url" content="http://yoursite.com/2018/05/12/机器学习——BatchNormalization/index.html">
 <meta property="og:site_name" content="RedMudBUPT">
+<meta property="og:description" content="经过 BN 层后，使得输出的均值与方差不再与前面的网络参数有复杂的关联依赖，而只由 BN 层的参数 $\beta , \gamma$ 决定，故前面的网络参数是否学好并不影响后面 BN 层参数 $\beta , \gamma$ 的学习，若前面的网络参数尚未学好，已经学好的 BN 层参数 $\beta , \gamma$ 的存在，会使得最近一层的网络参数更快地朝好的方向发展，进而一步步反传使得所有网络">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-03T12:57:03.692Z">
+<meta property="og:updated_time" content="2018-06-27T14:46:17.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习——BatchNormalization">
+<meta name="twitter:description" content="经过 BN 层后，使得输出的均值与方差不再与前面的网络参数有复杂的关联依赖，而只由 BN 层的参数 $\beta , \gamma$ 决定，故前面的网络参数是否学好并不影响后面 BN 层参数 $\beta , \gamma$ 的学习，若前面的网络参数尚未学好，已经学好的 BN 层参数 $\beta , \gamma$ 的存在，会使得最近一层的网络参数更快地朝好的方向发展，进而一步步反传使得所有网络">
 
 
 
@@ -376,7 +379,11 @@
       
 
       
-        <a id="more"></a> 
+        <p>经过 BN 层后，使得输出的均值与方差不再与前面的网络参数有复杂的关联依赖，而只由 BN 层的参数 $\beta , \gamma$ 决定，故前面的网络参数是否学好并不影响后面 BN 层参数 $\beta , \gamma$ 的学习，若前面的网络参数尚未学好，已经学好的 BN 层参数 $\beta , \gamma$ 的存在，会使得最近一层的网络参数更快地朝好的方向发展，进而一步步反传使得所有网络参数达到最优，而不必费心地去考虑网络参数如何初始化最好。</p>
+<p>BN 层使得应处于激活函数饱和区的神经元处于饱和区，应处于激活区的神经元处于激活区，即无论网络参数如何，BN 层仍可使得信号进行有效的传播，结合对参数的正则化，学习到的权重便不会过高或过低，从而从根本上解决了因 w 的大小而导致的梯度爆炸或消失问题。</p>
+<p>容许较高学习率的原因：</p>
+<p>对于通用格式 conv + BN + ReLU 中的 conv 层不加 bias 是因为 BN 已有 bias 功能？：</p>
+<a id="more"></a> 
       
     </div>
     
@@ -513,7 +520,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
