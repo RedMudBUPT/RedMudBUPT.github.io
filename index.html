@@ -317,6 +317,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -357,9 +379,33 @@
 
       
         
-          
-            
-          
+          <blockquote>
+<p><a href="https://fishedee.com/2017/09/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" target="_blank" rel="noopener">ref1-深度学习应用场景</a></p>
+<p><a href="https://fishedee.com/" target="_blank" rel="noopener">ref2-fishedee_blog</a></p>
+</blockquote>
+<h2 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p><img src="https://image.fishedee.com/8654ad717b9e3d46022fa85599a823c4f389453b" alt="cnn"></p>
+<h3 id="相似匹配"><a href="#相似匹配" class="headerlink" title="相似匹配"></a>相似匹配</h3><blockquote>
+<p>相似匹配就是图像检索的实现，常用于相似人脸检测，以图搜图等场景。</p>
+</blockquote>
+<ol>
+<li><p>在数据充分，标签少的情况下，可将相似匹配问题转换为分类问题：首先使用分类模型（如 VGG）来训练出人脸特征指纹提取器，然后将特征指纹存放到数据库中，检索时使用kNN算法来检索出最接近的图像。</p>
+</li>
+<li><p>当每个类别中的数据集不够多时，特征提取器容易过拟合，Siamese 网络（左右两个网络共享权重）解决了该问题：</p>
+<p><img src="https://image.fishedee.com/51a5273bd389d339264db9d68f57d1df7c3441f8" alt="Siamese 网络"><br>$$<br>loss = - \sum bool_{y_1 = y_2} <em> \ln D(G(X_1),G(X<em>2)) + (1 - bool</em>{y_1 = y_2}) </em> \ln (1 - D(G(X_1),G(X_2)))<br>$$</p>
+</li>
+<li><p>2-channel 网络是 Siamese 的进化版，它将提取特征和比较特征都放在一个网络中做，精度提高了但无法像Siamese一样将特征指纹存放到数据库中任意检索，实用性差：</p>
+<p><img src="https://image.fishedee.com/b368b50556378b3c02a73f394493f575f0c5d9bf" alt="2-channel"></p>
+</li>
+<li><p>为了加快在图像在数据库上的检索，在 VGG 后面接入一个降维层，降维为128维的特征哈希。建立索引时，将图像集的特征指纹，和特征哈希（特征哈希都按照四舍五入的原则转化为01编码就可以了）都存放到数据库中；检索时先检索特征哈希相同的图像，然后再在这少量的图像中执行kNN算法，从而大大提高了搜索的速度。</p>
+</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/28/机器学习——深度学习概览/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -447,6 +493,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs/" itemprop="url" rel="index">
+                    <span itemprop="name">cs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1297,6 +1365,9 @@
 <p>BN 层使得应处于激活函数饱和区的神经元处于饱和区，应处于激活区的神经元处于激活区，即无论网络参数如何，BN 层仍可使得信号进行有效的传播，结合对参数的正则化，学习到的权重便不会过高或过低，从而从根本上解决了因 w 的大小而导致的梯度爆炸或消失问题。</p>
 <p>容许较高学习率的原因：</p>
 <p>对于通用格式 conv + BN + ReLU 中的 conv 层不加 bias 是因为 BN 已有 bias 功能？：</p>
+<p>faster-rcnn 中的 BN 怎么操作的？：</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180324/9b68914ff7da4d14af334668d858a46f.jpeg" alt="BN"></p>
+<p>减了对初始化参数的依赖，那么迁移学习的必要性：？</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/12/机器学习——BatchNormalization/#more" rel="contents">
@@ -1350,7 +1421,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/机器学习——目标检测/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/机器学习——目标识别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="redmud">
@@ -1369,7 +1440,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/11/机器学习——目标检测/" itemprop="url">机器学习——faster_RCNN</a></h2>
+                <a class="post-title-link" href="/2018/05/11/机器学习——目标识别/" itemprop="url">机器学习——faster_RCNN</a></h2>
         
 
         <div class="post-meta">
@@ -1423,8 +1494,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/11/机器学习——目标检测/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/05/11/机器学习——目标检测/" itemprop="commentsCount"></span>
+                <a href="/2018/05/11/机器学习——目标识别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/05/11/机器学习——目标识别/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -1462,7 +1533,7 @@
 <p>这样做的优点是，通过在最后一层做 pooling（核大小为 feature map 大小）的方法，可实现让一个已设计完毕的网络可以接收任意大小的图片。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/11/机器学习——目标检测/#more" rel="contents">
+            <a class="btn" href="/2018/05/11/机器学习——目标识别/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

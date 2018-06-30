@@ -132,10 +132,12 @@
 <meta property="og:site_name" content="RedMudBUPT">
 <meta property="og:description" content="经过 BN 层后，使得输出的均值与方差不再与前面的网络参数有复杂的关联依赖，而只由 BN 层的参数 $\beta , \gamma$ 决定，故前面的网络参数是否学好并不影响后面 BN 层参数 $\beta , \gamma$ 的学习，若前面的网络参数尚未学好，已经学好的 BN 层参数 $\beta , \gamma$ 的存在，会使得最近一层的网络参数更快地朝好的方向发展，进而一步步反传使得所有网络">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-27T14:46:17.614Z">
+<meta property="og:image" content="http://5b0988e595225.cdn.sohucs.com/images/20180324/9b68914ff7da4d14af334668d858a46f.jpeg">
+<meta property="og:updated_time" content="2018-06-30T07:53:29.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习——BatchNormalization">
 <meta name="twitter:description" content="经过 BN 层后，使得输出的均值与方差不再与前面的网络参数有复杂的关联依赖，而只由 BN 层的参数 $\beta , \gamma$ 决定，故前面的网络参数是否学好并不影响后面 BN 层参数 $\beta , \gamma$ 的学习，若前面的网络参数尚未学好，已经学好的 BN 层参数 $\beta , \gamma$ 的存在，会使得最近一层的网络参数更快地朝好的方向发展，进而一步步反传使得所有网络">
+<meta name="twitter:image" content="http://5b0988e595225.cdn.sohucs.com/images/20180324/9b68914ff7da4d14af334668d858a46f.jpeg">
 
 
 
@@ -383,7 +385,12 @@
 <p>BN 层使得应处于激活函数饱和区的神经元处于饱和区，应处于激活区的神经元处于激活区，即无论网络参数如何，BN 层仍可使得信号进行有效的传播，结合对参数的正则化，学习到的权重便不会过高或过低，从而从根本上解决了因 w 的大小而导致的梯度爆炸或消失问题。</p>
 <p>容许较高学习率的原因：</p>
 <p>对于通用格式 conv + BN + ReLU 中的 conv 层不加 bias 是因为 BN 已有 bias 功能？：</p>
+<p>faster-rcnn 中的 BN 怎么操作的？：</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20180324/9b68914ff7da4d14af334668d858a46f.jpeg" alt="BN"></p>
+<p>减了对初始化参数的依赖，那么迁移学习的必要性：？</p>
 <a id="more"></a> 
+<p><a href="https://docs.google.com/presentation/d/18MiZndRCOxB7g-TcCl2EZOElS5udVaCuxnGznLnmOlE/pub?slide=id.g963e5b4287fb24d_5" target="_blank" rel="noopener">https://docs.google.com/presentation/d/18MiZndRCOxB7g-TcCl2EZOElS5udVaCuxnGznLnmOlE/pub?slide=id.g963e5b4287fb24d_5</a></p>
+
       
     </div>
     
@@ -407,7 +414,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/11/机器学习——目标检测/" rel="next" title="机器学习——faster_RCNN">
+              <a href="/2018/05/11/机器学习——目标识别/" rel="next" title="机器学习——faster_RCNN">
                 <i class="fa fa-chevron-left"></i> 机器学习——faster_RCNN
               </a>
             
